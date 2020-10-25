@@ -9,8 +9,11 @@ import kotlinx.serialization.json.Json
 import me.dicoding.bajp.reel.BuildConfig
 import me.dicoding.bajp.reel.data.network.ApiService
 import me.dicoding.bajp.reel.data.repository.MovieRepository
+import me.dicoding.bajp.reel.data.repository.TvShowRepository
 import me.dicoding.bajp.reel.ui.movie.detail.MovieDetailViewModel
 import me.dicoding.bajp.reel.ui.movie.list.MovieListViewModel
+import me.dicoding.bajp.reel.ui.tvshow.detail.TvShowDetailViewModel
+import me.dicoding.bajp.reel.ui.tvshow.list.TvShowListViewModel
 import me.dicoding.bajp.reel.utils.BASE_URL
 import okhttp3.Cache
 import okhttp3.MediaType.Companion.toMediaType
@@ -26,6 +29,9 @@ import java.util.concurrent.TimeUnit
 val viewModelModule = module {
     viewModel { MovieListViewModel(get()) }
     viewModel { (id: Long) -> MovieDetailViewModel(id,get()) }
+
+    viewModel { TvShowListViewModel(get()) }
+    viewModel { (id: Long) -> TvShowDetailViewModel(id,get()) }
 }
 
 val dataModule = module {
@@ -33,6 +39,7 @@ val dataModule = module {
 
     //repository
     single { MovieRepository(get()) }
+    single { TvShowRepository(get()) }
 }
 
 val networkModule = module {

@@ -3,7 +3,7 @@
 
     <style name="Theme.Reel.DayNight" parent="Theme.Reel" />
 
-    <style name="Theme.Reel" parent="Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
+    <style name="Theme.Reel" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Brand color. -->
         <item name="colorPrimary">@color/dark_blue_800</item>
         <item name="colorPrimaryVariant">@color/dark_blue_900</item>
@@ -44,8 +44,5 @@
         <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.App.MediumComponent
         </item>
         <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.App.LargeComponent</item>
-
-        <item name="bottomSheetStyle">@style/Widget.Design.BottomSheet.Modal</item>
-        <item name="toolbarStyle">@style/Widget.MaterialComponents.Toolbar.Surface</item>
     </style>
 </resources>

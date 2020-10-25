@@ -15,7 +15,7 @@ import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class MovieListFragment : Fragment(R.layout.fragment_simple_list) {
-    private val binding by viewBinding(FragmentSimpleListBinding::bind)
+    private val binding by viewBinding { FragmentSimpleListBinding.bind(requireView()) }
 
     private val viewModel by viewModel<MovieListViewModel>()
     private val coilLoader by inject<ImageLoader>()
@@ -38,7 +38,11 @@ class MovieListFragment : Fragment(R.layout.fragment_simple_list) {
         viewModel.errorMessage.observe(viewLifecycleOwner) { message ->
             cardError.isVisible = message.isNotBlank()
             errorText.text = message
+            recyclerView.isVisible = message.isBlank()
         }
+
+        swipeRefresh.setOnRefreshListener { viewModel.fetchPopularMovie() }
+        viewModel.loading.observe(viewLifecycleOwner){ swipeRefresh.isRefreshing = it }
     }
 
     private fun setupList() {
@@ -49,8 +53,6 @@ class MovieListFragment : Fragment(R.layout.fragment_simple_list) {
         }
         recyclerView.adapter = rvAdapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-
-        swipeRefresh.isEnabled = false
     }
 
     private fun navigateToMovieDetail(movieId: Long) {

@@ -4,10 +4,12 @@ import android.app.Application
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import me.dicoding.bajp.reel.data.preferences.AppPreferences.nightMode
 import me.dicoding.bajp.reel.di.dataModule
 import me.dicoding.bajp.reel.di.libModule
 import me.dicoding.bajp.reel.di.networkModule
 import me.dicoding.bajp.reel.di.viewModelModule
+import me.dicoding.bajp.reel.utils.ext.toggleNightMode
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -39,5 +41,7 @@ class App: Application() {
                 )
             )
         }
+
+        toggleNightMode(nightMode)
     }
 }

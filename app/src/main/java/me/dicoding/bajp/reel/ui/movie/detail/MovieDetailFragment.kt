@@ -16,7 +16,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
 class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
-    private val binding by viewBinding(FragmentMovieDetailBinding::bind)
+    private val binding by viewBinding { FragmentMovieDetailBinding.bind(requireView()) }
 
     private val toolbar get() = binding.toolbar
     private val cardError get() = binding.infoContainer

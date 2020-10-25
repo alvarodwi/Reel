@@ -17,6 +17,9 @@
         <action
             android:id="@+id/action_home_to_tvShowDetail"
             app:destination="@id/tvShowDetailFragment" />
+        <action
+            android:id="@+id/action_home_to_settings"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/movieDetailFragment"
@@ -39,4 +42,8 @@
             app:argType="long"
             android:defaultValue="-1L" />
     </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="me.dicoding.bajp.reel.ui.settings.SettingsFragment"
+        android:label="SettingsFragment" />
 </navigation>

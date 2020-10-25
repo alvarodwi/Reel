@@ -11,7 +11,9 @@ import me.dicoding.bajp.reel.data.network.ApiService
 import me.dicoding.bajp.reel.data.network.NetworkResult
 import me.dicoding.bajp.reel.utils.API_KEY
 
-class MovieRepository(private val api: ApiService) {
+class MovieRepository(
+    private val api: ApiService
+) {
     fun getPopularMovie(): Flow<NetworkResult<List<MovieEntity>>> = flow {
         try {
             val response = api.getPopularMovie(API_KEY)
