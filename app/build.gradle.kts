@@ -1,3 +1,5 @@
+import java.util.*
+
 plugins {
     id ("com.android.application")
     kotlin("android")
@@ -5,6 +7,9 @@ plugins {
     kotlin("plugin.serialization")
     id("androidx.navigation.safeargs.kotlin")
 }
+
+val localProperties = Properties()
+localProperties.load(project.rootProject.file("local.properties").inputStream())
 
 android {
     compileSdkVersion(30)
@@ -19,6 +24,8 @@ android {
         multiDexEnabled = true
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String","tmdbApiKey",localProperties["tmdb.api.key"] as String)
     }
 
     buildTypes {
@@ -76,8 +83,14 @@ dependencies {
     implementation(Libs.AndroidX.Lifecycle.viewModel)
     kapt(Libs.AndroidX.Lifecycle.compiler)
 
+    //navigation
+    implementation(Libs.AndroidX.Navigation.navFragment)
+    implementation(Libs.AndroidX.Navigation.navUI)
+
     //data
     implementation(Libs.kotlinxSerialization)
+    implementation(Libs.retrofit)
+    implementation(Libs.retrofitKotlinxSerializationConverter)
 
     //ui
     implementation(Libs.Google.material)
@@ -93,6 +106,7 @@ dependencies {
 
     //logging
     implementation(Libs.timber)
+    implementation(Libs.okhttpLogging)
 
     //testing
     testImplementation(Libs.Testing.junit)
