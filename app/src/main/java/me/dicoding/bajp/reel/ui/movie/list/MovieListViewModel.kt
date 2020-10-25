@@ -28,18 +28,16 @@ class MovieListViewModel(
         fetchPopularMovie()
     }
 
-    fun fetchPopularMovie(){
+    fun fetchPopularMovie() {
         viewModelScope.launch {
             _loading.postValue(true)
+            _errorMessage.postValue("")
             repository.getPopularMovie()
                 .catch { _errorMessage.postValue(it.message) }
                 .collect { result ->
-                    when(result){
-                        is NetworkResult.Success -> {
-                            _movies.postValue(result.data)
-                            _errorMessage.postValue("")
-                        }
-                        is NetworkResult.Error -> _errorMessage.postValue(result.message)
+                    when (result) {
+                        is NetworkResult.Success -> _movies.postValue(result.data)
+                        is NetworkResult.Error -> _errorMessage.postValue(result.exception.message)
                     }
                 }
             _loading.postValue(false)

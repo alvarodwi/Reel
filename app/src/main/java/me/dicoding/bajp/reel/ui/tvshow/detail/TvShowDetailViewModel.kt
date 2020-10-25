@@ -12,6 +12,7 @@ class TvShowDetailViewModel(
     private val repository: TvShowRepository
 ) : ViewModel() {
     val tvShow = liveData {
+        _errorMessage.postValue("")
         repository.getTvShowDetailData(tvShowId)
             .catch { _errorMessage.postValue(it.message) }
             .collect { result ->
@@ -20,17 +21,13 @@ class TvShowDetailViewModel(
                         emit(result.data)
                         _errorMessage.postValue("")
                     }
-                    is NetworkResult.Error -> _errorMessage.postValue(result.message)
+                    is NetworkResult.Error -> _errorMessage.postValue(result.exception.message)
                 }
             }
     }
 
     private val _errorMessage = MutableLiveData<String>()
     val errorMessage: LiveData<String> get() = _errorMessage
-
-    init {
-        _errorMessage.postValue("")
-    }
 
     override fun onCleared() {
         super.onCleared()

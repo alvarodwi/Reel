@@ -2,8 +2,8 @@ package me.dicoding.bajp.reel.data.model.entity
 
 data class MovieEntity(
     val id: Long,
-    val poster : String,
-    val backdrop : String,
+    val poster : String?,
+    val backdrop : String?,
     val releaseDate : String,
 
     val title : String,

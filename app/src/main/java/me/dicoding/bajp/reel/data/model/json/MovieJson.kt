@@ -3,13 +3,12 @@ package me.dicoding.bajp.reel.data.model.json
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import me.dicoding.bajp.reel.data.model.entity.MovieEntity
-import timber.log.Timber
 
 @Serializable
 data class MovieJson(
     @SerialName("id") val id: Long,
-    @SerialName("poster_path") val poster: String,
-    @SerialName("backdrop_path") val backdrop : String,
+    @SerialName("poster_path") val poster: String? = null,
+    @SerialName("backdrop_path") val backdrop : String? = null,
     @SerialName("release_date") val releaseDate: String,
 
     @SerialName("title") val title: String,

@@ -2,8 +2,8 @@ package me.dicoding.bajp.reel.data.model.entity
 
 data class TvShowEntity(
     val id: Long,
-    val poster : String,
-    val backdrop : String,
+    val poster : String?,
+    val backdrop : String?,
     val firstAirDate : String,
 
     val name : String,

@@ -57,6 +57,9 @@ android {
     buildFeatures {
         viewBinding = true
     }
+    testOptions {
+        unitTests.isReturnDefaultValues = true
+    }
 }
 
 dependencies {
@@ -71,6 +74,7 @@ dependencies {
     //coroutines
     implementation(Libs.Kotlin.Coroutines.core)
     implementation(Libs.Kotlin.Coroutines.android)
+    testImplementation(Libs.Kotlin.Coroutines.test)
 
     //ktx
     implementation(Libs.AndroidX.KTX.activity)
@@ -87,10 +91,11 @@ dependencies {
     implementation(Libs.AndroidX.Navigation.navFragment)
     implementation(Libs.AndroidX.Navigation.navUI)
 
-    //data
-    implementation(Libs.kotlinxSerialization)
-    implementation(Libs.retrofit)
-    implementation(Libs.retrofitKotlinxSerializationConverter)
+    //networking
+    implementation(Libs.Network.kotlinxSerialization)
+    implementation(Libs.Network.retrofit)
+    implementation(Libs.Network.retrofitKotlinxSerializationConverter)
+    implementation(Libs.Network.okhttpLogging)
 
     //ui
     implementation(Libs.Google.material)
@@ -101,15 +106,16 @@ dependencies {
 
     //di
     implementation(Libs.Koin.core)
-    implementation(Libs.Koin.scope)
     implementation(Libs.Koin.viewModel)
 
     //logging
     implementation(Libs.timber)
-    implementation(Libs.okhttpLogging)
 
     //testing
     testImplementation(Libs.Testing.junit)
+    testImplementation(Libs.Testing.mockk)
+    testImplementation(Libs.Network.okhttpMockWebServer)
+    testImplementation(Libs.Testing.archCore)
     androidTestImplementation(Libs.Testing.junitExt)
     androidTestImplementation(Libs.Testing.espresso)
 }

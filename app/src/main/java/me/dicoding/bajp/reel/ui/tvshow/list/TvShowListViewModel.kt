@@ -31,15 +31,13 @@ class TvShowListViewModel(
     fun fetchPopularTvShow(){
         viewModelScope.launch {
             _loading.postValue(true)
+            _errorMessage.postValue("")
             repository.getPopularTvShow()
                 .catch { _errorMessage.postValue(it.message) }
                 .collect { result ->
                     when(result){
-                        is NetworkResult.Success -> {
-                            _tvShows.postValue(result.data)
-                            _errorMessage.postValue("")
-                        }
-                        is NetworkResult.Error -> _errorMessage.postValue(result.message)
+                        is NetworkResult.Success -> _tvShows.postValue(result.data)
+                        is NetworkResult.Error -> _errorMessage.postValue(result.exception.message)
                     }
                 }
             _loading.postValue(false)

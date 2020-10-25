@@ -6,6 +6,7 @@ object Libs {
     private const val coroutines_version = "1.3.9"
     private const val koin_version = "2.1.6"
     private const val coil_version = "0.13.0"
+    private const val okhttp_version = "4.9.0"
 
     const val androidGradlePlugin = "com.android.tools.build:gradle:4.1.0"
     const val jdkDesugaring = "com.android.tools:desugar_jdk_libs:1.0.9"
@@ -47,9 +48,10 @@ object Libs {
 
     object Kotlin {
         object Coroutines {
-            const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${coroutines_version}"
+            const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
             const val android =
-                "org.jetbrains.kotlinx:kotlinx-coroutines-android:${coroutines_version}"
+                "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
+            const val test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version"
         }
     }
 
@@ -57,7 +59,7 @@ object Libs {
         const val core = "org.koin:koin-android:$koin_version"
         const val scope = "org.koin:koin-android-scope:$koin_version"
         const val viewModel = "org.koin:koin-android-viewmodel:$koin_version"
-        const val ext = "org.koin:koin-android-ext:$koin_version"
+        const val test = "org.koin:koin-test:$koin_version"
     }
 
     object CoilKt {
@@ -65,17 +67,24 @@ object Libs {
         const val gif = "io.coil-kt:coil-gif:${coil_version}"
     }
 
+    object Network{
+        const val retrofit = "com.squareup.retrofit2:retrofit:2.9.0"
+        const val retrofitKotlinxSerializationConverter =
+            "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.7.0"
+        const val kotlinxSerialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.0"
+
+        const val okhttpLogging = "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
+        const val okhttpMockWebServer = "com.squareup.okhttp3:mockwebserver:$okhttp_version"
+    }
+
     object Testing {
         const val junit = "junit:junit:4.13.1"
         const val junitExt = "androidx.test.ext:junit:1.1.2"
         const val espresso = "androidx.test.espresso:espresso-core:3.3.0"
+        const val mockk = "io.mockk:mockk:1.10.2"
+        const val archCore = "androidx.arch.core:core-testing:2.1.0"
     }
 
     //other library
-    const val retrofit = "com.squareup.retrofit2:retrofit:2.9.0"
-    const val retrofitKotlinxSerializationConverter =
-        "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.7.0"
-    const val okhttpLogging = "com.squareup.okhttp3:logging-interceptor:4.9.0"
     const val timber = "com.jakewharton.timber:timber:4.7.1"
-    const val kotlinxSerialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.0"
 }

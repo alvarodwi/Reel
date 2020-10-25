@@ -1,5 +1,6 @@
 package me.dicoding.bajp.reel.data.repository
 
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -12,7 +13,8 @@ import me.dicoding.bajp.reel.data.network.NetworkResult
 import me.dicoding.bajp.reel.utils.API_KEY
 
 class MovieRepository(
-    private val api: ApiService
+    private val api: ApiService,
+    private val dispatcher : CoroutineDispatcher = Dispatchers.IO
 ) {
     fun getPopularMovie(): Flow<NetworkResult<List<MovieEntity>>> = flow {
         try {
@@ -24,9 +26,9 @@ class MovieRepository(
                 throw(Exception("code : ${response.code()}"))
             }
         } catch (e: Exception) {
-            emit(NetworkResult.Error(e.message.toString()))
+            emit(NetworkResult.Error(e))
         }
-    }.flowOn(Dispatchers.IO)
+    }.flowOn(dispatcher)
 
     fun getMovieDetailData(id: Long): Flow<NetworkResult<MovieEntity>> = flow {
         try {
@@ -38,7 +40,7 @@ class MovieRepository(
                 throw(Exception("code : ${response.code()}"))
             }
         } catch (e: Exception) {
-            emit(NetworkResult.Error(e.message.toString()))
+            emit(NetworkResult.Error(e))
         }
-    }.flowOn(Dispatchers.IO)
+    }.flowOn(dispatcher)
 }

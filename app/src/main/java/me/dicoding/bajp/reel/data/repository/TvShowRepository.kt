@@ -24,7 +24,7 @@ class TvShowRepository (
                 throw(Exception("code : ${response.code()}"))
             }
         } catch (e: Exception) {
-            emit(NetworkResult.Error(e.message.toString()))
+            emit(NetworkResult.Error(e))
         }
     }.flowOn(Dispatchers.IO)
 
@@ -38,7 +38,7 @@ class TvShowRepository (
                 throw(Exception("code : ${response.code()}"))
             }
         } catch (e: Exception) {
-            emit(NetworkResult.Error(e.message.toString()))
+            emit(NetworkResult.Error(e))
         }
     }.flowOn(Dispatchers.IO)
 }
