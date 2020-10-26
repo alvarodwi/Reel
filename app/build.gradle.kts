@@ -1,3 +1,5 @@
+import java.util.*
+
 plugins {
     id ("com.android.application")
     kotlin("android")
@@ -5,6 +7,9 @@ plugins {
     kotlin("plugin.serialization")
     id("androidx.navigation.safeargs.kotlin")
 }
+
+val localProperties = Properties()
+localProperties.load(project.rootProject.file("local.properties").inputStream())
 
 android {
     compileSdkVersion(30)
@@ -19,6 +24,8 @@ android {
         multiDexEnabled = true
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String","tmdbApiKey",localProperties["tmdb.api.key"] as String)
     }
 
     buildTypes {
@@ -50,6 +57,9 @@ android {
     buildFeatures {
         viewBinding = true
     }
+    testOptions {
+        unitTests.isReturnDefaultValues = true
+    }
 }
 
 dependencies {
@@ -64,6 +74,7 @@ dependencies {
     //coroutines
     implementation(Libs.Kotlin.Coroutines.core)
     implementation(Libs.Kotlin.Coroutines.android)
+    testImplementation(Libs.Kotlin.Coroutines.test)
 
     //ktx
     implementation(Libs.AndroidX.KTX.activity)
@@ -76,8 +87,15 @@ dependencies {
     implementation(Libs.AndroidX.Lifecycle.viewModel)
     kapt(Libs.AndroidX.Lifecycle.compiler)
 
-    //data
-    implementation(Libs.kotlinxSerialization)
+    //navigation
+    implementation(Libs.AndroidX.Navigation.navFragment)
+    implementation(Libs.AndroidX.Navigation.navUI)
+
+    //networking
+    implementation(Libs.Network.kotlinxSerialization)
+    implementation(Libs.Network.retrofit)
+    implementation(Libs.Network.retrofitKotlinxSerializationConverter)
+    implementation(Libs.Network.okhttpLogging)
 
     //ui
     implementation(Libs.Google.material)
@@ -88,7 +106,6 @@ dependencies {
 
     //di
     implementation(Libs.Koin.core)
-    implementation(Libs.Koin.scope)
     implementation(Libs.Koin.viewModel)
 
     //logging
@@ -96,6 +113,9 @@ dependencies {
 
     //testing
     testImplementation(Libs.Testing.junit)
+    testImplementation(Libs.Testing.mockk)
+    testImplementation(Libs.Network.okhttpMockWebServer)
+    testImplementation(Libs.Testing.archCore)
     androidTestImplementation(Libs.Testing.junitExt)
     androidTestImplementation(Libs.Testing.espresso)
 }
