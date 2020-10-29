@@ -32,7 +32,10 @@
 -->
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
-  <h3 align="center">Reel</h3>
+ <p align="center">
+    <img src="app/src/main/ic_launcher-playstore.png" alt="Logo" width="128" height="128">
+</p>
+<h1 align="center">Reel</h1>
 
 
 
