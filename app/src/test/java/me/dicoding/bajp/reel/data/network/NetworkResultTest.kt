@@ -6,18 +6,18 @@ import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 
 @RunWith(JUnit4::class)
-class NetworkResultTest : TestCase(){
+class NetworkResultTest : TestCase() {
     @Test
-    fun exception(){
+    fun exception() {
         val exception = Exception("foo")
-        val networkResult =  NetworkResult.Error(exception)
-        assertEquals(networkResult.exception.message,"foo")
+        val networkResult = NetworkResult.Error(exception)
+        assertEquals(networkResult.exception.message, "foo")
     }
 
     @Test
-    fun data(){
+    fun data() {
         val data = "foo"
-        val networkResult =  NetworkResult.Success(data)
-        assertEquals(networkResult.data,"foo")
+        val networkResult = NetworkResult.Success(data)
+        assertEquals(networkResult.data, "foo")
     }
 }

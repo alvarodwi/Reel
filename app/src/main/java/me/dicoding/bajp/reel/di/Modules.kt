@@ -28,10 +28,10 @@ import java.util.concurrent.TimeUnit
 
 val viewModelModule = module {
     viewModel { MovieListViewModel(get()) }
-    viewModel { (id: Long) -> MovieDetailViewModel(id,get()) }
+    viewModel { (id: Long) -> MovieDetailViewModel(id, get()) }
 
     viewModel { TvShowListViewModel(get()) }
-    viewModel { (id: Long) -> TvShowDetailViewModel(id,get()) }
+    viewModel { (id: Long) -> TvShowDetailViewModel(id, get()) }
 }
 
 val dataModule = module {
@@ -93,13 +93,13 @@ val networkModule = module {
 
 val libModule = module {
     //coil
-    fun provideCoilLoader(app: Application,client:OkHttpClient) = ImageLoader.Builder(app)
+    fun provideCoilLoader(app: Application, client: OkHttpClient) = ImageLoader.Builder(app)
         .availableMemoryPercentage(0.25)
         .okHttpClient(client)
         .crossfade(true)
         .build()
 
-    single { provideCoilLoader(androidApplication(),get()) }
+    single { provideCoilLoader(androidApplication(), get()) }
 
     //pref
     fun provideUserPreferences(app: Application): SharedPreferences =

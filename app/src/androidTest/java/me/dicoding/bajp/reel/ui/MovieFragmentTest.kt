@@ -16,12 +16,12 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class MovieFragmentTest{
+class MovieFragmentTest {
     @get:Rule
     var activityRule = ActivityScenarioRule(MainActivity::class.java)
 
     @Test
-    fun loadMovies(){
+    fun loadMovies() {
         SystemClock.sleep(1000)
         onView(withId(R.id.rv_list)).perform(
             RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(19)
@@ -29,9 +29,9 @@ class MovieFragmentTest{
     }
 
     @Test
-    fun loadDetails(){
+    fun loadDetails() {
         onView(withId(R.id.rv_list)).perform(
-            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0,click())
+            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click())
         )
 
         SystemClock.sleep(1000)

@@ -67,7 +67,7 @@ object Libs {
         const val gif = "io.coil-kt:coil-gif:${coil_version}"
     }
 
-    object Network{
+    object Network {
         const val retrofit = "com.squareup.retrofit2:retrofit:2.9.0"
         const val retrofitKotlinxSerializationConverter =
             "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.7.0"

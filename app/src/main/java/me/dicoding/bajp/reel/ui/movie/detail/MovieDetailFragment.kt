@@ -55,15 +55,15 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
 
     private fun setupView(data: MovieEntity) {
         binding.toolbar.title = String.format("#%d", data.id)
-        binding.toolbar.setOnMenuItemClickListener {menu ->
-            when(menu.itemId){
+        binding.toolbar.setOnMenuItemClickListener { menu ->
+            when (menu.itemId) {
                 R.id.action_open_link -> openLink(data.tmdbUrl)
                 R.id.action_share -> shareLink(data.tmdbUrl)
             }
             true
         }
         binding.title.text = data.title
-        with(binding.tagLine){
+        with(binding.tagLine) {
             isVisible = data.tagLine.isNotBlank()
             text = data.tagLine
         }
@@ -86,7 +86,7 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
         imageLoader.enqueue(backdropData)
     }
 
-    private fun openLink(url : String?){
+    private fun openLink(url: String?) {
         Intent(Intent.ACTION_VIEW).apply {
             data = Uri.parse(url.toSafeUrl())
         }.also {
@@ -94,9 +94,9 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
         }
     }
 
-    private fun shareLink(url : String){
+    private fun shareLink(url: String) {
         Intent(Intent.ACTION_SEND).apply {
-            putExtra(Intent.EXTRA_TEXT,url.toSafeUrl())
+            putExtra(Intent.EXTRA_TEXT, url.toSafeUrl())
             type = "text/plain"
         }.also {
             startActivity(it)

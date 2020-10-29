@@ -12,11 +12,11 @@ import me.dicoding.bajp.reel.databinding.ItemMovieBinding
 import me.dicoding.bajp.reel.utils.ext.viewBinding
 
 class MovieAdapter(
-    private val coilLoader : ImageLoader,
-    private val clickCallback : (Long) -> Unit,
-) : ListAdapter<MovieEntity, MovieAdapter.MovieViewHolder>(MOVIE_DIFF){
-    companion object{
-        private val MOVIE_DIFF = object : DiffUtil.ItemCallback<MovieEntity>(){
+    private val coilLoader: ImageLoader,
+    private val clickCallback: (Long) -> Unit,
+) : ListAdapter<MovieEntity, MovieAdapter.MovieViewHolder>(MOVIE_DIFF) {
+    companion object {
+        private val MOVIE_DIFF = object : DiffUtil.ItemCallback<MovieEntity>() {
             override fun areItemsTheSame(oldItem: MovieEntity, newItem: MovieEntity): Boolean {
                 return oldItem.id == newItem.id
             }
@@ -27,18 +27,19 @@ class MovieAdapter(
         }
     }
 
-    inner class MovieViewHolder(private val binding : ItemMovieBinding) : RecyclerView.ViewHolder(binding.root){
-        constructor(parent : ViewGroup) : this(
+    inner class MovieViewHolder(private val binding: ItemMovieBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        constructor(parent: ViewGroup) : this(
             parent.viewBinding(ItemMovieBinding::inflate)
         )
 
-        fun bind(data : MovieEntity?){
-            if(data == null) return
+        fun bind(data: MovieEntity?) {
+            if (data == null) return
 
-            with(binding){
+            with(binding) {
                 binding.root.setOnClickListener { clickCallback(data.id) }
                 title.text = data.title
-                releaseDate.text = String.format("Released at %s",data.releaseDate)
+                releaseDate.text = String.format("Released at %s", data.releaseDate)
 
                 val posterData = ImageRequest.Builder(itemView.context)
                     .data(data.posterUrl)
@@ -52,7 +53,8 @@ class MovieAdapter(
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder = MovieViewHolder(parent)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder =
+        MovieViewHolder(parent)
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         val movie = getItem(position)

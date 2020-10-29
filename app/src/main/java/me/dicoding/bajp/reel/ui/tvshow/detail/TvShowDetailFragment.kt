@@ -19,7 +19,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import timber.log.Timber
 
-class TvShowDetailFragment : Fragment(R.layout.fragment_tv_show_detail){
+class TvShowDetailFragment : Fragment(R.layout.fragment_tv_show_detail) {
     private val binding by viewBinding { FragmentTvShowDetailBinding.bind(requireView()) }
 
     private val toolbar get() = binding.toolbar
@@ -56,8 +56,8 @@ class TvShowDetailFragment : Fragment(R.layout.fragment_tv_show_detail){
 
     private fun setupView(data: TvShowEntity) {
         binding.toolbar.title = String.format("#%d", data.id)
-        binding.toolbar.setOnMenuItemClickListener {menu ->
-            when(menu.itemId){
+        binding.toolbar.setOnMenuItemClickListener { menu ->
+            when (menu.itemId) {
                 R.id.action_open_link -> openLink(data.tmdbUrl)
                 R.id.action_share -> shareLink(data.tmdbUrl)
             }
@@ -83,7 +83,7 @@ class TvShowDetailFragment : Fragment(R.layout.fragment_tv_show_detail){
         imageLoader.enqueue(backdropData)
     }
 
-    private fun openLink(url : String?){
+    private fun openLink(url: String?) {
         Timber.d(url.toSafeUrl())
         Intent(Intent.ACTION_VIEW).apply {
             data = Uri.parse(url.toSafeUrl())
@@ -92,9 +92,9 @@ class TvShowDetailFragment : Fragment(R.layout.fragment_tv_show_detail){
         }
     }
 
-    private fun shareLink(url : String){
+    private fun shareLink(url: String) {
         Intent(Intent.ACTION_SEND).apply {
-            putExtra(Intent.EXTRA_TEXT,url.toSafeUrl())
+            putExtra(Intent.EXTRA_TEXT, url.toSafeUrl())
             type = "text/plain"
         }.also {
             startActivity(it)

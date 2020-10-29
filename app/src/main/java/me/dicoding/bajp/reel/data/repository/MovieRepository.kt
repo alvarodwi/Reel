@@ -14,13 +14,14 @@ import me.dicoding.bajp.reel.utils.API_KEY
 
 class MovieRepository(
     private val api: ApiService,
-    private val dispatcher : CoroutineDispatcher = Dispatchers.IO
+    private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
     fun getPopularMovie(): Flow<NetworkResult<List<MovieEntity>>> = flow {
         try {
             val response = api.getPopularMovie(API_KEY)
             if (response.isSuccessful) {
-                val data = response.body()?.results?.map(MovieJson::asEntity) ?: throw(Exception("List is empty"))
+                val data = response.body()?.results?.map(MovieJson::asEntity)
+                    ?: throw(Exception("List is empty"))
                 emit(NetworkResult.Success(data))
             } else {
                 throw(Exception("code : ${response.code()}"))

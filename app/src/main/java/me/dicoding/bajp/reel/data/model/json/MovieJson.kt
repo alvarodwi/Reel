@@ -8,7 +8,7 @@ import me.dicoding.bajp.reel.data.model.entity.MovieEntity
 data class MovieJson(
     @SerialName("id") val id: Long,
     @SerialName("poster_path") val poster: String? = null,
-    @SerialName("backdrop_path") val backdrop : String? = null,
+    @SerialName("backdrop_path") val backdrop: String? = null,
     @SerialName("release_date") val releaseDate: String,
 
     @SerialName("title") val title: String,
@@ -20,14 +20,14 @@ data class MovieJson(
 
 @Serializable
 data class MovieListJson(
-    @SerialName("page") val page : Int,
-    @SerialName("results") val results : List<MovieJson>,
-    @SerialName("total_pages") val totalPages : Int,
-    @SerialName("total_results") val totalResults : Int,
+    @SerialName("page") val page: Int,
+    @SerialName("results") val results: List<MovieJson>,
+    @SerialName("total_pages") val totalPages: Int,
+    @SerialName("total_results") val totalResults: Int,
 )
 
 fun MovieJson.asEntity(): MovieEntity {
-    val listGenre : List<String> = genres.map { it.name }
+    val listGenre: List<String> = genres.map { it.name }
 
     return MovieEntity(
         id = id,

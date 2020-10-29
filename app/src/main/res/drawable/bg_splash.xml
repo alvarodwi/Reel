@@ -4,10 +4,9 @@
     <item android:drawable="?colorPrimary" />
 
     <item
-        android:drawable="@drawable/ic_reel"
-        android:gravity="center"
         android:width="300dp"
         android:height="300dp"
-        />
+        android:drawable="@drawable/ic_reel"
+        android:gravity="center" />
 
 </layer-list>

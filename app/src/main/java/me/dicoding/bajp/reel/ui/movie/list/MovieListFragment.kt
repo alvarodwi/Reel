@@ -42,7 +42,7 @@ class MovieListFragment : Fragment(R.layout.fragment_simple_list) {
         }
 
         swipeRefresh.setOnRefreshListener { viewModel.fetchPopularMovie() }
-        viewModel.loading.observe(viewLifecycleOwner){ swipeRefresh.isRefreshing = it }
+        viewModel.loading.observe(viewLifecycleOwner) { swipeRefresh.isRefreshing = it }
     }
 
     private fun setupList() {

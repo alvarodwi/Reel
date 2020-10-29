@@ -35,8 +35,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
         viewPager.adapter = HomePagerAdapter(requireActivity())
         val titles = arrayOf("Movies", "Tv Shows")
-        TabLayoutMediator(tabLayout, viewPager) {
-                tab: TabLayout.Tab, position: Int -> tab.text = titles[position]
+        TabLayoutMediator(tabLayout, viewPager) { tab: TabLayout.Tab, position: Int ->
+            tab.text = titles[position]
         }.attach()
     }
 

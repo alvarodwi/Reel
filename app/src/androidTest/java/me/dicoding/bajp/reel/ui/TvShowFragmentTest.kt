@@ -17,12 +17,12 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class TvShowFragmentTest{
+class TvShowFragmentTest {
     @get:Rule
     var activityRule = ActivityScenarioRule(MainActivity::class.java)
 
     @Test
-    fun loadTvShows(){
+    fun loadTvShows() {
         SystemClock.sleep(1000)
         onView(withId(R.id.view_pager)).perform(swipeLeft())
         onView(withId(R.id.rv_list)).perform(
@@ -31,10 +31,10 @@ class TvShowFragmentTest{
     }
 
     @Test
-    fun loadDetails(){
+    fun loadDetails() {
         onView(withId(R.id.view_pager)).perform(swipeLeft())
         onView(withId(R.id.rv_list)).perform(
-            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0,click())
+            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click())
         )
 
         SystemClock.sleep(1000)

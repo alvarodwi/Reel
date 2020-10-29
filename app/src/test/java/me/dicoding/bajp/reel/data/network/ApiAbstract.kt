@@ -50,8 +50,8 @@ abstract class ApiAbstract<T> : TestCase() {
     }
 
     fun createService(clazz: Class<T>): T {
-        val jsonConverterFactory = Json{
-            ignoreUnknownKeys=true
+        val jsonConverterFactory = Json {
+            ignoreUnknownKeys = true
             isLenient = true
         }.asConverterFactory("application/json".toMediaType())
 
