@@ -81,6 +81,8 @@ object Libs {
         const val junit = "junit:junit:4.13.1"
         const val junitExt = "androidx.test.ext:junit:1.1.2"
         const val espresso = "androidx.test.espresso:espresso-core:3.3.0"
+        const val espressoContrib = "androidx.test.espresso:espresso-contrib:3.3.0"
+        const val rules = "androidx.test:rules:1.3.0"
         const val mockk = "io.mockk:mockk:1.10.2"
         const val archCore = "androidx.arch.core:core-testing:2.1.0"
     }

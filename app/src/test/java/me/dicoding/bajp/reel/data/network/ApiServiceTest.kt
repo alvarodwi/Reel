@@ -21,6 +21,7 @@ class ApiServiceTest : ApiAbstract<ApiService>(){
         val response = service.getPopularMovie(API_KEY)
         mockWebServer.takeRequest()
 
+        assertNotNull(response.body())
         assertEquals(response.body()?.page,1)
         assertEquals(response.body()?.results?.size,20)
         assertEquals(response.body()?.totalPages,500)
@@ -36,6 +37,7 @@ class ApiServiceTest : ApiAbstract<ApiService>(){
         val response = service.getPopularTvShow(API_KEY)
         mockWebServer.takeRequest()
 
+        assertNotNull(response.body())
         assertEquals(response.body()?.page,1)
         assertEquals(response.body()?.results?.size,20)
         assertEquals(response.body()?.totalPages,500)
@@ -51,6 +53,7 @@ class ApiServiceTest : ApiAbstract<ApiService>(){
         val response = service.getMovieDetail( 528085,API_KEY)
         mockWebServer.takeRequest()
 
+        assertNotNull(response.body())
         assertEquals(response.body()?.id, 528085L)
         assertEquals(response.body()?.title,"2067")
     }
@@ -62,6 +65,7 @@ class ApiServiceTest : ApiAbstract<ApiService>(){
         val response = service.getTvShowDetail( 77169,API_KEY)
         mockWebServer.takeRequest()
 
+        assertNotNull(response.body())
         assertEquals(response.body()?.id, 77169L)
         assertEquals(response.body()?.name,"Cobra Kai")
     }

@@ -118,4 +118,6 @@ dependencies {
     testImplementation(Libs.Testing.archCore)
     androidTestImplementation(Libs.Testing.junitExt)
     androidTestImplementation(Libs.Testing.espresso)
+    androidTestImplementation(Libs.Testing.espressoContrib)
+    androidTestImplementation(Libs.Testing.rules)
 }
