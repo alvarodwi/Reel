@@ -45,4 +45,8 @@
         </item>
         <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.App.LargeComponent</item>
     </style>
+    
+    <style name="Theme.Reel.DayNight.Splash">
+        <item name="android:windowBackground">@drawable/bg_splash</item>
+    </style>
 </resources>

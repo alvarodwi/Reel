@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="me.dicoding.bajp.reel">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".App"
@@ -14,13 +14,17 @@
         android:supportsRtl="false"
         android:theme="@style/Theme.Reel.DayNight"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.MainActivity">
+        <activity
+            android:name=".ui.SplashActivity"
+            android:theme="@style/Theme.Reel.DayNight.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.MainActivity" />
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

@@ -1,7 +1,7 @@
 import java.util.*
 
 plugins {
-    id ("com.android.application")
+    id("com.android.application")
     kotlin("android")
     kotlin("kapt")
     kotlin("plugin.serialization")
@@ -25,7 +25,7 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("String","tmdbApiKey",localProperties["tmdb.api.key"] as String)
+        buildConfigField("String", "tmdbApiKey", localProperties["tmdb.api.key"] as String)
     }
 
     buildTypes {

@@ -13,4 +13,6 @@ data class TvShowEntity(
 ){
     val posterUrl = String.format("https://image.tmdb.org/t/p/w500/%s",poster)
     val backdropUrl = String.format("https://image.tmdb.org/t/p/w500/%s",backdrop)
+
+    val tmdbUrl = String.format("https://www.themoviedb.org/tv/%d",id)
 }

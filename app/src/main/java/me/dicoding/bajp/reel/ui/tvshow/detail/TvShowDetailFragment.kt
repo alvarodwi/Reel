@@ -1,5 +1,7 @@
 package me.dicoding.bajp.reel.ui.tvshow.detail
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
@@ -10,12 +12,12 @@ import coil.request.ImageRequest
 import me.dicoding.bajp.reel.R
 import me.dicoding.bajp.reel.data.model.entity.TvShowEntity
 import me.dicoding.bajp.reel.databinding.FragmentTvShowDetailBinding
-import me.dicoding.bajp.reel.ui.tvshow.detail.TvShowDetailFragmentArgs
-import me.dicoding.bajp.reel.ui.tvshow.detail.TvShowDetailViewModel
+import me.dicoding.bajp.reel.utils.ext.toSafeUrl
 import me.dicoding.bajp.reel.utils.ext.viewBinding
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
+import timber.log.Timber
 
 class TvShowDetailFragment : Fragment(R.layout.fragment_tv_show_detail){
     private val binding by viewBinding { FragmentTvShowDetailBinding.bind(requireView()) }
@@ -54,6 +56,13 @@ class TvShowDetailFragment : Fragment(R.layout.fragment_tv_show_detail){
 
     private fun setupView(data: TvShowEntity) {
         binding.toolbar.title = String.format("#%d", data.id)
+        binding.toolbar.setOnMenuItemClickListener {menu ->
+            when(menu.itemId){
+                R.id.action_open_link -> openLink(data.tmdbUrl)
+                R.id.action_share -> shareLink(data.tmdbUrl)
+            }
+            true
+        }
         binding.name.text = data.name
         binding.overview.text = data.overview
         binding.firstAirDate.text = data.firstAirDate
@@ -72,5 +81,23 @@ class TvShowDetailFragment : Fragment(R.layout.fragment_tv_show_detail){
             .build()
         imageLoader.enqueue(posterData)
         imageLoader.enqueue(backdropData)
+    }
+
+    private fun openLink(url : String?){
+        Timber.d(url.toSafeUrl())
+        Intent(Intent.ACTION_VIEW).apply {
+            data = Uri.parse(url.toSafeUrl())
+        }.also {
+            startActivity(it)
+        }
+    }
+
+    private fun shareLink(url : String){
+        Intent(Intent.ACTION_SEND).apply {
+            putExtra(Intent.EXTRA_TEXT,url.toSafeUrl())
+            type = "text/plain"
+        }.also {
+            startActivity(it)
+        }
     }
 }
