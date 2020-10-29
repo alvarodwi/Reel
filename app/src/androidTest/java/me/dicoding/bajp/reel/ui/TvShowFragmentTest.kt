@@ -4,6 +4,7 @@ import android.os.SystemClock
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.action.ViewActions.swipeLeft
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers
@@ -21,8 +22,9 @@ class TvShowFragmentTest{
     var activityRule = ActivityScenarioRule(MainActivity::class.java)
 
     @Test
-    fun loadMovies(){
+    fun loadTvShows(){
         SystemClock.sleep(1000)
+        onView(withId(R.id.view_pager)).perform(swipeLeft())
         onView(withId(R.id.rv_list)).perform(
             RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(19)
         )
@@ -30,6 +32,7 @@ class TvShowFragmentTest{
 
     @Test
     fun loadDetails(){
+        onView(withId(R.id.view_pager)).perform(swipeLeft())
         onView(withId(R.id.rv_list)).perform(
             RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0,click())
         )
