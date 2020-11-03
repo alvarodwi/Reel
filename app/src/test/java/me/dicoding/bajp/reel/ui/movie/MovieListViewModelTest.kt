@@ -45,10 +45,10 @@ class MovieListViewModelTest : TestCase() {
 
         verify(atLeast = 1) { repository.getPopularMovie() }
 
-        viewModel.movies.observeForever {value ->
+        viewModel.movies.observeForever { value ->
             assertNotNull(value)
             assertEquals(value.size, 20)
-            assertEquals(viewModel.errorMessage.value,"")
+            assertEquals(viewModel.errorMessage.value, "")
         }
     }
 
@@ -59,9 +59,9 @@ class MovieListViewModelTest : TestCase() {
 
         verify(atLeast = 1) { repository.getPopularMovie() }
 
-        viewModel.movies.observeForever {value ->
+        viewModel.movies.observeForever { value ->
             assert(value.isEmpty())
-            assertEquals(viewModel.errorMessage.value,"foo")
+            assertEquals(viewModel.errorMessage.value, "foo")
         }
     }
 

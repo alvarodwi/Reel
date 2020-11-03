@@ -36,34 +36,42 @@ class TvShowDetailViewModelTest : TestCase() {
     @Before
     fun setup() {
         MockKAnnotations.init(this)
-        viewModel = TvShowDetailViewModel(expectedTvShowId,repository)
+        viewModel = TvShowDetailViewModel(expectedTvShowId, repository)
     }
 
     @Test
     fun `test successful fetch of list tvShow`() {
-        every { repository.getTvShowDetailData(expectedTvShowId) } returns flow { NetworkResult.Success(provideDummyData()) }
+        every { repository.getTvShowDetailData(expectedTvShowId) } returns flow {
+            NetworkResult.Success(
+                provideDummyData()
+            )
+        }
         viewModel.fetchTvShowDetail()
 
         verify(atLeast = 1) { repository.getTvShowDetailData(expectedTvShowId) }
 
-        viewModel.tvShow.observeForever {value ->
+        viewModel.tvShow.observeForever { value ->
             assertNotNull(value)
             assertEquals(value.id, 528085L)
             assertEquals(value.name, "Cobra Kai")
-            assertEquals(viewModel.errorMessage.value,"")
+            assertEquals(viewModel.errorMessage.value, "")
         }
     }
 
     @Test
     fun `test failed fetch of list tvShow`() {
-        every { repository.getTvShowDetailData(expectedTvShowId) } returns flow { NetworkResult.Error(Exception("foo")) }
+        every { repository.getTvShowDetailData(expectedTvShowId) } returns flow {
+            NetworkResult.Error(
+                Exception("foo")
+            )
+        }
         viewModel.fetchTvShowDetail()
 
         verify(atLeast = 1) { repository.getTvShowDetailData(expectedTvShowId) }
 
-        viewModel.tvShow.observeForever {value ->
+        viewModel.tvShow.observeForever { value ->
             assertNull(value)
-            assertEquals(viewModel.errorMessage.value,"foo")
+            assertEquals(viewModel.errorMessage.value, "foo")
         }
     }
 

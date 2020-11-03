@@ -38,7 +38,7 @@ class TvShowRepositoryTest : TestCase() {
     @Before
     fun setup() {
         MockKAnnotations.init(this)
-        repository = TvShowRepository(api,dispatcher)
+        repository = TvShowRepository(api, dispatcher)
     }
 
     @Test
@@ -53,30 +53,31 @@ class TvShowRepositoryTest : TestCase() {
                 .collect { result ->
                     assert(result is NetworkResult.Success)
                     result as NetworkResult.Success
-                    assertEquals(result.data.size,20)
+                    assertEquals(result.data.size, 20)
                 }
         }
     }
 
     @Test
     fun getTvShowDetailData() {
-        coEvery { api.getTvShowDetail(1,API_KEY) } returns Response.success(provideSingleTvShow())
+        coEvery { api.getTvShowDetail(1, API_KEY) } returns Response.success(provideSingleTvShow())
         runBlocking { api.getTvShowDetail(1, API_KEY) }
 
-        coVerify(atLeast = 1) { api.getTvShowDetail(1,API_KEY) }
+        coVerify(atLeast = 1) { api.getTvShowDetail(1, API_KEY) }
 
-        runBlocking { repository.getTvShowDetailData(1)
-            .collect { result ->
-                assert(result is NetworkResult.Success)
-                result as NetworkResult.Success
-                assertEquals(result.data.id, 77169L)
-                assertEquals(result.data.name,"Cobra Kai")
-            }
+        runBlocking {
+            repository.getTvShowDetailData(1)
+                .collect { result ->
+                    assert(result is NetworkResult.Success)
+                    result as NetworkResult.Success
+                    assertEquals(result.data.id, 77169L)
+                    assertEquals(result.data.name, "Cobra Kai")
+                }
         }
     }
 
     @After
-    fun tearUp(){
+    fun tearUp() {
         unmockkAll()
     }
 

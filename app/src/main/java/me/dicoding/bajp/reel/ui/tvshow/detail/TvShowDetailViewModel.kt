@@ -22,7 +22,7 @@ class TvShowDetailViewModel(
     private val _errorMessage = MutableLiveData<String>()
     val errorMessage: LiveData<String> get() = _errorMessage
 
-    fun fetchTvShowDetail(){
+    fun fetchTvShowDetail() {
         viewModelScope.launch {
             _errorMessage.postValue("")
             repository.getTvShowDetailData(tvShowId)

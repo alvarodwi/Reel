@@ -7,7 +7,7 @@ import me.dicoding.bajp.reel.data.model.json.TvShowJson
 import me.dicoding.bajp.reel.data.model.json.TvShowListJson
 
 object JsonHelper {
-    val jsonBuilder = Json{
+    val jsonBuilder = Json {
         ignoreUnknownKeys = true
         isLenient = true
     }

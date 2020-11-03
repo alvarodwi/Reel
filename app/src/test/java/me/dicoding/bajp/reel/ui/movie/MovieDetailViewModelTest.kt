@@ -36,34 +36,42 @@ class MovieDetailViewModelTest : TestCase() {
     @Before
     fun setup() {
         MockKAnnotations.init(this)
-        viewModel = MovieDetailViewModel(expectedMovieId,repository)
+        viewModel = MovieDetailViewModel(expectedMovieId, repository)
     }
 
     @Test
     fun `test successful fetch of list movie`() {
-        every { repository.getMovieDetailData(expectedMovieId) } returns flow { NetworkResult.Success(provideDummyData()) }
+        every { repository.getMovieDetailData(expectedMovieId) } returns flow {
+            NetworkResult.Success(
+                provideDummyData()
+            )
+        }
         viewModel.fetchMovieDetail()
 
         verify(atLeast = 1) { repository.getMovieDetailData(expectedMovieId) }
 
-        viewModel.movie.observeForever {value ->
+        viewModel.movie.observeForever { value ->
             assertNotNull(value)
             assertEquals(value.id, 528085L)
             assertEquals(value.title, "2067")
-            assertEquals(viewModel.errorMessage.value,"")
+            assertEquals(viewModel.errorMessage.value, "")
         }
     }
 
     @Test
     fun `test failed fetch of list movie`() {
-        every { repository.getMovieDetailData(expectedMovieId) } returns flow { NetworkResult.Error(Exception("foo")) }
+        every { repository.getMovieDetailData(expectedMovieId) } returns flow {
+            NetworkResult.Error(
+                Exception("foo")
+            )
+        }
         viewModel.fetchMovieDetail()
 
         verify(atLeast = 1) { repository.getMovieDetailData(expectedMovieId) }
 
-        viewModel.movie.observeForever {value ->
+        viewModel.movie.observeForever { value ->
             assertNull(value)
-            assertEquals(viewModel.errorMessage.value,"foo")
+            assertEquals(viewModel.errorMessage.value, "foo")
         }
     }
 

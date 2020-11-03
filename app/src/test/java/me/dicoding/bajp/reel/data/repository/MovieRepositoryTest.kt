@@ -38,7 +38,7 @@ class MovieRepositoryTest : TestCase() {
     @Before
     fun setup() {
         MockKAnnotations.init(this)
-        repository = MovieRepository(api,dispatcher)
+        repository = MovieRepository(api, dispatcher)
     }
 
     @Test
@@ -53,30 +53,31 @@ class MovieRepositoryTest : TestCase() {
                 .collect { result ->
                     assert(result is NetworkResult.Success)
                     result as NetworkResult.Success
-                    assertEquals(result.data.size,20)
+                    assertEquals(result.data.size, 20)
                 }
         }
     }
 
     @Test
     fun getMovieDetailData() {
-        coEvery { api.getMovieDetail(1,API_KEY) } returns Response.success(provideSingleMovie())
+        coEvery { api.getMovieDetail(1, API_KEY) } returns Response.success(provideSingleMovie())
         runBlocking { api.getMovieDetail(1, API_KEY) }
 
-        coVerify(atLeast = 1) { api.getMovieDetail(1,API_KEY) }
+        coVerify(atLeast = 1) { api.getMovieDetail(1, API_KEY) }
 
-        runBlocking { repository.getMovieDetailData(1)
-            .collect { result ->
-                assert(result is NetworkResult.Success)
-                result as NetworkResult.Success
-                assertEquals(result.data.id, 528085L)
-                assertEquals(result.data.title,"2067")
-            }
+        runBlocking {
+            repository.getMovieDetailData(1)
+                .collect { result ->
+                    assert(result is NetworkResult.Success)
+                    result as NetworkResult.Success
+                    assertEquals(result.data.id, 528085L)
+                    assertEquals(result.data.title, "2067")
+                }
         }
     }
 
     @After
-    fun tearUp(){
+    fun tearUp() {
         unmockkAll()
     }
 

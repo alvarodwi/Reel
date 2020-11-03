@@ -40,15 +40,19 @@ class TvShowListViewModelTest : TestCase() {
 
     @Test
     fun `test successful fetch of list tvShow`() {
-        every { repository.getPopularTvShow() } returns flow { NetworkResult.Success(provideDummyData()) }
+        every { repository.getPopularTvShow() } returns flow {
+            NetworkResult.Success(
+                provideDummyData()
+            )
+        }
         viewModel.fetchPopularTvShow()
 
         verify(atLeast = 1) { repository.getPopularTvShow() }
 
-        viewModel.tvShows.observeForever {value ->
+        viewModel.tvShows.observeForever { value ->
             assertNotNull(value)
             assertEquals(value.size, 20)
-            assertEquals(viewModel.errorMessage.value,"")
+            assertEquals(viewModel.errorMessage.value, "")
         }
     }
 
@@ -59,10 +63,10 @@ class TvShowListViewModelTest : TestCase() {
 
         verify(atLeast = 1) { repository.getPopularTvShow() }
 
-        viewModel.tvShows.observeForever {value ->
+        viewModel.tvShows.observeForever { value ->
             assertNotNull(value)
             assert(value.isEmpty())
-            assertEquals(viewModel.errorMessage.value,"foo")
+            assertEquals(viewModel.errorMessage.value, "foo")
         }
     }
 

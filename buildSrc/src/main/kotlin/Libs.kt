@@ -85,10 +85,11 @@ object Libs {
         const val mockk = "io.mockk:mockk:1.10.2"
         const val archCore = "androidx.arch.core:core-testing:2.1.0"
 
-        object Espresso{
+        object Espresso {
             const val core = "androidx.test.espresso:espresso-core:$espresso_version"
             const val contrib = "androidx.test.espresso:espresso-contrib:$espresso_version"
-            const val idlingResources = "androidx.test.espresso:espresso-idling-resource:$espresso_version"
+            const val idlingResources =
+                "androidx.test.espresso:espresso-idling-resource:$espresso_version"
         }
     }
 

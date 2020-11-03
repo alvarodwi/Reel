@@ -116,7 +116,7 @@ dependencies {
     testImplementation(Libs.Testing.mockk)
     testImplementation(Libs.Network.okhttpMockWebServer)
     testImplementation(Libs.Testing.archCore)
-    
+
     //instrumentation testing
     androidTestImplementation(Libs.Testing.junitExt)
     androidTestImplementation(Libs.Testing.rules)

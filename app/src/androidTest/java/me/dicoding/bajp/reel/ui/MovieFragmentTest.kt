@@ -25,12 +25,12 @@ class MovieFragmentTest {
     var activityRule = ActivityScenarioRule(MainActivity::class.java)
 
     @Before
-    fun setup(){
+    fun setup() {
         IdlingRegistry.getInstance().register(EspressoIdlingResource.idleResource)
     }
 
     @After
-    fun after(){
+    fun after() {
         IdlingRegistry.getInstance().unregister(EspressoIdlingResource.idleResource)
     }
 

@@ -22,18 +22,18 @@ class MovieDetailViewModel(
     private val _errorMessage = MutableLiveData<String>()
     val errorMessage: LiveData<String> get() = _errorMessage
 
-    fun fetchMovieDetail(){
-       viewModelScope.launch {
-           _errorMessage.postValue("")
-           repository.getMovieDetailData(movieId)
-               .catch { _errorMessage.postValue(it.message) }
-               .collect { result ->
-                   when (result) {
-                       is NetworkResult.Success -> _movie.postValue(result.data)
-                       is NetworkResult.Error -> _errorMessage.postValue(result.exception.message)
-                   }
-               }
-       }
+    fun fetchMovieDetail() {
+        viewModelScope.launch {
+            _errorMessage.postValue("")
+            repository.getMovieDetailData(movieId)
+                .catch { _errorMessage.postValue(it.message) }
+                .collect { result ->
+                    when (result) {
+                        is NetworkResult.Success -> _movie.postValue(result.data)
+                        is NetworkResult.Error -> _errorMessage.postValue(result.exception.message)
+                    }
+                }
+        }
     }
 
     override fun onCleared() {

@@ -36,11 +36,15 @@ object ViewCounter {
         return getElementFromMatchAtPosition(matcher, getCount(matcher) - 1)
     }
 
-    private fun getElementFromMatchAtPosition(matcher: Matcher<View>, position: Int): Matcher<View?>? {
+    private fun getElementFromMatchAtPosition(
+        matcher: Matcher<View>,
+        position: Int
+    ): Matcher<View?>? {
         return object : BaseMatcher<View?>() {
             var counter = 0
 
-            override fun matches(item: Any): Boolean = matcher.matches(item) && counter++ == position
+            override fun matches(item: Any): Boolean =
+                matcher.matches(item) && counter++ == position
 
             override fun describeTo(description: Description) {
                 description.appendText("Element at hierarchy position $position")
