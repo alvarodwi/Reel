@@ -9,11 +9,11 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface ApiService{
+interface ApiService {
     // movies
     @GET("movie/{movie_id}")
     suspend fun getMovieDetail(
-        @Path("movie_id") movieId : Long,
+        @Path("movie_id") movieId: Long,
         @Query("api_key") apiKey: String,
     ): Response<MovieJson>
 
@@ -25,7 +25,7 @@ interface ApiService{
     //tv shows
     @GET("tv/{tv_show_id}")
     suspend fun getTvShowDetail(
-        @Path("tv_show_id") tvShowId : Long,
+        @Path("tv_show_id") tvShowId: Long,
         @Query("api_key") apiKey: String,
     ): Response<TvShowJson>
 

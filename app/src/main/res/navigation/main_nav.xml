@@ -9,8 +9,7 @@
         android:id="@+id/homeFragment"
         android:name="me.dicoding.bajp.reel.ui.home.HomeFragment"
         android:label="HomeFragment"
-        tools:layout="@layout/fragment_home"
-        >
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_home_to_movieDetail"
             app:destination="@id/movieDetailFragment" />
@@ -25,22 +24,21 @@
         android:id="@+id/movieDetailFragment"
         android:name="me.dicoding.bajp.reel.ui.movie.detail.MovieDetailFragment"
         android:label="MovieDetailFragment"
-        tools:layout="@layout/fragment_movie_detail"
-        >
+        tools:layout="@layout/fragment_movie_detail">
         <argument
             android:name="movieId"
-            app:argType="long"
-            android:defaultValue="-1L" />
+            android:defaultValue="-1L"
+            app:argType="long" />
     </fragment>
     <fragment
-        tools:layout="@layout/fragment_tv_show_detail"
         android:id="@+id/tvShowDetailFragment"
         android:name="me.dicoding.bajp.reel.ui.tvshow.detail.TvShowDetailFragment"
-        android:label="TvShowDetailFragment" >
+        android:label="TvShowDetailFragment"
+        tools:layout="@layout/fragment_tv_show_detail">
         <argument
             android:name="tvShowId"
-            app:argType="long"
-            android:defaultValue="-1L" />
+            android:defaultValue="-1L"
+            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"

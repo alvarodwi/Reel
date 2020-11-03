@@ -8,7 +8,7 @@ import me.dicoding.bajp.reel.R
 import me.dicoding.bajp.reel.databinding.FragmentSettingsBinding
 import me.dicoding.bajp.reel.utils.ext.viewBinding
 
-class SettingsFragment : Fragment(R.layout.fragment_settings){
+class SettingsFragment : Fragment(R.layout.fragment_settings) {
     private val binding by viewBinding { FragmentSettingsBinding.bind(requireView()) }
 
     private val toolbar get() = binding.toolbar
@@ -16,9 +16,9 @@ class SettingsFragment : Fragment(R.layout.fragment_settings){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        with(toolbar){
+        with(toolbar) {
             title = getString(R.string.text_settings)
-            navigationIcon = ContextCompat.getDrawable(context,R.drawable.ic_arrow_back)
+            navigationIcon = ContextCompat.getDrawable(context, R.drawable.ic_arrow_back)
             setNavigationOnClickListener { activity?.onBackPressed() }
         }
     }

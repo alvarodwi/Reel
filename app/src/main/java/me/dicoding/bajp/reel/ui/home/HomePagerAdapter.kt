@@ -6,12 +6,12 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import me.dicoding.bajp.reel.ui.movie.list.MovieListFragment
 import me.dicoding.bajp.reel.ui.tvshow.list.TvShowListFragment
 
-class HomePagerAdapter(activity : FragmentActivity) :
-    FragmentStateAdapter(activity){
+class HomePagerAdapter(activity: FragmentActivity) :
+    FragmentStateAdapter(activity) {
     override fun getItemCount(): Int = 2
 
     override fun createFragment(position: Int): Fragment {
-        return when(position){
+        return when (position) {
             0 -> MovieListFragment()
             else -> TvShowListFragment()
         }

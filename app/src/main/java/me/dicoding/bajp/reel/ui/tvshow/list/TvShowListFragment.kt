@@ -14,7 +14,7 @@ import me.dicoding.bajp.reel.utils.ext.viewBinding
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class TvShowListFragment : Fragment(R.layout.fragment_simple_list){
+class TvShowListFragment : Fragment(R.layout.fragment_simple_list) {
     private val binding by viewBinding { FragmentSimpleListBinding.bind(requireView()) }
 
     private val viewModel by viewModel<TvShowListViewModel>()
@@ -42,7 +42,7 @@ class TvShowListFragment : Fragment(R.layout.fragment_simple_list){
         }
 
         swipeRefresh.setOnRefreshListener { viewModel.fetchPopularTvShow() }
-        viewModel.loading.observe(viewLifecycleOwner){ swipeRefresh.isRefreshing = it }
+        viewModel.loading.observe(viewLifecycleOwner) { swipeRefresh.isRefreshing = it }
     }
 
     private fun setupList() {

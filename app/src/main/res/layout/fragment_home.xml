@@ -19,10 +19,10 @@
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_layout"
-            android:layout_marginTop="?actionBarSize"
-            android:background="?android:colorBackground"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="?actionBarSize"
+            android:background="?android:colorBackground"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

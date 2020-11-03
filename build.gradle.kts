@@ -11,7 +11,7 @@ buildscript {
     dependencies {
         classpath(Libs.androidGradlePlugin)
         classpath(kotlin("gradle-plugin", version = Libs.kotlin_version))
-        classpath(kotlin("serialization",version = Libs.kotlin_version))
+        classpath(kotlin("serialization", version = Libs.kotlin_version))
         classpath(Libs.AndroidX.Navigation.safeArgsGradlePlugin)
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files

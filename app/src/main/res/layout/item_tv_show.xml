@@ -39,14 +39,14 @@
 
         <TextView
             android:id="@+id/first_air_date"
+            style="?attr/textAppearanceSubtitle2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_normal"
             android:ellipsize="end"
             android:maxWidth="300dp"
-            style="?attr/textAppearanceSubtitle2"
-            android:textColor="@color/color_on_surface_emphasis_medium"
-            android:layout_marginStart="@dimen/spacing_normal"
             android:maxLines="1"
+            android:textColor="@color/color_on_surface_emphasis_medium"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/poster"
             app:layout_constraintTop_toBottomOf="@id/name"

@@ -1,5 +1,7 @@
 package me.dicoding.bajp.reel.ui.movie.detail
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
@@ -10,6 +12,7 @@ import coil.request.ImageRequest
 import me.dicoding.bajp.reel.R
 import me.dicoding.bajp.reel.data.model.entity.MovieEntity
 import me.dicoding.bajp.reel.databinding.FragmentMovieDetailBinding
+import me.dicoding.bajp.reel.utils.ext.toSafeUrl
 import me.dicoding.bajp.reel.utils.ext.viewBinding
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -52,8 +55,15 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
 
     private fun setupView(data: MovieEntity) {
         binding.toolbar.title = String.format("#%d", data.id)
+        binding.toolbar.setOnMenuItemClickListener { menu ->
+            when (menu.itemId) {
+                R.id.action_open_link -> openLink(data.tmdbUrl)
+                R.id.action_share -> shareLink(data.tmdbUrl)
+            }
+            true
+        }
         binding.title.text = data.title
-        with(binding.tagLine){
+        with(binding.tagLine) {
             isVisible = data.tagLine.isNotBlank()
             text = data.tagLine
         }
@@ -74,5 +84,22 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
             .build()
         imageLoader.enqueue(posterData)
         imageLoader.enqueue(backdropData)
+    }
+
+    private fun openLink(url: String?) {
+        Intent(Intent.ACTION_VIEW).apply {
+            data = Uri.parse(url.toSafeUrl())
+        }.also {
+            startActivity(it)
+        }
+    }
+
+    private fun shareLink(url: String) {
+        Intent(Intent.ACTION_SEND).apply {
+            putExtra(Intent.EXTRA_TEXT, url.toSafeUrl())
+            type = "text/plain"
+        }.also {
+            startActivity(it)
+        }
     }
 }
