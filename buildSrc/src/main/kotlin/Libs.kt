@@ -1,12 +1,13 @@
 object Libs {
     const val kotlin_version = "1.4.10"
-    const val benmanes_version = "0.33.0"
+    const val benmanes_version = "0.34.0"
     private const val nav_version = "2.3.1"
     private const val lifecycle_version = "2.2.0"
-    private const val coroutines_version = "1.3.9"
+    private const val coroutines_version = "1.4.0"
     private const val koin_version = "2.1.6"
-    private const val coil_version = "0.13.0"
+    private const val coil_version = "1.0.0"
     private const val okhttp_version = "4.9.0"
+    private const val espresso_version = "3.3.0"
 
     const val androidGradlePlugin = "com.android.tools.build:gradle:4.1.0"
     const val jdkDesugaring = "com.android.tools:desugar_jdk_libs:1.0.9"
@@ -14,7 +15,7 @@ object Libs {
     object AndroidX {
         const val appCompat = "androidx.appcompat:appcompat:1.2.0"
         const val core = "androidx.core:core-ktx:1.3.2"
-        const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.0.2"
+        const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.0.4"
         const val coordinatorLayout = "androidx.coordinatorlayout:coordinatorlayout:1.1.0"
         const val swipeRefresh = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
         const val viewPager2 = "androidx.viewpager2:viewpager2:1.0.0"
@@ -70,8 +71,8 @@ object Libs {
     object Network {
         const val retrofit = "com.squareup.retrofit2:retrofit:2.9.0"
         const val retrofitKotlinxSerializationConverter =
-            "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.7.0"
-        const val kotlinxSerialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.0"
+            "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0"
+        const val kotlinxSerialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1"
 
         const val okhttpLogging = "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
         const val okhttpMockWebServer = "com.squareup.okhttp3:mockwebserver:$okhttp_version"
@@ -80,11 +81,15 @@ object Libs {
     object Testing {
         const val junit = "junit:junit:4.13.1"
         const val junitExt = "androidx.test.ext:junit:1.1.2"
-        const val espresso = "androidx.test.espresso:espresso-core:3.3.0"
-        const val espressoContrib = "androidx.test.espresso:espresso-contrib:3.3.0"
         const val rules = "androidx.test:rules:1.3.0"
         const val mockk = "io.mockk:mockk:1.10.2"
         const val archCore = "androidx.arch.core:core-testing:2.1.0"
+
+        object Espresso{
+            const val core = "androidx.test.espresso:espresso-core:$espresso_version"
+            const val contrib = "androidx.test.espresso:espresso-contrib:$espresso_version"
+            const val idlingResources = "androidx.test.espresso:espresso-idling-resource:$espresso_version"
+        }
     }
 
     //other library

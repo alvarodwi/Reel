@@ -36,6 +36,7 @@ class TvShowDetailFragment : Fragment(R.layout.fragment_tv_show_detail) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.fetchTvShowDetail()
 
         with(toolbar) {
             navigationIcon = ContextCompat.getDrawable(context, R.drawable.ic_arrow_back)
