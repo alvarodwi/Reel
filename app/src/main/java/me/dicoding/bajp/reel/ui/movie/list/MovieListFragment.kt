@@ -29,6 +29,7 @@ class MovieListFragment : Fragment(R.layout.fragment_simple_list) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.fetchPopularMovie()
 
         setupList()
         viewModel.movies.observe(viewLifecycleOwner) { data ->

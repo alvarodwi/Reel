@@ -20,13 +20,9 @@ class MovieListViewModel(
 
     private val _movies = MutableLiveData<List<MovieEntity>>()
     val movies: LiveData<List<MovieEntity>> get() = _movies
+
     private val _errorMessage = MutableLiveData<String>()
     val errorMessage: LiveData<String> get() = _errorMessage
-
-    init {
-        _errorMessage.postValue("")
-        fetchPopularMovie()
-    }
 
     fun fetchPopularMovie() {
         viewModelScope.launch {

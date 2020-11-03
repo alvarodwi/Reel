@@ -16,7 +16,7 @@ class ApiServiceTest : ApiAbstract<ApiService>() {
 
     @Throws(IOException::class)
     @Test
-    fun getPopularMovie() = runBlocking {
+    fun `test getPopularMovie through mockWebServer`() = runBlocking {
         enqueueResponse("/popular_movies.json")
         val response = service.getPopularMovie(API_KEY)
         mockWebServer.takeRequest()
@@ -32,7 +32,7 @@ class ApiServiceTest : ApiAbstract<ApiService>() {
 
     @Throws(IOException::class)
     @Test
-    fun getPopularTvShow() = runBlocking {
+    fun `test getPopularTvShow through mockWebServer`() = runBlocking {
         enqueueResponse("/popular_tv_shows.json")
         val response = service.getPopularTvShow(API_KEY)
         mockWebServer.takeRequest()
@@ -48,7 +48,7 @@ class ApiServiceTest : ApiAbstract<ApiService>() {
 
     @Throws(IOException::class)
     @Test
-    fun getMovieDetail() = runBlocking {
+    fun `test getMovieDetail through mockWebServer`() = runBlocking {
         enqueueResponse("/latest_movie.json")
         val response = service.getMovieDetail(528085, API_KEY)
         mockWebServer.takeRequest()
@@ -60,7 +60,7 @@ class ApiServiceTest : ApiAbstract<ApiService>() {
 
     @Throws(IOException::class)
     @Test
-    fun getTvShowDetail() = runBlocking {
+    fun `test getTvShowDetail through mockWebServer`() = runBlocking {
         enqueueResponse("/latest_tv_show.json")
         val response = service.getTvShowDetail(77169, API_KEY)
         mockWebServer.takeRequest()

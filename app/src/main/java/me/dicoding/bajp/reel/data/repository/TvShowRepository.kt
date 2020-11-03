@@ -1,5 +1,6 @@
 package me.dicoding.bajp.reel.data.repository
 
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -12,7 +13,8 @@ import me.dicoding.bajp.reel.data.network.NetworkResult
 import me.dicoding.bajp.reel.utils.API_KEY
 
 class TvShowRepository(
-    private val api: ApiService
+    private val api: ApiService,
+    private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
     fun getPopularTvShow(): Flow<NetworkResult<List<TvShowEntity>>> = flow {
         try {
@@ -27,7 +29,7 @@ class TvShowRepository(
         } catch (e: Exception) {
             emit(NetworkResult.Error(e))
         }
-    }.flowOn(Dispatchers.IO)
+    }.flowOn(dispatcher)
 
     fun getTvShowDetailData(id: Long): Flow<NetworkResult<TvShowEntity>> = flow {
         try {
@@ -41,5 +43,5 @@ class TvShowRepository(
         } catch (e: Exception) {
             emit(NetworkResult.Error(e))
         }
-    }.flowOn(Dispatchers.IO)
+    }.flowOn(dispatcher)
 }
