@@ -35,6 +35,7 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.fetchMovieDetail()
 
         with(toolbar) {
             navigationIcon = ContextCompat.getDrawable(context, R.drawable.ic_arrow_back)

@@ -20,13 +20,9 @@ class TvShowListViewModel(
 
     private val _tvShows = MutableLiveData<List<TvShowEntity>>()
     val tvShows: LiveData<List<TvShowEntity>> get() = _tvShows
+
     private val _errorMessage = MutableLiveData<String>()
     val errorMessage: LiveData<String> get() = _errorMessage
-
-    init {
-        _errorMessage.postValue("")
-        fetchPopularTvShow()
-    }
 
     fun fetchPopularTvShow() {
         viewModelScope.launch {
