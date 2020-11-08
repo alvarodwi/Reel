@@ -80,6 +80,7 @@ dependencies {
     implementation(Libs.AndroidX.KTX.activity)
     implementation(Libs.AndroidX.KTX.fragment)
     implementation(Libs.AndroidX.KTX.preferences)
+    implementation(Libs.AndroidX.KTX.room)
 
     //lifecycle
     implementation(Libs.AndroidX.Lifecycle.runtime)
@@ -90,6 +91,10 @@ dependencies {
     //navigation
     implementation(Libs.AndroidX.Navigation.navFragment)
     implementation(Libs.AndroidX.Navigation.navUI)
+
+    //room
+    implementation(Libs.AndroidX.Room.runtime)
+    kapt(Libs.AndroidX.Room.compiler)
 
     //networking
     implementation(Libs.Network.kotlinxSerialization)

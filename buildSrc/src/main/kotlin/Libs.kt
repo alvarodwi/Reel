@@ -3,6 +3,7 @@ object Libs {
     const val benmanes_version = "0.34.0"
     private const val nav_version = "2.3.1"
     private const val lifecycle_version = "2.2.0"
+    private const val room_version = "2.2.5"
     private const val coroutines_version = "1.4.0"
     private const val koin_version = "2.1.6"
     private const val coil_version = "1.0.0"
@@ -26,6 +27,7 @@ object Libs {
             const val fragment = "androidx.fragment:fragment-ktx:1.2.5"
             const val activity = "androidx.activity:activity-ktx:1.1.0"
             const val preferences = "androidx.preference:preference-ktx:1.1.1"
+            const val room = "androidx.room:room-ktx:$room_version"
         }
 
         object Lifecycle {
@@ -40,6 +42,11 @@ object Libs {
             const val navUI = "androidx.navigation:navigation-ui-ktx:$nav_version"
             const val safeArgsGradlePlugin =
                 "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
+        }
+
+        object Room {
+            const val runtime = "androidx.room:room-runtime:$room_version"
+            const val compiler = "androidx.room:room-compiler:$room_version"
         }
     }
 

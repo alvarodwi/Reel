@@ -1,12 +1,17 @@
 package me.dicoding.bajp.reel.di
 
 import android.app.Application
+import android.content.Context
 import android.content.SharedPreferences
 import androidx.preference.PreferenceManager
+import androidx.room.Room
 import coil.ImageLoader
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.asExecutor
 import kotlinx.serialization.json.Json
 import me.dicoding.bajp.reel.BuildConfig
+import me.dicoding.bajp.reel.data.db.AppDatabase
 import me.dicoding.bajp.reel.data.network.ApiService
 import me.dicoding.bajp.reel.data.repository.MovieRepository
 import me.dicoding.bajp.reel.data.repository.TvShowRepository
@@ -20,6 +25,7 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidApplication
+import org.koin.android.ext.koin.androidContext
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -36,6 +42,14 @@ val viewModelModule = module {
 
 val dataModule = module {
     //db
+    fun provideAppDatabase(context: Context) =
+        Room.databaseBuilder(context, AppDatabase::class.java, "db_reel")
+            .fallbackToDestructiveMigration()
+            .setQueryExecutor(Dispatchers.IO.asExecutor())
+            .setTransactionExecutor(Dispatchers.IO.asExecutor())
+            .build()
+
+    single { provideAppDatabase(androidContext()) }
 
     //repository
     single { MovieRepository(get()) }
