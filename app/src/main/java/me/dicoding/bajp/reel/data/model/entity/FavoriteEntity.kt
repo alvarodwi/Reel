@@ -16,6 +16,7 @@ data class FavoriteEntity(
   @PrimaryKey(autoGenerate = true) @NonNull val uid: Long = 0L,
   @ColumnInfo(name = "tmdb_id") val tmdbId: Long,
   @ColumnInfo(name = "item_title") val itemTitle: String,
+  @ColumnInfo(name = "item_poster_url") val itemPosterUrl: String,
   @ColumnInfo(name = "item_date") val itemDate: String = "",
   @ColumnInfo(name = "date_added") val dateAdded: String = "",
   val type: Int
@@ -24,6 +25,7 @@ data class FavoriteEntity(
 fun MovieEntity.asFavoriteEntity() = FavoriteEntity(
   tmdbId = this.id,
   itemTitle = this.title,
+  itemPosterUrl = this.posterUrl,
   itemDate = this.releaseDate,
   dateAdded = LocalDateTime.now().toString(),
   type = DBConst.FavoriteTable.Types.TYPE_MOVIE
@@ -32,6 +34,7 @@ fun MovieEntity.asFavoriteEntity() = FavoriteEntity(
 fun TvShowEntity.asFavoriteEntity() = FavoriteEntity(
   tmdbId = this.id,
   itemTitle = this.name,
+  itemPosterUrl = this.posterUrl,
   itemDate = this.firstAirDate,
   dateAdded = LocalDateTime.now().toString(),
   type = DBConst.FavoriteTable.Types.TYPE_TV_SHOW

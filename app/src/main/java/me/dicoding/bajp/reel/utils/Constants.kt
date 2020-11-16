@@ -18,8 +18,8 @@ object DatabaseConstants {
 
     object Indexes {
       const val TITLE = 0
-      const val DATE = 1
-      const val DATE_ADDED = 2
+      const val DATE = 2
+      const val DATE_ADDED = 4
     }
   }
 }

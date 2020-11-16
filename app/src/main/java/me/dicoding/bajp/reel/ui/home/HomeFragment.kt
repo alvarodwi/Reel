@@ -32,6 +32,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
           R.id.action_settings -> {
             navigateToSettings()
           }
+          R.id.action_favorite -> {
+            navigateToFavorite()
+          }
         }
         true
       }
@@ -46,6 +49,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
   private fun navigateToSettings() {
     findNavController().navigate(
       HomeFragmentDirections.actionHomeToSettings()
+    )
+  }
+
+  private fun navigateToFavorite() {
+    findNavController().navigate(
+      HomeFragmentDirections.actionHomeToFavorite()
     )
   }
 }
