@@ -4,5 +4,7 @@ import androidx.lifecycle.ViewModel
 import me.dicoding.bajp.reel.data.repository.FavoriteRepository
 
 class FavoriteViewModel(
-    private val repository: FavoriteRepository
-) : ViewModel()
+  private val repository: FavoriteRepository
+) : ViewModel() {
+
+}

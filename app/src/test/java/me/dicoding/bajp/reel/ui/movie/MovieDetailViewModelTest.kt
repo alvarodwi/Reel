@@ -24,65 +24,65 @@ import org.junit.runners.JUnit4
 
 @RunWith(JUnit4::class)
 class MovieDetailViewModelTest : TestCase() {
-    private val expectedMovieId = 1L
+  private val expectedMovieId = 1L
 
-    @get:Rule
-    var instantExecutorRule = InstantTaskExecutorRule()
+  @get:Rule
+  var instantExecutorRule = InstantTaskExecutorRule()
 
-    @MockK
-    lateinit var repository: MovieRepository
-    lateinit var viewModel: MovieDetailViewModel
+  @MockK
+  lateinit var repository: MovieRepository
+  lateinit var viewModel: MovieDetailViewModel
 
-    @Before
-    fun setup() {
-        MockKAnnotations.init(this)
-        viewModel = MovieDetailViewModel(expectedMovieId, repository)
+  @Before
+  fun setup() {
+    MockKAnnotations.init(this)
+    viewModel = MovieDetailViewModel(expectedMovieId, repository)
+  }
+
+  @Test
+  fun `test successful fetch of list movie`() {
+    every { repository.getMovieDetailData(expectedMovieId) } returns flow {
+      NetworkResult.Success(
+        provideDummyData()
+      )
     }
+    viewModel.fetchMovieDetail()
 
-    @Test
-    fun `test successful fetch of list movie`() {
-        every { repository.getMovieDetailData(expectedMovieId) } returns flow {
-            NetworkResult.Success(
-                provideDummyData()
-            )
-        }
-        viewModel.fetchMovieDetail()
+    verify(atLeast = 1) { repository.getMovieDetailData(expectedMovieId) }
 
-        verify(atLeast = 1) { repository.getMovieDetailData(expectedMovieId) }
-
-        viewModel.movie.observeForever { value ->
-            assertNotNull(value)
-            assertEquals(value.id, 528085L)
-            assertEquals(value.title, "2067")
-            assertEquals(viewModel.errorMessage.value, "")
-        }
+    viewModel.movie.observeForever { value ->
+      assertNotNull(value)
+      assertEquals(value.id, 528085L)
+      assertEquals(value.title, "2067")
+      assertEquals(viewModel.errorMessage.value, "")
     }
+  }
 
-    @Test
-    fun `test failed fetch of list movie`() {
-        every { repository.getMovieDetailData(expectedMovieId) } returns flow {
-            NetworkResult.Error(
-                Exception("foo")
-            )
-        }
-        viewModel.fetchMovieDetail()
-
-        verify(atLeast = 1) { repository.getMovieDetailData(expectedMovieId) }
-
-        viewModel.movie.observeForever { value ->
-            assertNull(value)
-            assertEquals(viewModel.errorMessage.value, "foo")
-        }
+  @Test
+  fun `test failed fetch of list movie`() {
+    every { repository.getMovieDetailData(expectedMovieId) } returns flow {
+      NetworkResult.Error(
+        Exception("foo")
+      )
     }
+    viewModel.fetchMovieDetail()
 
-    @After
-    fun tearUp() {
-        unmockkAll()
-    }
+    verify(atLeast = 1) { repository.getMovieDetailData(expectedMovieId) }
 
-    private fun provideDummyData(): MovieEntity {
-        return JsonHelper.loadMovieData(
-            TestUtils.parseStringFromJsonResource("/latest_movie.json")
-        ).asEntity()
+    viewModel.movie.observeForever { value ->
+      assertNull(value)
+      assertEquals(viewModel.errorMessage.value, "foo")
     }
+  }
+
+  @After
+  fun tearUp() {
+    unmockkAll()
+  }
+
+  private fun provideDummyData(): MovieEntity {
+    return JsonHelper.loadMovieData(
+      TestUtils.parseStringFromJsonResource("/latest_movie.json")
+    ).asEntity()
+  }
 }

@@ -15,50 +15,53 @@ import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class MovieListFragment : Fragment(R.layout.fragment_simple_list) {
-    private val binding by viewBinding { FragmentSimpleListBinding.bind(requireView()) }
+  private val binding by viewBinding { FragmentSimpleListBinding.bind(requireView()) }
 
-    private val viewModel by viewModel<MovieListViewModel>()
-    private val coilLoader by inject<ImageLoader>()
+  private val viewModel by viewModel<MovieListViewModel>()
+  private val coilLoader by inject<ImageLoader>()
 
-    private val recyclerView get() = binding.list.rvList
-    private val swipeRefresh get() = binding.list.srlList
-    private val cardError get() = binding.info.cardContainer
-    private val errorText get() = binding.info.txtDescription
+  private val recyclerView get() = binding.list.rvList
+  private val swipeRefresh get() = binding.list.srlList
+  private val cardError get() = binding.info.cardContainer
+  private val errorText get() = binding.info.txtDescription
 
-    private lateinit var rvAdapter: MovieAdapter
+  private lateinit var rvAdapter: MovieAdapter
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        viewModel.fetchPopularMovie()
+  override fun onViewCreated(
+    view: View,
+    savedInstanceState: Bundle?
+  ) {
+    super.onViewCreated(view, savedInstanceState)
+    viewModel.fetchPopularMovie()
 
-        setupList()
-        viewModel.movies.observe(viewLifecycleOwner) { data ->
-            rvAdapter.submitList(data)
-        }
-
-        viewModel.errorMessage.observe(viewLifecycleOwner) { message ->
-            cardError.isVisible = message.isNotBlank()
-            errorText.text = message
-            recyclerView.isVisible = message.isBlank()
-        }
-
-        swipeRefresh.setOnRefreshListener { viewModel.fetchPopularMovie() }
-        viewModel.loading.observe(viewLifecycleOwner) { swipeRefresh.isRefreshing = it }
+    setupList()
+    viewModel.movies.observe(viewLifecycleOwner) { data ->
+      rvAdapter.submitList(data)
     }
 
-    private fun setupList() {
-        rvAdapter = MovieAdapter(
-            coilLoader
-        ) { id ->
-            navigateToMovieDetail(id)
-        }
-        recyclerView.adapter = rvAdapter
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+    viewModel.errorMessage.observe(viewLifecycleOwner) { message ->
+      cardError.isVisible = message.isNotBlank()
+      errorText.text = message
+      recyclerView.isVisible = message.isBlank()
     }
 
-    private fun navigateToMovieDetail(movieId: Long) {
-        findNavController().navigate(
-            HomeFragmentDirections.actionHomeToMovieDetail(movieId)
-        )
+    swipeRefresh.setOnRefreshListener { viewModel.fetchPopularMovie() }
+    viewModel.loading.observe(viewLifecycleOwner) { swipeRefresh.isRefreshing = it }
+  }
+
+  private fun setupList() {
+    rvAdapter = MovieAdapter(
+      coilLoader
+    ) { id ->
+      navigateToMovieDetail(id)
     }
+    recyclerView.adapter = rvAdapter
+    recyclerView.layoutManager = LinearLayoutManager(requireContext())
+  }
+
+  private fun navigateToMovieDetail(movieId: Long) {
+    findNavController().navigate(
+      HomeFragmentDirections.actionHomeToMovieDetail(movieId)
+    )
+  }
 }

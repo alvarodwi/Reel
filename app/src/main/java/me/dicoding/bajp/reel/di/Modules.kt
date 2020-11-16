@@ -13,8 +13,10 @@ import kotlinx.serialization.json.Json
 import me.dicoding.bajp.reel.BuildConfig
 import me.dicoding.bajp.reel.data.db.AppDatabase
 import me.dicoding.bajp.reel.data.network.ApiService
+import me.dicoding.bajp.reel.data.repository.FavoriteRepository
 import me.dicoding.bajp.reel.data.repository.MovieRepository
 import me.dicoding.bajp.reel.data.repository.TvShowRepository
+import me.dicoding.bajp.reel.ui.favorite.FavoriteViewModel
 import me.dicoding.bajp.reel.ui.movie.detail.MovieDetailViewModel
 import me.dicoding.bajp.reel.ui.movie.list.MovieListViewModel
 import me.dicoding.bajp.reel.ui.tvshow.detail.TvShowDetailViewModel
@@ -33,91 +35,97 @@ import timber.log.Timber
 import java.util.concurrent.TimeUnit
 
 val viewModelModule = module {
-    viewModel { MovieListViewModel(get()) }
-    viewModel { (id: Long) -> MovieDetailViewModel(id, get()) }
+  viewModel { MovieListViewModel(get()) }
+  viewModel { (id: Long) -> MovieDetailViewModel(id, get()) }
 
-    viewModel { TvShowListViewModel(get()) }
-    viewModel { (id: Long) -> TvShowDetailViewModel(id, get()) }
+  viewModel { TvShowListViewModel(get()) }
+  viewModel { (id: Long) -> TvShowDetailViewModel(id, get()) }
+
+  viewModel { FavoriteViewModel(get()) }
 }
 
 val dataModule = module {
-    //db
-    fun provideAppDatabase(context: Context) =
-        Room.databaseBuilder(context, AppDatabase::class.java, "db_reel")
-            .fallbackToDestructiveMigration()
-            .setQueryExecutor(Dispatchers.IO.asExecutor())
-            .setTransactionExecutor(Dispatchers.IO.asExecutor())
-            .build()
+  //db
+  fun provideAppDatabase(context: Context): AppDatabase =
+    Room.databaseBuilder(context, AppDatabase::class.java, "db_reel")
+      .fallbackToDestructiveMigration()
+      .setQueryExecutor(Dispatchers.IO.asExecutor())
+      .setTransactionExecutor(Dispatchers.IO.asExecutor())
+      .build()
 
-    single { provideAppDatabase(androidContext()) }
+  single { provideAppDatabase(androidContext()) }
 
-    //repository
-    single { MovieRepository(get()) }
-    single { TvShowRepository(get()) }
+  //repository
+  single { MovieRepository(get(), get()) }
+  single { TvShowRepository(get(), get()) }
+  single { FavoriteRepository(get()) }
 }
 
 val networkModule = module {
-    fun provideNetworkCache(application: Application): Cache {
-        val cacheSize: Long = 10 * 1024 * 1024
-        return Cache(application.cacheDir, cacheSize)
+  fun provideNetworkCache(application: Application): Cache {
+    val cacheSize: Long = 10 * 1024 * 1024
+    return Cache(application.cacheDir, cacheSize)
+  }
+
+  fun provideHttpClient(cache: Cache): OkHttpClient {
+    val builder = OkHttpClient.Builder()
+      .connectTimeout(10, TimeUnit.SECONDS)
+      .readTimeout(10, TimeUnit.SECONDS)
+      .writeTimeout(10, TimeUnit.SECONDS)
+
+    if (BuildConfig.DEBUG) {
+      val logger = HttpLoggingInterceptor { messsage ->
+        Timber.d("API: $messsage")
+      }.apply {
+        level = HttpLoggingInterceptor.Level.BASIC
+      }
+      builder.addInterceptor(logger)
     }
 
-    fun provideHttpClient(cache: Cache): OkHttpClient {
-        val builder = OkHttpClient.Builder()
-            .connectTimeout(10, TimeUnit.SECONDS)
-            .readTimeout(10, TimeUnit.SECONDS)
-            .writeTimeout(10, TimeUnit.SECONDS)
+    return builder
+      .cache(cache)
+      .build()
+  }
 
-        if (BuildConfig.DEBUG) {
-            val logger = HttpLoggingInterceptor { messsage ->
-                Timber.d("API: $messsage")
-            }.apply {
-                level = HttpLoggingInterceptor.Level.BASIC
-            }
-            builder.addInterceptor(logger)
-        }
+  fun provideRetrofit(client: OkHttpClient): Retrofit {
+    val contentType = "application/json".toMediaType()
+    val jsonConverterFactory = Json {
+      ignoreUnknownKeys = true
+      isLenient = true
+    }.asConverterFactory(contentType)
 
-        return builder
-            .cache(cache)
-            .build()
-    }
+    return Retrofit.Builder()
+      .baseUrl(BASE_URL)
+      .client(client)
+      .addConverterFactory(jsonConverterFactory)
+      .build()
+  }
 
-    fun provideRetrofit(client: OkHttpClient): Retrofit {
-        val contentType = "application/json".toMediaType()
-        val jsonConverterFactory = Json {
-            ignoreUnknownKeys = true
-            isLenient = true
-        }.asConverterFactory(contentType)
+  single { provideNetworkCache(androidApplication()) }
+  single { provideHttpClient(get()) }
+  single { provideRetrofit(get()) }
 
-        return Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .client(client)
-            .addConverterFactory(jsonConverterFactory)
-            .build()
-    }
+  fun provideApiService(retrofit: Retrofit): ApiService = retrofit.create(ApiService::class.java)
 
-    single { provideNetworkCache(androidApplication()) }
-    single { provideHttpClient(get()) }
-    single { provideRetrofit(get()) }
-
-    fun provideApiService(retrofit: Retrofit): ApiService = retrofit.create(ApiService::class.java)
-
-    single { provideApiService(get()) }
+  single { provideApiService(get()) }
 }
 
 val libModule = module {
-    //coil
-    fun provideCoilLoader(app: Application, client: OkHttpClient) = ImageLoader.Builder(app)
-        .availableMemoryPercentage(0.25)
-        .okHttpClient(client)
-        .crossfade(true)
-        .build()
+  //coil
+  fun provideCoilLoader(
+    app: Application,
+    client: OkHttpClient
+  ) = ImageLoader.Builder(app)
+    .availableMemoryPercentage(0.25)
+    .okHttpClient(client)
+    .crossfade(true)
+    .build()
 
-    single { provideCoilLoader(androidApplication(), get()) }
+  single { provideCoilLoader(androidApplication(), get()) }
 
-    //pref
-    fun provideUserPreferences(app: Application): SharedPreferences =
-        PreferenceManager.getDefaultSharedPreferences(app)
+  //pref
+  fun provideUserPreferences(app: Application): SharedPreferences =
+    PreferenceManager.getDefaultSharedPreferences(app)
 
-    single { provideUserPreferences(androidApplication()) }
+  single { provideUserPreferences(androidApplication()) }
 }

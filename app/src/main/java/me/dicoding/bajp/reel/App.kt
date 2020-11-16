@@ -17,31 +17,31 @@ import org.koin.core.logger.Level
 import timber.log.Timber
 
 class App : Application() {
-    companion object {
-        lateinit var app: App
+  companion object {
+    lateinit var app: App
+  }
+
+  override fun onCreate() {
+    super.onCreate()
+    app = this
+    // plant timber
+    if (BuildConfig.DEBUG) {
+      CoroutineScope(Dispatchers.Default).launch {
+        Timber.plant(Timber.DebugTree())
+      }
     }
 
-    override fun onCreate() {
-        super.onCreate()
-        app = this
-        // plant timber
-        if (BuildConfig.DEBUG) {
-            CoroutineScope(Dispatchers.Default).launch {
-                Timber.plant(Timber.DebugTree())
-            }
-        }
-
-        // start injecting di
-        startKoin {
-            androidLogger(Level.ERROR)
-            androidContext(this@App)
-            modules(
-                listOf(
-                    viewModelModule, dataModule, networkModule, libModule
-                )
-            )
-        }
-
-        toggleNightMode(nightMode)
+    // start injecting di
+    startKoin {
+      androidLogger(Level.ERROR)
+      androidContext(this@App)
+      modules(
+        listOf(
+          viewModelModule, dataModule, networkModule, libModule
+        )
+      )
     }
+
+    toggleNightMode(nightMode().get())
+  }
 }

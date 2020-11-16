@@ -25,59 +25,59 @@ import org.junit.runners.JUnit4
 
 @RunWith(JUnit4::class)
 class TvShowListViewModelTest : TestCase() {
-    @get:Rule
-    var instantExecutorRule = InstantTaskExecutorRule()
+  @get:Rule
+  var instantExecutorRule = InstantTaskExecutorRule()
 
-    @MockK
-    lateinit var repository: TvShowRepository
-    lateinit var viewModel: TvShowListViewModel
+  @MockK
+  lateinit var repository: TvShowRepository
+  lateinit var viewModel: TvShowListViewModel
 
-    @Before
-    fun setup() {
-        MockKAnnotations.init(this)
-        viewModel = TvShowListViewModel(repository)
+  @Before
+  fun setup() {
+    MockKAnnotations.init(this)
+    viewModel = TvShowListViewModel(repository)
+  }
+
+  @Test
+  fun `test successful fetch of list tvShow`() {
+    every { repository.getPopularTvShow() } returns flow {
+      NetworkResult.Success(
+        provideDummyData()
+      )
     }
+    viewModel.fetchPopularTvShow()
 
-    @Test
-    fun `test successful fetch of list tvShow`() {
-        every { repository.getPopularTvShow() } returns flow {
-            NetworkResult.Success(
-                provideDummyData()
-            )
-        }
-        viewModel.fetchPopularTvShow()
+    verify(atLeast = 1) { repository.getPopularTvShow() }
 
-        verify(atLeast = 1) { repository.getPopularTvShow() }
-
-        viewModel.tvShows.observeForever { value ->
-            assertNotNull(value)
-            assertEquals(value.size, 20)
-            assertEquals(viewModel.errorMessage.value, "")
-        }
+    viewModel.tvShows.observeForever { value ->
+      assertNotNull(value)
+      assertEquals(value.size, 20)
+      assertEquals(viewModel.errorMessage.value, "")
     }
+  }
 
-    @Test
-    fun `test failed fetch of list tvShow`() {
-        every { repository.getPopularTvShow() } returns flow { NetworkResult.Error(Exception("foo")) }
-        viewModel.fetchPopularTvShow()
+  @Test
+  fun `test failed fetch of list tvShow`() {
+    every { repository.getPopularTvShow() } returns flow { NetworkResult.Error(Exception("foo")) }
+    viewModel.fetchPopularTvShow()
 
-        verify(atLeast = 1) { repository.getPopularTvShow() }
+    verify(atLeast = 1) { repository.getPopularTvShow() }
 
-        viewModel.tvShows.observeForever { value ->
-            assertNotNull(value)
-            assert(value.isEmpty())
-            assertEquals(viewModel.errorMessage.value, "foo")
-        }
+    viewModel.tvShows.observeForever { value ->
+      assertNotNull(value)
+      assert(value.isEmpty())
+      assertEquals(viewModel.errorMessage.value, "foo")
     }
+  }
 
-    @After
-    fun tearUp() {
-        unmockkAll()
-    }
+  @After
+  fun tearUp() {
+    unmockkAll()
+  }
 
-    private fun provideDummyData(): List<TvShowEntity> {
-        return JsonHelper.loadPopularTvShowData(
-            TestUtils.parseStringFromJsonResource("/popular_tv_shows.json")
-        ).results.map(TvShowJson::asEntity)
-    }
+  private fun provideDummyData(): List<TvShowEntity> {
+    return JsonHelper.loadPopularTvShowData(
+      TestUtils.parseStringFromJsonResource("/popular_tv_shows.json")
+    ).results.map(TvShowJson::asEntity)
+  }
 }

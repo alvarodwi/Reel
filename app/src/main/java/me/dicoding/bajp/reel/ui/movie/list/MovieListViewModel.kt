@@ -13,35 +13,35 @@ import me.dicoding.bajp.reel.data.network.NetworkResult
 import me.dicoding.bajp.reel.data.repository.MovieRepository
 
 class MovieListViewModel(
-    private val repository: MovieRepository
+  private val repository: MovieRepository
 ) : ViewModel() {
-    private val _loading = MutableLiveData<Boolean>()
-    val loading: LiveData<Boolean> get() = _loading
+  private val _loading = MutableLiveData<Boolean>()
+  val loading: LiveData<Boolean> get() = _loading
 
-    private val _movies = MutableLiveData<List<MovieEntity>>()
-    val movies: LiveData<List<MovieEntity>> get() = _movies
+  private val _movies = MutableLiveData<List<MovieEntity>>()
+  val movies: LiveData<List<MovieEntity>> get() = _movies
 
-    private val _errorMessage = MutableLiveData<String>()
-    val errorMessage: LiveData<String> get() = _errorMessage
+  private val _errorMessage = MutableLiveData<String>()
+  val errorMessage: LiveData<String> get() = _errorMessage
 
-    fun fetchPopularMovie() {
-        viewModelScope.launch {
-            _loading.postValue(true)
-            _errorMessage.postValue("")
-            repository.getPopularMovie()
-                .catch { _errorMessage.postValue(it.message) }
-                .collect { result ->
-                    when (result) {
-                        is NetworkResult.Success -> _movies.postValue(result.data)
-                        is NetworkResult.Error -> _errorMessage.postValue(result.exception.message)
-                    }
-                }
-            _loading.postValue(false)
+  fun fetchPopularMovie() {
+    viewModelScope.launch {
+      _loading.postValue(true)
+      _errorMessage.postValue("")
+      repository.getPopularMovie()
+        .catch { _errorMessage.postValue(it.message) }
+        .collect { result ->
+          when (result) {
+            is NetworkResult.Success -> _movies.postValue(result.data)
+            is NetworkResult.Error -> _errorMessage.postValue(result.exception.message)
+          }
         }
+      _loading.postValue(false)
     }
+  }
 
-    override fun onCleared() {
-        super.onCleared()
-        viewModelScope.cancel()
-    }
+  override fun onCleared() {
+    super.onCleared()
+    viewModelScope.cancel()
+  }
 }

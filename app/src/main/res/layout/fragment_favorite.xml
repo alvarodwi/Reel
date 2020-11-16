@@ -2,8 +2,7 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_height="match_parent">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
@@ -13,9 +12,14 @@
         app:title="@string/app_name" />
 
     <include
+        android:id="@+id/list_layout"
+        layout="@layout/fragment_simple_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="?actionBarSize"
-        layout="@layout/fragment_simple_list"/>
+        android:layout_marginTop="?actionBarSize" />
+
+    <include
+        android:id="@+id/filter_layout"
+        layout="@layout/sheet_favorite_filter" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

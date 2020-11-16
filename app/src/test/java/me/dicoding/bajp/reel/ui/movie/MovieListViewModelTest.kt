@@ -25,54 +25,58 @@ import org.junit.runners.JUnit4
 
 @RunWith(JUnit4::class)
 class MovieListViewModelTest : TestCase() {
-    @get:Rule
-    var instantExecutorRule = InstantTaskExecutorRule()
+  @get:Rule
+  var instantExecutorRule = InstantTaskExecutorRule()
 
-    @MockK
-    lateinit var repository: MovieRepository
-    lateinit var viewModel: MovieListViewModel
+  @MockK
+  lateinit var repository: MovieRepository
+  lateinit var viewModel: MovieListViewModel
 
-    @Before
-    fun setup() {
-        MockKAnnotations.init(this)
-        viewModel = MovieListViewModel(repository)
+  @Before
+  fun setup() {
+    MockKAnnotations.init(this)
+    viewModel = MovieListViewModel(repository)
+  }
+
+  @Test
+  fun `test successful fetch of list movie`() {
+    every { repository.getPopularMovie() } returns flow {
+      NetworkResult.Success(
+        provideDummyData()
+      )
     }
+    viewModel.fetchPopularMovie()
 
-    @Test
-    fun `test successful fetch of list movie`() {
-        every { repository.getPopularMovie() } returns flow { NetworkResult.Success(provideDummyData()) }
-        viewModel.fetchPopularMovie()
+    verify(atLeast = 1) { repository.getPopularMovie() }
 
-        verify(atLeast = 1) { repository.getPopularMovie() }
-
-        viewModel.movies.observeForever { value ->
-            assertNotNull(value)
-            assertEquals(value.size, 20)
-            assertEquals(viewModel.errorMessage.value, "")
-        }
+    viewModel.movies.observeForever { value ->
+      assertNotNull(value)
+      assertEquals(value.size, 20)
+      assertEquals(viewModel.errorMessage.value, "")
     }
+  }
 
-    @Test
-    fun `test failed fetch of list movie`() {
-        every { repository.getPopularMovie() } returns flow { NetworkResult.Error(Exception("foo")) }
-        viewModel.fetchPopularMovie()
+  @Test
+  fun `test failed fetch of list movie`() {
+    every { repository.getPopularMovie() } returns flow { NetworkResult.Error(Exception("foo")) }
+    viewModel.fetchPopularMovie()
 
-        verify(atLeast = 1) { repository.getPopularMovie() }
+    verify(atLeast = 1) { repository.getPopularMovie() }
 
-        viewModel.movies.observeForever { value ->
-            assert(value.isEmpty())
-            assertEquals(viewModel.errorMessage.value, "foo")
-        }
+    viewModel.movies.observeForever { value ->
+      assert(value.isEmpty())
+      assertEquals(viewModel.errorMessage.value, "foo")
     }
+  }
 
-    @After
-    fun tearUp() {
-        unmockkAll()
-    }
+  @After
+  fun tearUp() {
+    unmockkAll()
+  }
 
-    private fun provideDummyData(): List<MovieEntity> {
-        return JsonHelper.loadPopularMovieData(
-            TestUtils.parseStringFromJsonResource("/popular_movies.json")
-        ).results.map(MovieJson::asEntity)
-    }
+  private fun provideDummyData(): List<MovieEntity> {
+    return JsonHelper.loadPopularMovieData(
+      TestUtils.parseStringFromJsonResource("/popular_movies.json")
+    ).results.map(MovieJson::asEntity)
+  }
 }
