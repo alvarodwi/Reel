@@ -31,7 +31,7 @@ class MovieListViewModelTest : TestCase() {
 
   @MockK
   lateinit var repository: MovieRepository
-  lateinit var viewModel: MovieListViewModel
+  private lateinit var viewModel: MovieListViewModel
 
   @Before
   fun setup() {

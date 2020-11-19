@@ -6,9 +6,6 @@ const val API_KEY = BuildConfig.tmdbApiKey
 const val BASE_URL = "https://api.themoviedb.org/3/"
 
 object DatabaseConstants {
-  const val SORT_ASC = 0
-  const val SORT_DESC = 1
-
   object FavoriteTable {
     object Types {
       const val TYPE_ALL = 0
@@ -23,12 +20,6 @@ object DatabaseConstants {
       const val DATE_DESC = 3
       const val DATE_ADDED_ASC = 4
       const val DATE_ADDED_DESC = 5
-    }
-
-    object Indexes {
-      const val TITLE = 0
-      const val DATE = 2
-      const val DATE_ADDED = 4
     }
   }
 }

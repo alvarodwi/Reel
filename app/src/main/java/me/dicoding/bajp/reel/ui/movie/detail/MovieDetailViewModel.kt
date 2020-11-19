@@ -22,8 +22,8 @@ class MovieDetailViewModel(
   private val _errorMessage = MutableLiveData<String>()
   val errorMessage: LiveData<String> get() = _errorMessage
 
-  val _isFavorited = MutableLiveData<Boolean>()
-  val isFavorited get() = _isFavorited
+  private val _isFavorite = MutableLiveData<Boolean>()
+  val isFavorite get() = _isFavorite
 
   fun fetchMovieDetail() {
     viewModelScope.launch {
@@ -42,14 +42,14 @@ class MovieDetailViewModel(
   fun checkMovieInDb() {
     viewModelScope.launch {
       repository.isMovieInFavorites(movieId).collect { result ->
-        _isFavorited.value = result == 1
+        _isFavorite.value = result == 1
       }
     }
   }
 
   fun onFabClicked(data: MovieEntity) {
     viewModelScope.launch {
-      if (isFavorited.value == true) repository.removeMovieFromFavorites(data)
+      if (isFavorite.value == true) repository.removeMovieFromFavorites(data)
       else repository.addMovieToFavorites(data)
     }
   }

@@ -39,8 +39,8 @@ class TvShowRepositoryTest : TestCase() {
 
   @MockK
   lateinit var db: AppDatabase
-  lateinit var repository: TvShowRepository
-  val dispatcher = Dispatchers.Unconfined
+  private lateinit var repository: TvShowRepository
+  private val dispatcher = Dispatchers.Unconfined
 
   @Before
   fun setup() {

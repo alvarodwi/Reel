@@ -33,17 +33,4 @@ interface ApiService {
   suspend fun getPopularTvShow(
     @Query("api_key") apiKey: String,
   ): Response<TvShowListJson>
-
-  //Search
-  @GET("search/movie")
-  suspend fun searchMovie(
-    @Query("api_key") apiKey: String,
-    @Query("query") query: String
-  ): Response<MovieListJson>
-
-  @GET("search/tv")
-  suspend fun searchTvShow(
-    @Query("api_key") apiKey: String,
-    @Query("query") query: String
-  ): Response<TvShowListJson>
 }

@@ -1,8 +1,5 @@
 package me.dicoding.bajp.reel.utils.ext
 
-import android.app.Activity
-import android.content.Intent
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
@@ -44,12 +41,3 @@ inline fun <T : ViewBinding> ViewGroup.viewBinding(
   crossinline bindingInflater: (LayoutInflater, ViewGroup, Boolean) -> T,
   attachToParent: Boolean = false
 ) = bindingInflater.invoke(LayoutInflater.from(context), this, attachToParent)
-
-fun Activity.moveActivity(
-  dest: Class<*>,
-  args: Bundle? = null
-) {
-  Intent(this, dest).apply {
-    if (args != null) this.putExtras(args)
-  }.also { startActivity(it) }
-}

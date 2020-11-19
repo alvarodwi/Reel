@@ -23,8 +23,8 @@ class TvShowDetailViewModel(
   private val _errorMessage = MutableLiveData<String>()
   val errorMessage: LiveData<String> get() = _errorMessage
 
-  val _isFavorited = MutableLiveData<Boolean>()
-  val isFavorited get() = _isFavorited
+  private val _isFavorite = MutableLiveData<Boolean>()
+  val isFavorite get() = _isFavorite
 
   fun fetchTvShowDetail() {
     viewModelScope.launch {
@@ -43,14 +43,14 @@ class TvShowDetailViewModel(
   fun checkTvShowInDb() {
     viewModelScope.launch {
       repository.isTvShowInFavorites(tvShowId).collect { result ->
-        _isFavorited.value = result == 1
+        _isFavorite.value = result == 1
       }
     }
   }
 
   fun onFabClicked(data: TvShowEntity) {
     viewModelScope.launch(Dispatchers.IO) {
-      if (isFavorited.value == true) repository.removeTvShowFromFavorites(data)
+      if (isFavorite.value == true) repository.removeTvShowFromFavorites(data)
       else repository.addTvShowToFavorites(data)
     }
   }

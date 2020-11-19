@@ -32,7 +32,7 @@ class TvShowDetailViewModelTest : TestCase() {
 
   @MockK
   lateinit var repository: TvShowRepository
-  lateinit var viewModel: TvShowDetailViewModel
+  private lateinit var viewModel: TvShowDetailViewModel
 
   @Before
   fun setup() {
@@ -88,7 +88,7 @@ class TvShowDetailViewModelTest : TestCase() {
     verify(atLeast = 1) { repository.isTvShowInFavorites(expectedTvShowId) }
     confirmVerified(repository)
 
-    viewModel.isFavorited.observeForever { value ->
+    viewModel.isFavorite.observeForever { value ->
       assertNotNull(value)
       assertEquals(value, true)
     }
@@ -104,7 +104,7 @@ class TvShowDetailViewModelTest : TestCase() {
     verify(atLeast = 1) { repository.isTvShowInFavorites(expectedTvShowId) }
     confirmVerified(repository)
 
-    viewModel.isFavorited.observeForever { value ->
+    viewModel.isFavorite.observeForever { value ->
       assertNotNull(value)
       assertEquals(value, false)
     }

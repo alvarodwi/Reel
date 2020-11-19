@@ -38,7 +38,7 @@ class FavoriteViewModelTest : TestCase() {
 
   @MockK
   lateinit var repository: FavoriteRepository
-  lateinit var viewModel: FavoriteViewModel
+  private lateinit var viewModel: FavoriteViewModel
 
   @Before
   fun setup() {

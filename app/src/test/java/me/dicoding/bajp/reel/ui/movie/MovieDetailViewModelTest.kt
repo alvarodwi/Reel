@@ -32,7 +32,7 @@ class MovieDetailViewModelTest : TestCase() {
 
   @MockK
   lateinit var repository: MovieRepository
-  lateinit var viewModel: MovieDetailViewModel
+  private lateinit var viewModel: MovieDetailViewModel
 
   @Before
   fun setup() {
@@ -88,7 +88,7 @@ class MovieDetailViewModelTest : TestCase() {
     verify(atLeast = 1) { repository.isMovieInFavorites(expectedMovieId) }
     confirmVerified(repository)
 
-    viewModel.isFavorited.observeForever { value ->
+    viewModel.isFavorite.observeForever { value ->
       assertNotNull(value)
       assertEquals(value, true)
     }
@@ -104,7 +104,7 @@ class MovieDetailViewModelTest : TestCase() {
     verify(atLeast = 1) { repository.isMovieInFavorites(expectedMovieId) }
     confirmVerified(repository)
 
-    viewModel.isFavorited.observeForever { value ->
+    viewModel.isFavorite.observeForever { value ->
       assertNotNull(value)
       assertEquals(value, false)
     }

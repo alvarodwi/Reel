@@ -58,7 +58,7 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
       errorText.text = message
     }
 
-    viewModel.isFavorited.observe(viewLifecycleOwner) { flag ->
+    viewModel.isFavorite.observe(viewLifecycleOwner) { flag ->
       fab.setImageResource(if (flag) R.drawable.ic_favorite else R.drawable.ic_favorite_alt)
     }
   }

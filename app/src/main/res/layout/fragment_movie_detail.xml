@@ -65,7 +65,7 @@
                     android:layout_height="175dp"
                     android:contentDescription="@string/desc_detail_poster"
                     android:scaleType="centerCrop"
-                    tools:src="@drawable/ic_launcher_background" />
+                    tools:src="@color/black" />
             </androidx.cardview.widget.CardView>
 
             <TextView

@@ -31,7 +31,7 @@ class TvShowListViewModelTest : TestCase() {
 
   @MockK
   lateinit var repository: TvShowRepository
-  lateinit var viewModel: TvShowListViewModel
+  private lateinit var viewModel: TvShowListViewModel
 
   @Before
   fun setup() {

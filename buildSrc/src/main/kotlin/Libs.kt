@@ -22,7 +22,7 @@ object Libs {
         const val swipeRefresh = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
         const val viewPager2 = "androidx.viewpager2:viewpager2:1.0.0"
         const val paging = "androidx.paging:paging-runtime-ktx:3.0.0-alpha09"
-        const val work = "androidx.work:work-runtime-ktx:2.4.0"
+        // const val work = "androidx.work:work-runtime-ktx:2.4.0"
 
         object KTX {
             const val fragment = "androidx.fragment:fragment-ktx:1.2.5"
@@ -66,14 +66,14 @@ object Libs {
 
     object Koin {
         const val core = "org.koin:koin-android:$koin_version"
-        const val scope = "org.koin:koin-android-scope:$koin_version"
+        // const val scope = "org.koin:koin-android-scope:$koin_version"
         const val viewModel = "org.koin:koin-android-viewmodel:$koin_version"
         const val test = "org.koin:koin-test:$koin_version"
     }
 
     object CoilKt {
         const val core = "io.coil-kt:coil-base:${coil_version}"
-        const val gif = "io.coil-kt:coil-gif:${coil_version}"
+        // const val gif = "io.coil-kt:coil-gif:${coil_version}"
     }
 
     object Network {
