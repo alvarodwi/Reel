@@ -61,3 +61,7 @@
   
   - Memastikan ketika TvShowListFragment dibuka, recycler view bisa discroll ke index terakhir
   - Memastikan ketika item recycler view di klik, halaman detail terbuka
+
+- FavoriteFragmentTest
+  
+  - Memastikan fungsi favorite berjalan dan halaman favorite bisa dibuka

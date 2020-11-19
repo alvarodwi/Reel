@@ -1,7 +1,7 @@
 <!--
  Using https://github.com/othneildrew/Best-README-Template for this README~
->
- [![LinkedIn][linkedin-shield]][linkedin-url] [![GitHub version](https://badge.fury.io/gh/alvarodwi%2Freel.svg)](https://badge.fury.io/gh/alvarodwi%2Freel)
+-->
+[![LinkedIn][linkedin-shield]][linkedin-url] [![GitHub version](https://badge.fury.io/gh/alvarodwi%2Freel.svg)](https://badge.fury.io/gh/alvarodwi%2Freel)
 
 <p align="center">
     <img src="app/src/main/ic_launcher-playstore.png" alt="Logo" width="128" height="128">
