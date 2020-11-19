@@ -47,11 +47,12 @@ class TvShowFragmentTest {
   @Test
   fun loadDetails() {
     onView(withId(R.id.view_pager)).perform(swipeLeft())
+    //akomodasi waktu swipe
+    //ini biang error ketika testing =(
+    SystemClock.sleep(1000)
     onView(ViewCounter.last(withId(R.id.rv_list))).perform(
       RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click())
     )
-    //akomodasi waktu perpindahan dari list ke detail
-    SystemClock.sleep(1000)
     onView(withId(R.id.backdrop)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
   }
 }

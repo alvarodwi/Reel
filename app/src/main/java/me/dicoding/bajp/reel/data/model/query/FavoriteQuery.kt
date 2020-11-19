@@ -1,15 +1,12 @@
 package me.dicoding.bajp.reel.data.model.query
 
 import androidx.sqlite.db.SimpleSQLiteQuery
-import me.dicoding.bajp.reel.utils.DatabaseConstants.FavoriteTable.Indexes
+import me.dicoding.bajp.reel.utils.DatabaseConstants.FavoriteTable.Sorts
 import me.dicoding.bajp.reel.utils.DatabaseConstants.FavoriteTable.Types
-import me.dicoding.bajp.reel.utils.DatabaseConstants.SORT_ASC
-import me.dicoding.bajp.reel.utils.DatabaseConstants.SORT_DESC
 
 data class FavoriteQuery(
   var type: Int = Types.TYPE_ALL,
-  var sortColumns: Int = Indexes.TITLE,
-  var sortDirection: Int = SORT_ASC,
+  var sort: Int = Sorts.TITLE_ASC,
   var searchQuery: String = ""
 ) {
   fun generateQuery(): SimpleSQLiteQuery {
@@ -21,14 +18,13 @@ data class FavoriteQuery(
       Types.TYPE_TV_SHOW -> result.append(" type = 2")
     }
 
-    when (sortColumns) {
-      Indexes.TITLE -> result.append(" ORDER BY item_title")
-      Indexes.DATE -> result.append(" ORDER BY item_date")
-      Indexes.DATE_ADDED -> result.append(" ORDER BY date_added")
-    }
-    when (sortDirection) {
-      SORT_ASC -> result.append(" ASC")
-      SORT_DESC -> result.append(" DESC")
+    when (sort) {
+      Sorts.TITLE_ASC -> result.append(" ORDER BY item_title ASC")
+      Sorts.TITLE_DESC -> result.append(" ORDER BY item_title DESC")
+      Sorts.DATE_ASC -> result.append(" ORDER BY item_date ASC")
+      Sorts.DATE_DESC -> result.append(" ORDER BY item_date DESC")
+      Sorts.DATE_ADDED_ASC -> result.append(" ORDER BY date_added ASC")
+      Sorts.DATE_ADDED_DESC -> result.append(" ORDER BY date_added DESC")
     }
     return SimpleSQLiteQuery(result.toString())
   }

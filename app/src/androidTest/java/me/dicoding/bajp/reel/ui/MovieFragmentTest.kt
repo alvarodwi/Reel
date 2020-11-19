@@ -1,6 +1,5 @@
 package me.dicoding.bajp.reel.ui
 
-import android.os.SystemClock
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.IdlingRegistry
@@ -46,8 +45,6 @@ class MovieFragmentTest {
     onView(withId(R.id.rv_list)).perform(
       RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click())
     )
-    //akomodasi waktu perpindahan dari list ke detail
-    SystemClock.sleep(1000)
     onView(withId(R.id.backdrop)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
   }
 }

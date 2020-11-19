@@ -79,8 +79,8 @@ class FavoriteFragment : Fragment(R.layout.fragment_favorite) {
               listItemsSingleChoice(
                 R.array.favorite_sort,
                 initialSelection = viewModel.getSortCode()
-              ) { dialog, index, text ->
-                viewModel.reOrderItems((index / 2) * 2, index % 2)
+              ) { dialog, index, _ ->
+                viewModel.reOrderItems(index)
                 dialog.dismiss()
               }
             }

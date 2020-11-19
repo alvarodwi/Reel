@@ -11,7 +11,6 @@ object Libs {
     private const val espresso_version = "3.3.0"
     const val materialdialogs_version = "3.3.0"
 
-
     const val androidGradlePlugin = "com.android.tools.build:gradle:4.1.1"
     const val jdkDesugaring = "com.android.tools:desugar_jdk_libs:1.0.9"
 
@@ -107,5 +106,4 @@ object Libs {
     object MaterialDialogs{
         const val core = "com.afollestad.material-dialogs:core:$materialdialogs_version"
     }
-    const val flowPrefs = "com.github.tfcporciuncula.flow-preferences:flow-preferences:1.3.3"
 }

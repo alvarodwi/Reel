@@ -40,6 +40,7 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
   ) {
     super.onViewCreated(view, savedInstanceState)
     viewModel.fetchMovieDetail()
+    viewModel.checkMovieInDb()
 
     with(toolbar) {
       navigationIcon = ContextCompat.getDrawable(context, R.drawable.ic_arrow_back)

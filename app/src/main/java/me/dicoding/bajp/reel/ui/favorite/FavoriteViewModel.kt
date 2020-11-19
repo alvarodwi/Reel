@@ -11,17 +11,15 @@ import kotlinx.coroutines.launch
 import me.dicoding.bajp.reel.data.model.entity.FavoriteEntity
 import me.dicoding.bajp.reel.data.model.query.FavoriteQuery
 import me.dicoding.bajp.reel.data.repository.FavoriteRepository
-import me.dicoding.bajp.reel.utils.DatabaseConstants.FavoriteTable.Indexes
+import me.dicoding.bajp.reel.utils.DatabaseConstants.FavoriteTable.Sorts
 import me.dicoding.bajp.reel.utils.DatabaseConstants.FavoriteTable.Types
-import me.dicoding.bajp.reel.utils.DatabaseConstants.SORT_ASC
 
 class FavoriteViewModel(
   private val repository: FavoriteRepository
 ) : ViewModel() {
   private val query: FavoriteQuery = FavoriteQuery(
     type = Types.TYPE_ALL,
-    sortColumns = Indexes.TITLE,
-    sortDirection = SORT_ASC,
+    sort = Sorts.TITLE_ASC,
     searchQuery = ""
   )
 
@@ -52,14 +50,12 @@ class FavoriteViewModel(
     fetchFavoriteItems()
   }
 
-  fun getSortCode() = query.sortColumns + query.sortDirection
+  fun getSortCode() = query.sort
 
   fun reOrderItems(
-    column: Int,
-    direction: Int
+    sort: Int
   ) {
-    query.sortColumns = column
-    query.sortDirection = direction
+    query.sort = sort
     fetchFavoriteItems()
   }
 

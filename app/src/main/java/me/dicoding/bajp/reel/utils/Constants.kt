@@ -16,6 +16,15 @@ object DatabaseConstants {
       const val TYPE_TV_SHOW = 2
     }
 
+    object Sorts {
+      const val TITLE_ASC = 0
+      const val TITLE_DESC = 1
+      const val DATE_ASC = 2
+      const val DATE_DESC = 3
+      const val DATE_ADDED_ASC = 4
+      const val DATE_ADDED_DESC = 5
+    }
+
     object Indexes {
       const val TITLE = 0
       const val DATE = 2

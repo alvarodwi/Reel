@@ -4,17 +4,21 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.coVerify
+import io.mockk.confirmVerified
 import io.mockk.impl.annotations.MockK
 import io.mockk.unmockkAll
 import junit.framework.TestCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.runBlocking
+import me.dicoding.bajp.reel.data.db.AppDatabase
 import me.dicoding.bajp.reel.data.model.json.TvShowJson
 import me.dicoding.bajp.reel.data.model.json.TvShowListJson
 import me.dicoding.bajp.reel.data.network.ApiService
 import me.dicoding.bajp.reel.data.network.NetworkResult
 import me.dicoding.bajp.reel.utils.API_KEY
+import me.dicoding.bajp.reel.utils.DatabaseConstants.FavoriteTable.Types
 import me.dicoding.bajp.reel.utils.JsonHelper
 import me.dicoding.bajp.reel.utils.TestUtils
 import org.junit.After
@@ -32,13 +36,16 @@ class TvShowRepositoryTest : TestCase() {
 
   @MockK
   lateinit var api: ApiService
+
+  @MockK
+  lateinit var db: AppDatabase
   lateinit var repository: TvShowRepository
   val dispatcher = Dispatchers.Unconfined
 
   @Before
   fun setup() {
     MockKAnnotations.init(this)
-    repository = TvShowRepository(api, dispatcher)
+    repository = TvShowRepository(api, db, dispatcher)
   }
 
   @Test
@@ -47,6 +54,7 @@ class TvShowRepositoryTest : TestCase() {
     runBlocking { api.getPopularTvShow(API_KEY) }
 
     coVerify(atLeast = 1) { api.getPopularTvShow(API_KEY) }
+    confirmVerified(api)
 
     runBlocking {
       repository.getPopularTvShow()
@@ -64,6 +72,7 @@ class TvShowRepositoryTest : TestCase() {
     runBlocking { api.getTvShowDetail(1, API_KEY) }
 
     coVerify(atLeast = 1) { api.getTvShowDetail(1, API_KEY) }
+    confirmVerified(api)
 
     runBlocking {
       repository.getTvShowDetailData(1)
@@ -72,6 +81,24 @@ class TvShowRepositoryTest : TestCase() {
           result as NetworkResult.Success
           assertEquals(result.data.id, 77169L)
           assertEquals(result.data.name, "Cobra Kai")
+        }
+    }
+  }
+
+  @Test
+  fun `test checkTvShowExists from db`() {
+    coEvery { db.favoriteDao.isItemWithIdExists(1, Types.TYPE_TV_SHOW) } returns flow {
+      emit(1)
+    }
+    runBlocking { db.favoriteDao.isItemWithIdExists(1, Types.TYPE_TV_SHOW) }
+
+    coVerify(atLeast = 1) { db.favoriteDao.isItemWithIdExists(1, Types.TYPE_TV_SHOW) }
+    confirmVerified(db)
+
+    runBlocking {
+      repository.isTvShowInFavorites(1)
+        .collect { result ->
+          assertEquals(result, 1)
         }
     }
   }

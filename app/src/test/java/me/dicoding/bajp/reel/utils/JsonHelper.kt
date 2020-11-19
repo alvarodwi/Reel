@@ -1,6 +1,8 @@
 package me.dicoding.bajp.reel.utils
 
+import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
+import me.dicoding.bajp.reel.data.model.json.FavoriteJson
 import me.dicoding.bajp.reel.data.model.json.MovieJson
 import me.dicoding.bajp.reel.data.model.json.MovieListJson
 import me.dicoding.bajp.reel.data.model.json.TvShowJson
@@ -13,20 +15,17 @@ object JsonHelper {
   }
 
   fun loadMovieData(jsonString: String): MovieJson =
-    jsonBuilder.decodeFromString(MovieJson.serializer(), jsonString)
+    jsonBuilder.decodeFromString(jsonString)
 
   fun loadTvShowData(jsonString: String): TvShowJson =
-    jsonBuilder.decodeFromString(TvShowJson.serializer(), jsonString)
+    jsonBuilder.decodeFromString(jsonString)
 
   fun loadPopularMovieData(jsonString: String): MovieListJson =
-    jsonBuilder.decodeFromString(
-      MovieListJson.serializer(),
-      jsonString
-    )
+    jsonBuilder.decodeFromString(jsonString)
 
   fun loadPopularTvShowData(jsonString: String): TvShowListJson =
-    jsonBuilder.decodeFromString(
-      TvShowListJson.serializer(),
-      jsonString
-    )
+    jsonBuilder.decodeFromString(jsonString)
+
+  fun loadFavoritesData(jsonString: String): List<FavoriteJson> =
+    jsonBuilder.decodeFromString(jsonString)
 }

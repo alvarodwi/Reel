@@ -40,6 +40,7 @@ class TvShowDetailFragment : Fragment(R.layout.fragment_tv_show_detail) {
   ) {
     super.onViewCreated(view, savedInstanceState)
     viewModel.fetchTvShowDetail()
+    viewModel.checkTvShowInDb()
 
     with(toolbar) {
       navigationIcon = ContextCompat.getDrawable(context, R.drawable.ic_arrow_back)

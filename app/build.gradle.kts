@@ -95,7 +95,6 @@ dependencies {
   //data
   implementation(Libs.AndroidX.Room.runtime)
   kapt(Libs.AndroidX.Room.compiler)
-  implementation(Libs.flowPrefs)
 
   //networking
   implementation(Libs.Network.kotlinxSerialization)

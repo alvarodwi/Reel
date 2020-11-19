@@ -3,13 +3,11 @@ package me.dicoding.bajp.reel.ui.tvshow.detail
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import me.dicoding.bajp.reel.data.model.entity.TvShowEntity
 import me.dicoding.bajp.reel.data.network.NetworkResult
@@ -25,7 +23,8 @@ class TvShowDetailViewModel(
   private val _errorMessage = MutableLiveData<String>()
   val errorMessage: LiveData<String> get() = _errorMessage
 
-  val isFavorited = repository.isTvShowInFavorites(tvShowId).map { it == 1 }.asLiveData()
+  val _isFavorited = MutableLiveData<Boolean>()
+  val isFavorited get() = _isFavorited
 
   fun fetchTvShowDetail() {
     viewModelScope.launch {
@@ -38,6 +37,14 @@ class TvShowDetailViewModel(
             is NetworkResult.Error -> _errorMessage.postValue(result.exception.message)
           }
         }
+    }
+  }
+
+  fun checkTvShowInDb() {
+    viewModelScope.launch {
+      repository.isTvShowInFavorites(tvShowId).collect { result ->
+        _isFavorited.value = result == 1
+      }
     }
   }
 

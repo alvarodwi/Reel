@@ -2,6 +2,7 @@ package me.dicoding.bajp.reel.ui.movie
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import io.mockk.MockKAnnotations
+import io.mockk.confirmVerified
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
 import io.mockk.unmockkAll
@@ -48,6 +49,7 @@ class MovieListViewModelTest : TestCase() {
     viewModel.fetchPopularMovie()
 
     verify(atLeast = 1) { repository.getPopularMovie() }
+    confirmVerified(repository)
 
     viewModel.movies.observeForever { value ->
       assertNotNull(value)
@@ -62,6 +64,7 @@ class MovieListViewModelTest : TestCase() {
     viewModel.fetchPopularMovie()
 
     verify(atLeast = 1) { repository.getPopularMovie() }
+    confirmVerified(repository)
 
     viewModel.movies.observeForever { value ->
       assert(value.isEmpty())

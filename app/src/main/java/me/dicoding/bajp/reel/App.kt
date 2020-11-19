@@ -42,6 +42,6 @@ class App : Application() {
       )
     }
 
-    toggleNightMode(nightMode().get())
+    toggleNightMode(nightMode)
   }
 }

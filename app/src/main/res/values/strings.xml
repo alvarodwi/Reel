@@ -21,8 +21,8 @@
     <string name="favorite_button">Favorite button</string>
     <string name="text_favorite">Favorite</string>
     <string name="retry">Retry</string>
-    <string name="error_message_global">An error occured...</string>
+    <string name="error_message_global">An error occurred…</string>
     <string name="text_search">Search</string>
-    <string name="text_search_items">Search items...</string>
+    <string name="text_search_items">Search titles…</string>
     <string name="sort_items">Sort items by</string>
 </resources>

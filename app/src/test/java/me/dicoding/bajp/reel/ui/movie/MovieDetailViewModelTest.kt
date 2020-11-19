@@ -2,6 +2,7 @@ package me.dicoding.bajp.reel.ui.movie
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import io.mockk.MockKAnnotations
+import io.mockk.confirmVerified
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
 import io.mockk.unmockkAll
@@ -40,7 +41,7 @@ class MovieDetailViewModelTest : TestCase() {
   }
 
   @Test
-  fun `test successful fetch of list movie`() {
+  fun `test successful fetch of movie detail`() {
     every { repository.getMovieDetailData(expectedMovieId) } returns flow {
       NetworkResult.Success(
         provideDummyData()
@@ -49,6 +50,7 @@ class MovieDetailViewModelTest : TestCase() {
     viewModel.fetchMovieDetail()
 
     verify(atLeast = 1) { repository.getMovieDetailData(expectedMovieId) }
+    confirmVerified(repository)
 
     viewModel.movie.observeForever { value ->
       assertNotNull(value)
@@ -59,7 +61,7 @@ class MovieDetailViewModelTest : TestCase() {
   }
 
   @Test
-  fun `test failed fetch of list movie`() {
+  fun `test failed fetch of movie detail`() {
     every { repository.getMovieDetailData(expectedMovieId) } returns flow {
       NetworkResult.Error(
         Exception("foo")
@@ -68,10 +70,43 @@ class MovieDetailViewModelTest : TestCase() {
     viewModel.fetchMovieDetail()
 
     verify(atLeast = 1) { repository.getMovieDetailData(expectedMovieId) }
+    confirmVerified(repository)
 
     viewModel.movie.observeForever { value ->
       assertNull(value)
       assertEquals(viewModel.errorMessage.value, "foo")
+    }
+  }
+
+  @Test
+  fun `test check data assumed already in db`() {
+    every { repository.isMovieInFavorites(expectedMovieId) } returns flow {
+      emit(1) // room query returns 1 when data exists in db
+    }
+    viewModel.checkMovieInDb()
+
+    verify(atLeast = 1) { repository.isMovieInFavorites(expectedMovieId) }
+    confirmVerified(repository)
+
+    viewModel.isFavorited.observeForever { value ->
+      assertNotNull(value)
+      assertEquals(value, true)
+    }
+  }
+
+  @Test
+  fun `test check data assumed not already in db`() {
+    every { repository.isMovieInFavorites(expectedMovieId) } returns flow {
+      emit(0) // room query returns 0 when data didn't exists in db
+    }
+    viewModel.checkMovieInDb()
+
+    verify(atLeast = 1) { repository.isMovieInFavorites(expectedMovieId) }
+    confirmVerified(repository)
+
+    viewModel.isFavorited.observeForever { value ->
+      assertNotNull(value)
+      assertEquals(value, false)
     }
   }
 
