@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_home_to_settings"
             app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_home_to_favorite"
+            app:destination="@id/favoriteFragment" />
     </fragment>
     <fragment
         android:id="@+id/movieDetailFragment"
@@ -43,5 +46,18 @@
     <fragment
         android:id="@+id/settingsFragment"
         android:name="me.dicoding.bajp.reel.ui.settings.SettingsFragment"
-        android:label="SettingsFragment" />
+        android:label="SettingsFragment"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="me.dicoding.bajp.reel.ui.favorite.FavoriteFragment"
+        android:label="FavoriteFragment"
+        tools:layout="@layout/fragment_favorite">
+        <action
+            android:id="@+id/action_favorite_to_movieDetail"
+            app:destination="@id/movieDetailFragment" />
+        <action
+            android:id="@+id/action_favorite_to_tvShowDetail"
+            app:destination="@id/tvShowDetailFragment" />
+    </fragment>
 </navigation>

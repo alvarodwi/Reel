@@ -1,15 +1,17 @@
 object Libs {
     const val kotlin_version = "1.4.10"
-    const val benmanes_version = "0.34.0"
+    const val benmanes_version = "0.36.0"
     private const val nav_version = "2.3.1"
     private const val lifecycle_version = "2.2.0"
-    private const val coroutines_version = "1.4.0"
-    private const val koin_version = "2.1.6"
+    private const val room_version = "2.2.5"
+    private const val coroutines_version = "1.4.1"
+    private const val koin_version = "2.2.0"
     private const val coil_version = "1.0.0"
     private const val okhttp_version = "4.9.0"
     private const val espresso_version = "3.3.0"
+    const val materialdialogs_version = "3.3.0"
 
-    const val androidGradlePlugin = "com.android.tools.build:gradle:4.1.0"
+    const val androidGradlePlugin = "com.android.tools.build:gradle:4.1.1"
     const val jdkDesugaring = "com.android.tools:desugar_jdk_libs:1.0.9"
 
     object AndroidX {
@@ -19,13 +21,14 @@ object Libs {
         const val coordinatorLayout = "androidx.coordinatorlayout:coordinatorlayout:1.1.0"
         const val swipeRefresh = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
         const val viewPager2 = "androidx.viewpager2:viewpager2:1.0.0"
-        const val paging = "androidx.paging:paging-runtime-ktx:2.1.2"
-        const val work = "androidx.work:work-runtime-ktx:2.4.0"
+        const val paging = "androidx.paging:paging-runtime-ktx:3.0.0-alpha09"
+        // const val work = "androidx.work:work-runtime-ktx:2.4.0"
 
         object KTX {
             const val fragment = "androidx.fragment:fragment-ktx:1.2.5"
             const val activity = "androidx.activity:activity-ktx:1.1.0"
             const val preferences = "androidx.preference:preference-ktx:1.1.1"
+            const val room = "androidx.room:room-ktx:$room_version"
         }
 
         object Lifecycle {
@@ -40,6 +43,11 @@ object Libs {
             const val navUI = "androidx.navigation:navigation-ui-ktx:$nav_version"
             const val safeArgsGradlePlugin =
                 "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
+        }
+
+        object Room {
+            const val runtime = "androidx.room:room-runtime:$room_version"
+            const val compiler = "androidx.room:room-compiler:$room_version"
         }
     }
 
@@ -58,14 +66,14 @@ object Libs {
 
     object Koin {
         const val core = "org.koin:koin-android:$koin_version"
-        const val scope = "org.koin:koin-android-scope:$koin_version"
+        // const val scope = "org.koin:koin-android-scope:$koin_version"
         const val viewModel = "org.koin:koin-android-viewmodel:$koin_version"
         const val test = "org.koin:koin-test:$koin_version"
     }
 
     object CoilKt {
         const val core = "io.coil-kt:coil-base:${coil_version}"
-        const val gif = "io.coil-kt:coil-gif:${coil_version}"
+        // const val gif = "io.coil-kt:coil-gif:${coil_version}"
     }
 
     object Network {
@@ -95,4 +103,7 @@ object Libs {
 
     //other library
     const val timber = "com.jakewharton.timber:timber:4.7.1"
+    object MaterialDialogs{
+        const val core = "com.afollestad.material-dialogs:core:$materialdialogs_version"
+    }
 }

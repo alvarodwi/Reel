@@ -22,7 +22,18 @@
         <item name="elevation">@dimen/elevation_small</item>
     </style>
 
+    <style name="Widget.Reel.Button.Outlined" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="cornerRadius">@dimen/spacing_normal</item>
+        <item name="elevation">@dimen/elevation_small</item>
+    </style>
+
     <style name="Widget.Reel.BottomSheet" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:colorBackground">@android:color/transparent</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
+    <style name="BottomSheetDialogTheme" parent="@style/Theme.MaterialComponents.BottomSheetDialog">
         <item name="android:windowIsFloating">false</item>
         <item name="android:colorBackground">@android:color/transparent</item>
         <item name="android:statusBarColor">@android:color/transparent</item>

@@ -20,85 +20,97 @@ import org.koin.core.parameter.parametersOf
 import timber.log.Timber
 
 class TvShowDetailFragment : Fragment(R.layout.fragment_tv_show_detail) {
-    private val binding by viewBinding { FragmentTvShowDetailBinding.bind(requireView()) }
+  private val binding by viewBinding { FragmentTvShowDetailBinding.bind(requireView()) }
 
-    private val toolbar get() = binding.toolbar
-    private val cardError get() = binding.infoContainer
-    private val errorText get() = binding.info.txtDescription
+  private val toolbar get() = binding.toolbar
+  private val cardError get() = binding.infoContainer
+  private val errorText get() = binding.info.txtDescription
+  private val fab get() = binding.fabFavorite
 
-    private val tvShowId by lazy {
-        val args = TvShowDetailFragmentArgs.fromBundle(requireArguments())
-        args.tvShowId
+  private val tvShowId by lazy {
+    val args = TvShowDetailFragmentArgs.fromBundle(requireArguments())
+    args.tvShowId
+  }
+  private val viewModel by viewModel<TvShowDetailViewModel> { parametersOf(tvShowId) }
+  private val imageLoader by inject<ImageLoader>()
+
+  override fun onViewCreated(
+    view: View,
+    savedInstanceState: Bundle?
+  ) {
+    super.onViewCreated(view, savedInstanceState)
+    viewModel.fetchTvShowDetail()
+    viewModel.checkTvShowInDb()
+
+    with(toolbar) {
+      navigationIcon = ContextCompat.getDrawable(context, R.drawable.ic_arrow_back)
+      inflateMenu(R.menu.detail)
+
+      setNavigationOnClickListener { activity?.onBackPressed() }
     }
 
-    private val viewModel by viewModel<TvShowDetailViewModel> { parametersOf(tvShowId) }
-    private val imageLoader by inject<ImageLoader>()
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        viewModel.fetchTvShowDetail()
-
-        with(toolbar) {
-            navigationIcon = ContextCompat.getDrawable(context, R.drawable.ic_arrow_back)
-            inflateMenu(R.menu.detail)
-
-            setNavigationOnClickListener { activity?.onBackPressed() }
-        }
-
-        viewModel.tvShow.observe(viewLifecycleOwner) { data ->
-            setupView(data)
-        }
-
-        viewModel.errorMessage.observe(viewLifecycleOwner) { message ->
-            cardError.isVisible = message.isNotBlank()
-            errorText.text = message
-        }
+    viewModel.tvShow.observe(viewLifecycleOwner) { data ->
+      setupView(data)
     }
 
-    private fun setupView(data: TvShowEntity) {
-        binding.toolbar.title = String.format("#%d", data.id)
-        binding.toolbar.setOnMenuItemClickListener { menu ->
-            when (menu.itemId) {
-                R.id.action_open_link -> openLink(data.tmdbUrl)
-                R.id.action_share -> shareLink(data.tmdbUrl)
-            }
-            true
-        }
-        binding.name.text = data.name
-        binding.overview.text = data.overview
-        binding.firstAirDate.text = data.firstAirDate
-        binding.genres.text = data.genres.joinToString(", ")
-        val posterData = ImageRequest.Builder(binding.poster.context)
-            .data(data.posterUrl)
-            .placeholder(R.drawable.ic_loading)
-            .error(R.drawable.ic_error)
-            .target(binding.poster)
-            .build()
-        val backdropData = ImageRequest.Builder(binding.backdrop.context)
-            .data(data.backdropUrl)
-            .placeholder(R.drawable.ic_loading)
-            .error(R.drawable.ic_error)
-            .target(binding.backdrop)
-            .build()
-        imageLoader.enqueue(posterData)
-        imageLoader.enqueue(backdropData)
+    viewModel.errorMessage.observe(viewLifecycleOwner) { message ->
+      cardError.isVisible = message.isNotBlank()
+      errorText.text = message
     }
 
-    private fun openLink(url: String?) {
-        Timber.d(url.toSafeUrl())
-        Intent(Intent.ACTION_VIEW).apply {
-            data = Uri.parse(url.toSafeUrl())
-        }.also {
-            startActivity(it)
-        }
+    viewModel.isFavorite.observe(viewLifecycleOwner) { flag ->
+      fab.setImageResource(if (flag) R.drawable.ic_favorite else R.drawable.ic_favorite_alt)
     }
+  }
 
-    private fun shareLink(url: String) {
-        Intent(Intent.ACTION_SEND).apply {
-            putExtra(Intent.EXTRA_TEXT, url.toSafeUrl())
-            type = "text/plain"
-        }.also {
-            startActivity(it)
-        }
+  private fun setupView(data: TvShowEntity) {
+    binding.toolbar.title = String.format("#%d", data.id)
+    binding.toolbar.setOnMenuItemClickListener { menu ->
+      when (menu.itemId) {
+        R.id.action_open_link -> openLink(data.tmdbUrl)
+        R.id.action_share -> shareLink(data.tmdbUrl)
+      }
+      true
     }
+    binding.name.text = data.name
+    binding.overview.text = data.overview
+    binding.firstAirDate.text = data.firstAirDate
+    binding.genres.text = data.genres.joinToString(", ")
+    val posterData = ImageRequest.Builder(binding.poster.context)
+      .data(data.posterUrl)
+      .placeholder(R.drawable.ic_loading)
+      .error(R.drawable.ic_error)
+      .target(binding.poster)
+      .build()
+    val backdropData = ImageRequest.Builder(binding.backdrop.context)
+      .data(data.backdropUrl)
+      .placeholder(R.drawable.ic_loading)
+      .error(R.drawable.ic_error)
+      .target(binding.backdrop)
+      .build()
+    imageLoader.enqueue(posterData)
+    imageLoader.enqueue(backdropData)
+
+    fab.setOnClickListener {
+      viewModel.onFabClicked(data)
+    }
+  }
+
+  private fun openLink(url: String?) {
+    Timber.d(url.toSafeUrl())
+    Intent(Intent.ACTION_VIEW).apply {
+      data = Uri.parse(url.toSafeUrl())
+    }.also {
+      startActivity(it)
+    }
+  }
+
+  private fun shareLink(url: String) {
+    Intent(Intent.ACTION_SEND).apply {
+      putExtra(Intent.EXTRA_TEXT, url.toSafeUrl())
+      type = "text/plain"
+    }.also {
+      startActivity(it)
+    }
+  }
 }

@@ -16,40 +16,45 @@ import java.io.IOException
 
 @RunWith(JUnit4::class)
 abstract class ApiAbstract<T> : TestCase() {
-    lateinit var mockWebServer: MockWebServer
+  lateinit var mockWebServer: MockWebServer
 
-    @Throws(IOException::class)
-    @Before
-    fun mockServer() {
-        mockWebServer = MockWebServer()
-        mockWebServer.start()
-    }
+  @Throws(IOException::class)
+  @Before
+  fun mockServer() {
+    mockWebServer = MockWebServer()
+    mockWebServer.start()
+  }
 
-    @Throws(IOException::class)
-    @After
-    fun stopServer() {
-        mockWebServer.shutdown()
-    }
+  @Throws(IOException::class)
+  @After
+  fun stopServer() {
+    mockWebServer.shutdown()
+  }
 
-    @Throws(IOException::class)
-    fun enqueueResponse(fileName: String) {
-        enqueueResponse(fileName, emptyMap())
-    }
+  @Throws(IOException::class)
+  fun enqueueResponse(fileName: String) {
+    enqueueResponse(fileName, emptyMap())
+  }
 
-    @Throws(IOException::class)
-    private fun enqueueResponse(fileName: String, headers: Map<String, String>) {
-        val mockResponse = MockResponse()
-        for ((key, value) in headers) {
-            mockResponse.addHeader(key, value)
-        }
-        mockWebServer.enqueue(mockResponse.setBody(TestUtils.parseStringFromJsonResource(fileName)))
+  @Throws(IOException::class)
+  private fun enqueueResponse(
+    fileName: String,
+    headers: Map<String, String>
+  ) {
+    val mockResponse = MockResponse()
+    for ((key, value) in headers) {
+      mockResponse.addHeader(key, value)
     }
+    mockWebServer.enqueue(mockResponse.setBody(TestUtils.parseStringFromJsonResource(fileName)))
+  }
 
-    fun createService(clazz: Class<T>): T {
-        return Retrofit.Builder()
-            .baseUrl(mockWebServer.url("/"))
-            .addConverterFactory(JsonHelper.jsonBuilder.asConverterFactory("application/json".toMediaType()))
-            .build()
-            .create(clazz)
-    }
+  fun createService(clazz: Class<T>): T {
+    return Retrofit.Builder()
+      .baseUrl(mockWebServer.url("/"))
+      .addConverterFactory(
+        JsonHelper.jsonBuilder.asConverterFactory("application/json".toMediaType())
+      )
+      .build()
+      .create(clazz)
+  }
 }

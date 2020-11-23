@@ -65,7 +65,7 @@
                     android:layout_height="175dp"
                     android:contentDescription="@string/desc_detail_poster"
                     android:scaleType="centerCrop"
-                    tools:src="@drawable/ic_launcher_background" />
+                    tools:src="@color/black" />
             </androidx.cardview.widget.CardView>
 
             <TextView
@@ -151,4 +151,13 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_favorite"
+        style="@style/Widget.Reel.FAB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/spacing_medium"
+        android:contentDescription="@string/favorite_button"
+        android:src="@drawable/ic_favorite_alt" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
