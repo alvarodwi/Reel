@@ -1,12 +1,12 @@
 object Libs {
-    const val kotlin_version = "1.4.10"
+    const val kotlin_version = "1.4.21"
     const val benmanes_version = "0.36.0"
-    private const val nav_version = "2.3.1"
+    private const val nav_version = "2.3.2"
     private const val lifecycle_version = "2.2.0"
-    private const val room_version = "2.2.5"
-    private const val coroutines_version = "1.4.1"
-    private const val koin_version = "2.2.0"
-    private const val coil_version = "1.0.0"
+    private const val room_version = "2.2.6"
+    private const val coroutines_version = "1.4.2"
+    private const val koin_version = "2.2.2"
+    private const val coil_version = "1.1.0"
     private const val okhttp_version = "4.9.0"
     private const val espresso_version = "3.3.0"
     const val materialdialogs_version = "3.3.0"
@@ -21,7 +21,7 @@ object Libs {
         const val coordinatorLayout = "androidx.coordinatorlayout:coordinatorlayout:1.1.0"
         const val swipeRefresh = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
         const val viewPager2 = "androidx.viewpager2:viewpager2:1.0.0"
-        const val paging = "androidx.paging:paging-runtime-ktx:3.0.0-alpha09"
+        const val paging = "androidx.paging:paging-runtime-ktx:3.0.0-alpha11"
         // const val work = "androidx.work:work-runtime-ktx:2.4.0"
 
         object KTX {
@@ -90,7 +90,7 @@ object Libs {
         const val junit = "junit:junit:4.13.1"
         const val junitExt = "androidx.test.ext:junit:1.1.2"
         const val rules = "androidx.test:rules:1.3.0"
-        const val mockk = "io.mockk:mockk:1.10.2"
+        const val mockk = "io.mockk:mockk:1.10.3"
         const val archCore = "androidx.arch.core:core-testing:2.1.0"
 
         object Espresso {

@@ -4,7 +4,7 @@ plugins {
   id("com.android.application")
   kotlin("android")
   kotlin("kapt")
-  kotlin("plugin.serialization")
+  kotlin("plugin.serialization") version Libs.kotlin_version
   id("androidx.navigation.safeargs.kotlin")
 }
 
