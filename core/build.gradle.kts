@@ -3,6 +3,7 @@ import java.util.Properties
 plugins {
   id("com.android.library")
   id("reel-custom-plugin")
+  kotlin("kapt")
   kotlin("plugin.serialization") version Libs.kotlin_version
 }
 
@@ -12,9 +13,6 @@ localProperties.load(project.rootProject.file("local.properties").inputStream())
 android {
   defaultConfig {
     buildConfigField("String", "tmdbApiKey", localProperties["tmdb.api.key"] as String)
-  }
-  testOptions {
-    unitTests.isReturnDefaultValues = true
   }
 }
 
@@ -26,14 +24,15 @@ dependencies {
   api(Libs.Kotlin.Coroutines.android)
   testImplementation(Libs.Kotlin.Coroutines.test)
 
-  //lifecycle
-  api(Libs.AndroidX.Lifecycle.runtime)
-  api(Libs.AndroidX.Lifecycle.liveData)
+  //ui
+  api(Libs.AndroidX.paging)
+  api(Libs.CoilKt.core)
 
   //data
-  api(Libs.AndroidX.paging)
   implementation(Libs.AndroidX.Room.runtime)
+  implementation(Libs.AndroidX.KTX.room)
   kapt(Libs.AndroidX.Room.compiler)
+  api(Libs.AndroidX.KTX.preferences)
 
   //networking
   implementation(Libs.Network.kotlinxSerialization)
@@ -45,6 +44,7 @@ dependencies {
   api(Libs.Koin.core)
   api(Libs.Koin.viewModel)
 
-  //unit testing
+  //unit testing + espresso idling resource
   testImplementation(Libs.Network.okhttpMockWebServer)
+  api(Libs.Testing.Espresso.idlingResources)
 }

@@ -4,12 +4,13 @@ import android.app.Application
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import me.dicoding.bajp.reel.data.preferences.AppPreferences.nightMode
-import me.dicoding.bajp.reel.di.dataModule
-import me.dicoding.bajp.reel.di.libModule
-import me.dicoding.bajp.reel.di.networkModule
+import me.dicoding.bajp.reel.prefs.AppPreferences.nightMode
+import me.dicoding.bajp.reel.core.di.databaseModule
+import me.dicoding.bajp.reel.core.di.libModule
+import me.dicoding.bajp.reel.core.di.networkModule
+import me.dicoding.bajp.reel.core.di.repositoryModule
 import me.dicoding.bajp.reel.di.viewModelModule
-import me.dicoding.bajp.reel.utils.ext.toggleNightMode
+import me.dicoding.bajp.reel.ext.toggleNightMode
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -37,7 +38,7 @@ class App : Application() {
       androidContext(this@App)
       modules(
         listOf(
-          viewModelModule, dataModule, networkModule, libModule
+          databaseModule, networkModule, repositoryModule, viewModelModule, libModule
         )
       )
     }

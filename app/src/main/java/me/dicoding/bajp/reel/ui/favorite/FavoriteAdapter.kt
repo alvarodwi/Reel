@@ -8,11 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.ImageLoader
 import coil.request.ImageRequest
 import me.dicoding.bajp.reel.R
-import me.dicoding.bajp.reel.data.model.entity.FavoriteEntity
+import me.dicoding.bajp.reel.core.data.model.entity.FavoriteEntity
 import me.dicoding.bajp.reel.databinding.ItemFavoriteBinding
 import me.dicoding.bajp.reel.ui.favorite.FavoriteAdapter.FavoriteViewHolder
-import me.dicoding.bajp.reel.utils.DatabaseConstants.FavoriteTable.Types
-import me.dicoding.bajp.reel.utils.ext.viewBinding
+import me.dicoding.bajp.reel.core.utils.DatabaseConstants.FavoriteTable.Types
+import me.dicoding.bajp.reel.ext.viewBinding
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 

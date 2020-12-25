@@ -7,9 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.ImageLoader
 import coil.request.ImageRequest
 import me.dicoding.bajp.reel.R
-import me.dicoding.bajp.reel.data.model.entity.MovieEntity
+import me.dicoding.bajp.reel.core.data.model.entity.MovieEntity
 import me.dicoding.bajp.reel.databinding.ItemMovieBinding
-import me.dicoding.bajp.reel.utils.ext.viewBinding
+import me.dicoding.bajp.reel.ext.viewBinding
 
 class MovieAdapter(
   private val coilLoader: ImageLoader,

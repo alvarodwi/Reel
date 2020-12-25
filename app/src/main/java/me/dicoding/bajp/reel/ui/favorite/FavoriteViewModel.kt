@@ -8,11 +8,11 @@ import androidx.paging.PagingData
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import me.dicoding.bajp.reel.data.model.entity.FavoriteEntity
-import me.dicoding.bajp.reel.data.model.query.FavoriteQuery
-import me.dicoding.bajp.reel.data.repository.FavoriteRepository
-import me.dicoding.bajp.reel.utils.DatabaseConstants.FavoriteTable.Sorts
-import me.dicoding.bajp.reel.utils.DatabaseConstants.FavoriteTable.Types
+import me.dicoding.bajp.reel.core.data.model.entity.FavoriteEntity
+import me.dicoding.bajp.reel.core.data.model.query.FavoriteQuery
+import me.dicoding.bajp.reel.core.data.repository.FavoriteRepository
+import me.dicoding.bajp.reel.core.utils.DatabaseConstants.FavoriteTable.Sorts
+import me.dicoding.bajp.reel.core.utils.DatabaseConstants.FavoriteTable.Types
 
 class FavoriteViewModel(
   private val repository: FavoriteRepository

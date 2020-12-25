@@ -8,9 +8,9 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import me.dicoding.bajp.reel.data.model.entity.TvShowEntity
-import me.dicoding.bajp.reel.data.network.NetworkResult
-import me.dicoding.bajp.reel.data.repository.TvShowRepository
+import me.dicoding.bajp.reel.core.data.model.entity.TvShowEntity
+import me.dicoding.bajp.reel.core.data.network.NetworkResult
+import me.dicoding.bajp.reel.core.data.repository.TvShowRepository
 
 class TvShowListViewModel(
   private val repository: TvShowRepository

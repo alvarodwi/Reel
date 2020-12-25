@@ -7,9 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.ImageLoader
 import coil.request.ImageRequest
 import me.dicoding.bajp.reel.R
-import me.dicoding.bajp.reel.data.model.entity.TvShowEntity
+import me.dicoding.bajp.reel.core.data.model.entity.TvShowEntity
 import me.dicoding.bajp.reel.databinding.ItemTvShowBinding
-import me.dicoding.bajp.reel.utils.ext.viewBinding
+import me.dicoding.bajp.reel.ext.viewBinding
 
 class TvShowAdapter(
   private val coilLoader: ImageLoader,

@@ -10,10 +10,10 @@ import androidx.fragment.app.Fragment
 import coil.ImageLoader
 import coil.request.ImageRequest
 import me.dicoding.bajp.reel.R
-import me.dicoding.bajp.reel.data.model.entity.MovieEntity
+import me.dicoding.bajp.reel.core.data.model.entity.MovieEntity
 import me.dicoding.bajp.reel.databinding.FragmentMovieDetailBinding
 import me.dicoding.bajp.reel.utils.ext.toSafeUrl
-import me.dicoding.bajp.reel.utils.ext.viewBinding
+import me.dicoding.bajp.reel.ext.viewBinding
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf

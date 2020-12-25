@@ -8,7 +8,7 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import me.dicoding.bajp.reel.R
 import me.dicoding.bajp.reel.databinding.FragmentHomeBinding
-import me.dicoding.bajp.reel.utils.ext.viewBinding
+import me.dicoding.bajp.reel.ext.viewBinding
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
   private val binding by viewBinding { FragmentHomeBinding.bind(requireView()) }

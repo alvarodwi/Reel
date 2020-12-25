@@ -25,13 +25,16 @@ class ReelCustomPlugin : Plugin<Project> {
       androidExtension.enableJava8(project)
     }
 
-    //declaring shared dependencies (default deps
+    //declaring shared dependencies (default android dependencies + timber + mockk)
     project.dependencies {
-      add("implementation",Libs.AndroidX.core)
-      add("implementation",Libs.AndroidX.appCompat)
-      add("implementation",Libs.AndroidX.constraintLayout)
-      add("implementation",Libs.Google.material)
+      add("implementation", Libs.AndroidX.core)
+      add("implementation", Libs.AndroidX.appCompat)
+      add("implementation", Libs.AndroidX.constraintLayout)
+      add("implementation", Libs.Google.material)
+      add("implementation", Libs.timber)
       add("testImplementation", Libs.Testing.junit)
+      add("testImplementation", Libs.Testing.mockk)
+      add("testImplementation", Libs.Testing.archCore)
       add("androidTestImplementation", Libs.Testing.junitExt)
       add("androidTestImplementation", Libs.Testing.Espresso.core)
     }
@@ -49,6 +52,9 @@ class ReelCustomPlugin : Plugin<Project> {
 
       testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
+    testOptions {
+      unitTests.isReturnDefaultValues = true
+    }
   }
 
   private fun BaseExtension.applyProguardSettings() {
@@ -63,7 +69,7 @@ class ReelCustomPlugin : Plugin<Project> {
           isShrinkResources = true
           proguardFiles(
             getDefaultProguardFile("proguard-android-optimize.txt"),
-              proguardFilename
+            proguardFilename
           )
         }
       }
