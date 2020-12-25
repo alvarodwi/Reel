@@ -11,11 +11,11 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import me.dicoding.bajp.reel.core.data.network.NetworkResult
 import me.dicoding.bajp.reel.core.domain.model.TvShow
-import me.dicoding.bajp.reel.core.domain.repository.TvShowRepository
+import me.dicoding.bajp.reel.core.domain.usecase.TvShowDetailUseCase
 
 class TvShowDetailViewModel(
   private val tvShowId: Long,
-  private val repository: TvShowRepository
+  private val useCase: TvShowDetailUseCase
 ) : ViewModel() {
   private val _tvShow = MutableLiveData<TvShow>()
   val tvShow get() = _tvShow
@@ -29,7 +29,7 @@ class TvShowDetailViewModel(
   fun fetchTvShowDetail() {
     viewModelScope.launch {
       _errorMessage.postValue("")
-      repository.getTvShowDetailData(tvShowId)
+      useCase.getTvShowDetailData(tvShowId)
         .catch { _errorMessage.postValue(it.message) }
         .collect { result ->
           when (result) {
@@ -42,7 +42,7 @@ class TvShowDetailViewModel(
 
   fun checkTvShowInDb() {
     viewModelScope.launch {
-      repository.isTvShowInFavorites(tvShowId).collect { result ->
+      useCase.isTvShowInFavorites(tvShowId).collect { result ->
         _isFavorite.value = result == 1
       }
     }
@@ -50,8 +50,8 @@ class TvShowDetailViewModel(
 
   fun onFabClicked(data: TvShow) {
     viewModelScope.launch(Dispatchers.IO) {
-      if (isFavorite.value == true) repository.removeTvShowFromFavorites(data)
-      else repository.addTvShowToFavorites(data)
+      if (isFavorite.value == true) useCase.removeTvShowFromFavorites(data)
+      else useCase.addTvShowToFavorites(data)
     }
   }
 

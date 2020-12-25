@@ -22,7 +22,7 @@ class MovieRepositoryImpl(
   private val db: AppDatabase,
   private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : MovieRepository {
-  override fun getPopularMovie(): Flow<NetworkResult<List<Movie>>> = flow {
+  override fun getPopularMovie() = flow {
     EspressoIdlingResource.increment()
     try {
       val response = api.getPopularMovie(API_KEY)
@@ -40,7 +40,7 @@ class MovieRepositoryImpl(
     }
   }.flowOn(dispatcher)
 
-  override fun getMovieDetailData(id: Long): Flow<NetworkResult<Movie>> = flow {
+  override fun getMovieDetailData(id: Long) = flow {
     EspressoIdlingResource.increment()
     try {
       val response = api.getMovieDetail(id, API_KEY)
@@ -63,6 +63,6 @@ class MovieRepositoryImpl(
   override suspend fun removeMovieFromFavorites(data: Movie) =
     db.favoriteDao.deleteItem(data.id, Types.TYPE_MOVIE)
 
-  override fun isMovieInFavorites(id: Long): Flow<Int> =
+  override fun isMovieInFavorites(id: Long) =
     db.favoriteDao.isItemWithIdExists(id, Types.TYPE_MOVIE)
 }

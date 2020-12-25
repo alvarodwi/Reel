@@ -16,6 +16,9 @@ import me.dicoding.bajp.reel.core.data.MovieRepositoryImpl
 import me.dicoding.bajp.reel.core.data.TvShowRepositoryImpl
 import me.dicoding.bajp.reel.core.data.db.AppDatabase
 import me.dicoding.bajp.reel.core.data.network.ApiService
+import me.dicoding.bajp.reel.core.domain.repository.FavoriteRepository
+import me.dicoding.bajp.reel.core.domain.repository.MovieRepository
+import me.dicoding.bajp.reel.core.domain.repository.TvShowRepository
 import me.dicoding.bajp.reel.core.utils.BASE_URL
 import okhttp3.Cache
 import okhttp3.MediaType.Companion.toMediaType
@@ -89,9 +92,9 @@ val networkModule = module {
 }
 
 val repositoryModule = module {
-  single { MovieRepositoryImpl(get(), get()) }
-  single { TvShowRepositoryImpl(get(), get()) }
-  single { FavoriteRepositoryImpl(get()) }
+  single<MovieRepository> { MovieRepositoryImpl(get(), get()) }
+  single<TvShowRepository> { TvShowRepositoryImpl(get(), get()) }
+  single<FavoriteRepository> { FavoriteRepositoryImpl(get()) }
 }
 
 val libModule = module {

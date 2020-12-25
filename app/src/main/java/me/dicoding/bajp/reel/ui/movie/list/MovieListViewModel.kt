@@ -10,10 +10,10 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import me.dicoding.bajp.reel.core.data.network.NetworkResult
 import me.dicoding.bajp.reel.core.domain.model.Movie
-import me.dicoding.bajp.reel.core.domain.repository.MovieRepository
+import me.dicoding.bajp.reel.core.domain.usecase.MovieListUseCase
 
 class MovieListViewModel(
-  private val repository: MovieRepository
+  private val useCase: MovieListUseCase
 ) : ViewModel() {
   private val _loading = MutableLiveData<Boolean>()
   val loading: LiveData<Boolean> get() = _loading
@@ -28,7 +28,7 @@ class MovieListViewModel(
     viewModelScope.launch {
       _loading.postValue(true)
       _errorMessage.postValue("")
-      repository.getPopularMovie()
+      useCase.getPopularMovie()
         .catch { _errorMessage.postValue(it.message) }
         .collect { result ->
           when (result) {

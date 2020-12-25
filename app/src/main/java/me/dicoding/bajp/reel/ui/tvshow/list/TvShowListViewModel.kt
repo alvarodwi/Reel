@@ -10,10 +10,10 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import me.dicoding.bajp.reel.core.data.network.NetworkResult
 import me.dicoding.bajp.reel.core.domain.model.TvShow
-import me.dicoding.bajp.reel.core.domain.repository.TvShowRepository
+import me.dicoding.bajp.reel.core.domain.usecase.TvShowListUseCase
 
 class TvShowListViewModel(
-  private val repository: TvShowRepository
+  private val usecase: TvShowListUseCase
 ) : ViewModel() {
   private val _loading = MutableLiveData<Boolean>()
   val loading: LiveData<Boolean> get() = _loading
@@ -28,7 +28,7 @@ class TvShowListViewModel(
     viewModelScope.launch {
       _loading.postValue(true)
       _errorMessage.postValue("")
-      repository.getPopularTvShow()
+      usecase.getPopularTvShow()
         .catch { _errorMessage.postValue(it.message) }
         .collect { result ->
           when (result) {

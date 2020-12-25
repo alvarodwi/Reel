@@ -2,7 +2,6 @@ package me.dicoding.bajp.reel.core.data
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import me.dicoding.bajp.reel.core.data.db.AppDatabase
@@ -22,7 +21,7 @@ class TvShowRepositoryImpl(
   private val db: AppDatabase,
   private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : TvShowRepository {
-  override fun getPopularTvShow(): Flow<NetworkResult<List<TvShow>>> = flow {
+  override fun getPopularTvShow() = flow {
     EspressoIdlingResource.increment()
     try {
       val response = api.getPopularTvShow(API_KEY)
@@ -40,7 +39,7 @@ class TvShowRepositoryImpl(
     }
   }.flowOn(dispatcher)
 
-  override fun getTvShowDetailData(id: Long): Flow<NetworkResult<TvShow>> = flow {
+  override fun getTvShowDetailData(id: Long) = flow {
     EspressoIdlingResource.increment()
     try {
       val response = api.getTvShowDetail(id, API_KEY)
@@ -57,10 +56,10 @@ class TvShowRepositoryImpl(
     }
   }.flowOn(dispatcher)
 
-  override suspend fun addTvShowToFavorites(data: TvShow): Long =
+  override suspend fun addTvShowToFavorites(data: TvShow) =
     db.favoriteDao.insertItem(data.asFavoriteEntity())
 
-  override suspend fun removeTvShowFromFavorites(data: TvShow): Int =
+  override suspend fun removeTvShowFromFavorites(data: TvShow) =
     db.favoriteDao.deleteItem(data.id, Types.TYPE_TV_SHOW)
 
   override fun isTvShowInFavorites(id: Long) =

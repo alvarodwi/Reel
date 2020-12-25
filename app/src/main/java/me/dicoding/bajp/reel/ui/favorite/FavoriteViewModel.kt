@@ -10,15 +10,14 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import me.dicoding.bajp.reel.core.data.db.FavoriteQuery
-import me.dicoding.bajp.reel.core.data.db.entity.FavoriteEntity
 import me.dicoding.bajp.reel.core.domain.model.Favorite
 import me.dicoding.bajp.reel.core.domain.repository.FavoriteRepository
+import me.dicoding.bajp.reel.core.domain.usecase.FavoriteListUseCase
 import me.dicoding.bajp.reel.core.utils.DatabaseConstants.FavoriteTable.Sorts
 import me.dicoding.bajp.reel.core.utils.DatabaseConstants.FavoriteTable.Types
-import me.dicoding.bajp.reel.core.utils.asDomain
 
 class FavoriteViewModel(
-  private val repository: FavoriteRepository
+  private val useCase: FavoriteListUseCase
 ) : ViewModel() {
   private val query: FavoriteQuery = FavoriteQuery(
     type = Types.TYPE_ALL,
@@ -31,8 +30,8 @@ class FavoriteViewModel(
 
   fun fetchFavoriteItems() {
     viewModelScope.launch {
-      repository.getFavoriteItems(query, viewModelScope).collect { result ->
-        _items.postValue(result.map(FavoriteEntity::asDomain))
+      useCase.getFavoriteItems(query, viewModelScope).collect { result ->
+        _items.postValue(result)
       }
     }
   }
