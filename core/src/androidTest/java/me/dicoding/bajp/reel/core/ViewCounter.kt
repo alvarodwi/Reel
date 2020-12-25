@@ -1,3 +1,4 @@
+@file:Suppress("unused", "unused")
 package me.dicoding.bajp.reel.core
 
 import android.view.View
@@ -15,7 +16,7 @@ import org.hamcrest.TypeSafeMatcher
 //menghindari AmbiguousViewMatcherException espresso
 //https://alteral.github.io/note-18/
 object ViewCounter {
-  fun first(matcher: Matcher<View>): Matcher<View?>? {
+  fun first(matcher: Matcher<View>): Matcher<View?> {
     return object : BaseMatcher<View>() {
       var isFirst = true
       override fun matches(item: Any): Boolean {
@@ -39,7 +40,7 @@ object ViewCounter {
   private fun getElementFromMatchAtPosition(
     matcher: Matcher<View>,
     position: Int
-  ): Matcher<View?>? {
+  ): Matcher<View?> {
     return object : BaseMatcher<View?>() {
       var counter = 0
 
@@ -72,7 +73,7 @@ object ViewCounter {
   private fun withViewCount(
     viewMatcher: Matcher<View>,
     expectedCount: Int
-  ): Matcher<View?>? {
+  ): Matcher<View?> {
     return object : TypeSafeMatcher<View?>() {
       var actualCount = -1
       override fun describeTo(description: Description) {
@@ -93,7 +94,7 @@ object ViewCounter {
     }
   }
 
-  private fun withMatcherPredicate(matcher: Matcher<View>): Predicate<View?>? {
+  private fun withMatcherPredicate(matcher: Matcher<View>): Predicate<View?> {
     return Predicate<View?> { view -> matcher.matches(view) }
   }
 }

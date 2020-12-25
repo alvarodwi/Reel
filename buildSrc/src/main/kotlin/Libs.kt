@@ -18,7 +18,7 @@ object Libs {
         const val appCompat = "androidx.appcompat:appcompat:1.2.0"
         const val core = "androidx.core:core-ktx:1.3.2"
         const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.0.4"
-        const val coordinatorLayout = "androidx.coordinatorlayout:coordinatorlayout:1.1.0"
+        // const val coordinatorLayout = "androidx.coordinatorlayout:coordinatorlayout:1.1.0"
         const val swipeRefresh = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
         const val viewPager2 = "androidx.viewpager2:viewpager2:1.0.0"
         const val paging = "androidx.paging:paging-runtime-ktx:3.0.0-alpha11"

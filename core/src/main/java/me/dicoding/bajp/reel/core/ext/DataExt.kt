@@ -1,4 +1,4 @@
-package me.dicoding.bajp.reel.utils.ext
+package me.dicoding.bajp.reel.core.ext
 
 // generate safe url from string
 fun String?.toSafeUrl(

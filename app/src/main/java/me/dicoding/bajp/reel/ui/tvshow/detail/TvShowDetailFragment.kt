@@ -12,7 +12,7 @@ import coil.request.ImageRequest
 import me.dicoding.bajp.reel.R
 import me.dicoding.bajp.reel.core.data.model.entity.TvShowEntity
 import me.dicoding.bajp.reel.databinding.FragmentTvShowDetailBinding
-import me.dicoding.bajp.reel.utils.ext.toSafeUrl
+import me.dicoding.bajp.reel.core.ext.toSafeUrl
 import me.dicoding.bajp.reel.ext.viewBinding
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
