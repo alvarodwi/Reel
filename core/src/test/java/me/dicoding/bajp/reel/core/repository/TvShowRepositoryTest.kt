@@ -1,4 +1,4 @@
-package me.dicoding.bajp.reel.core.data.repository
+package me.dicoding.bajp.reel.core.repository
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import io.mockk.MockKAnnotations
@@ -18,9 +18,10 @@ import me.dicoding.bajp.reel.core.data.network.NetworkResult
 import me.dicoding.bajp.reel.core.utils.API_KEY
 import me.dicoding.bajp.reel.core.data.model.json.TvShowJson
 import me.dicoding.bajp.reel.core.data.model.json.TvShowListJson
+import me.dicoding.bajp.reel.core.data.repository.TvShowRepository
 import me.dicoding.bajp.reel.core.utils.DatabaseConstants.FavoriteTable.Types
-import me.dicoding.bajp.reel.core.utils.JsonHelper
-import me.dicoding.bajp.reel.core.utils.TestUtils
+import me.dicoding.bajp.reel.core.utils.TestFixtureHelper
+import me.dicoding.bajp.reel.core.utils.TestFixtureHelper.parseStringFromJsonResource
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -111,14 +112,14 @@ class TvShowRepositoryTest : TestCase() {
   }
 
   private fun providePopularTvShow(): TvShowListJson {
-    return JsonHelper.loadPopularTvShowData(
-      TestUtils.parseStringFromJsonResource("/popular_tv_shows.json")
+    return TestFixtureHelper.loadPopularTvShowData(
+      parseStringFromJsonResource("/popular_tv_shows.json")
     )
   }
 
   private fun provideSingleTvShow(): TvShowJson {
-    return JsonHelper.loadTvShowData(
-      TestUtils.parseStringFromJsonResource("/latest_tv_show.json")
+    return TestFixtureHelper.loadTvShowData(
+      parseStringFromJsonResource("/latest_tv_show.json")
     )
   }
 }

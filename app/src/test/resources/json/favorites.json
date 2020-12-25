@@ -1,0 +1,92 @@
+[
+  {
+    "uid": 2,
+    "tmdb_id": 724989,
+    "item_title": "Hard Kill",
+    "item_poster_url": "https://image.tmdb.org/t/p/w500/ugZW8ocsrfgI95pnQ7wrmKDxIe.jpg",
+    "item_date": "2020-10-23",
+    "date_added": "2020-11-16T18:59:37.298",
+    "type": 1
+  },
+  {
+    "uid": 3,
+    "tmdb_id": 1416,
+    "item_title": "Grey's Anatomy",
+    "item_poster_url": "https://image.tmdb.org/t/p/w500//clnyhPqj1SNgpAdeSS6a6fwE6Bo.jpg",
+    "item_date": "2005-03-27",
+    "date_added": "2020-11-16T19:01:15.575",
+    "type": 2
+  },
+  {
+    "uid": 4,
+    "tmdb_id": 62286,
+    "item_title": "Fear the Walking Dead",
+    "item_poster_url": "https://image.tmdb.org/t/p/w500//wGFUewXPeMErCe2xnCmmLEiHOGh.jpg",
+    "item_date": "2015-08-23",
+    "date_added": "2020-11-16T19:02:00.304",
+    "type": 2
+  },
+  {
+    "uid": 5,
+    "tmdb_id": 497582,
+    "item_title": "Enola Holmes",
+    "item_poster_url": "https://image.tmdb.org/t/p/w500/riYInlsq2kf1AWoGm80JQW5dLKp.jpg",
+    "item_date": "2020-09-23",
+    "date_added": "2020-11-16T19:02:09.838",
+    "type": 1
+  },
+  {
+    "uid": 6,
+    "tmdb_id": 560050,
+    "item_title": "Over the Moon",
+    "item_poster_url": "https://image.tmdb.org/t/p/w500/lQfdytwN7eh0tXWjIiMceFdBBvD.jpg",
+    "item_date": "2020-10-16",
+    "date_added": "2020-11-16T19:07:21.487",
+    "type": 1
+  },
+  {
+    "uid": 7,
+    "tmdb_id": 76479,
+    "item_title": "The Boys",
+    "item_poster_url": "https://image.tmdb.org/t/p/w500//mY7SeH4HFFxW1hiI6cWuwCRKptN.jpg",
+    "item_date": "2019-07-25",
+    "date_added": "2020-11-16T21:33:04.483",
+    "type": 2
+  },
+  {
+    "uid": 8,
+    "tmdb_id": 77169,
+    "item_title": "Cobra Kai",
+    "item_poster_url": "https://image.tmdb.org/t/p/w500//eTMMU2rKpZRbo9ERytyhwatwAjz.jpg",
+    "item_date": "2018-05-02",
+    "date_added": "2020-11-17T15:24:53.898",
+    "type": 2
+  },
+  {
+    "uid": 9,
+    "tmdb_id": 340102,
+    "item_title": "The New Mutants",
+    "item_poster_url": "https://image.tmdb.org/t/p/w500/xrI4EnZWftpo1B7tTvlMUXVOikd.jpg",
+    "item_date": "2020-08-26",
+    "date_added": "2020-11-17T15:25:43.442",
+    "type": 1
+  },
+  {
+    "uid": 10,
+    "tmdb_id": 539885,
+    "item_title": "Ava",
+    "item_poster_url": "https://image.tmdb.org/t/p/w500/qzA87Wf4jo1h8JMk9GilyIYvwsA.jpg",
+    "item_date": "2020-07-02",
+    "date_added": "2020-11-17T15:25:55.371",
+    "type": 1
+  },
+  {
+    "uid": 11,
+    "tmdb_id": 71712,
+    "item_title": "The Good Doctor",
+    "item_poster_url": "https://image.tmdb.org/t/p/w500//6tfT03sGp9k4c0J3dypjrI8TSAI.jpg",
+    "item_date": "2017-09-25",
+    "date_added": "2020-11-17T15:26:43.187",
+    "type": 2
+  }
+]

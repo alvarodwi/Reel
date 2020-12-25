@@ -15,8 +15,8 @@ import me.dicoding.bajp.reel.core.data.model.json.asEntity
 import me.dicoding.bajp.reel.core.data.network.NetworkResult
 import me.dicoding.bajp.reel.core.data.repository.TvShowRepository
 import me.dicoding.bajp.reel.ui.tvshow.list.TvShowListViewModel
-import me.dicoding.bajp.reel.core.utils.JsonHelper
-import me.dicoding.bajp.reel.core.utils.TestUtils
+import me.dicoding.bajp.reel.core.utils.TestFixtureHelper
+import me.dicoding.bajp.reel.core.utils.TestFixtureHelper.parseStringFromJsonResource
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -79,8 +79,8 @@ class TvShowListViewModelTest : TestCase() {
   }
 
   private fun provideDummyData(): List<TvShowEntity> {
-    return JsonHelper.loadPopularTvShowData(
-      TestUtils.parseStringFromJsonResource("/popular_tv_shows.json")
+    return TestFixtureHelper.loadPopularTvShowData(
+      parseStringFromJsonResource("/popular_tv_shows.json")
     ).results.map(TvShowJson::asEntity)
   }
 }

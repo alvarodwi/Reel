@@ -2,7 +2,6 @@ plugins {
   id("com.android.application")
   id("reel-custom-plugin")
   id("androidx.navigation.safeargs.kotlin")
-  id("java-test-fixtures")
 }
 
 android {
@@ -17,7 +16,6 @@ android {
 dependencies {
   //core
   implementation(project(":core"))
-  testImplementation(testFixtures(project(":core")))
   implementation(kotlin("stdlib", version = Libs.kotlin_version))
 
   //ktx

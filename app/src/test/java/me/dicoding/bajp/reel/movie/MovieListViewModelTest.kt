@@ -15,8 +15,8 @@ import me.dicoding.bajp.reel.core.data.model.json.asEntity
 import me.dicoding.bajp.reel.core.data.network.NetworkResult
 import me.dicoding.bajp.reel.core.data.repository.MovieRepository
 import me.dicoding.bajp.reel.ui.movie.list.MovieListViewModel
-import me.dicoding.bajp.reel.core.utils.JsonHelper
-import me.dicoding.bajp.reel.core.utils.TestUtils
+import me.dicoding.bajp.reel.core.utils.TestFixtureHelper
+import me.dicoding.bajp.reel.core.utils.TestFixtureHelper.parseStringFromJsonResource
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -78,8 +78,8 @@ class MovieListViewModelTest : TestCase() {
   }
 
   private fun provideDummyData(): List<MovieEntity> {
-    return JsonHelper.loadPopularMovieData(
-      TestUtils.parseStringFromJsonResource("/popular_movies.json")
+    return TestFixtureHelper.loadPopularMovieData(
+      parseStringFromJsonResource("/popular_movies.json")
     ).results.map(MovieJson::asEntity)
   }
 }

@@ -1,6 +1,7 @@
-package me.dicoding.bajp.reel.core.data.network
+package me.dicoding.bajp.reel.core.network
 
 import junit.framework.TestCase
+import me.dicoding.bajp.reel.core.data.network.NetworkResult
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

@@ -1,6 +1,7 @@
-package me.dicoding.bajp.reel.core.data.network
+package me.dicoding.bajp.reel.core.network
 
 import kotlinx.coroutines.runBlocking
+import me.dicoding.bajp.reel.core.data.network.ApiService
 import me.dicoding.bajp.reel.core.utils.API_KEY
 import org.junit.Before
 import org.junit.Test

@@ -17,8 +17,8 @@ import me.dicoding.bajp.reel.core.data.model.query.FavoriteQuery
 import me.dicoding.bajp.reel.core.data.repository.FavoriteRepository
 import me.dicoding.bajp.reel.core.utils.DatabaseConstants.FavoriteTable.Sorts
 import me.dicoding.bajp.reel.core.utils.DatabaseConstants.FavoriteTable.Types
-import me.dicoding.bajp.reel.core.utils.JsonHelper
-import me.dicoding.bajp.reel.core.utils.TestUtils
+import me.dicoding.bajp.reel.core.utils.TestFixtureHelper
+import me.dicoding.bajp.reel.core.utils.TestFixtureHelper.parseStringFromJsonResource
 import me.dicoding.bajp.reel.ui.favorite.FavoriteViewModel
 import org.junit.Before
 import org.junit.Rule
@@ -63,6 +63,6 @@ class FavoriteViewModelTest : TestCase() {
   }
 
   private fun provideDummyData(): List<FavoriteEntity> =
-    JsonHelper.loadFavoritesData(TestUtils.parseStringFromJsonResource("/favorites.json"))
+    TestFixtureHelper.loadFavoritesData(parseStringFromJsonResource("/favorites.json"))
       .map(FavoriteJson::asEntity)
 }

@@ -10,11 +10,12 @@ import io.mockk.verify
 import junit.framework.TestCase
 import kotlinx.coroutines.flow.flow
 import me.dicoding.bajp.reel.core.data.model.entity.TvShowEntity
+import me.dicoding.bajp.reel.core.data.model.json.asEntity
 import me.dicoding.bajp.reel.core.data.network.NetworkResult
 import me.dicoding.bajp.reel.core.data.repository.TvShowRepository
 import me.dicoding.bajp.reel.ui.tvshow.detail.TvShowDetailViewModel
-import me.dicoding.bajp.reel.core.utils.JsonHelper
-import me.dicoding.bajp.reel.core.utils.TestUtils
+import me.dicoding.bajp.reel.core.utils.TestFixtureHelper
+import me.dicoding.bajp.reel.core.utils.TestFixtureHelper.parseStringFromJsonResource
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -115,8 +116,8 @@ class TvShowDetailViewModelTest : TestCase() {
   }
 
   private fun provideDummyData(): TvShowEntity {
-    return JsonHelper.loadTvShowData(
-      TestUtils.parseStringFromJsonResource("/latest_tvShow.json")
+    return TestFixtureHelper.loadTvShowData(
+      parseStringFromJsonResource("/latest_tvShow.json")
     ).asEntity()
   }
 }

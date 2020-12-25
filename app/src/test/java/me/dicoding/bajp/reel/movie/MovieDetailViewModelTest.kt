@@ -10,11 +10,12 @@ import io.mockk.verify
 import junit.framework.TestCase
 import kotlinx.coroutines.flow.flow
 import me.dicoding.bajp.reel.core.data.model.entity.MovieEntity
+import me.dicoding.bajp.reel.core.data.model.json.asEntity
 import me.dicoding.bajp.reel.core.data.network.NetworkResult
 import me.dicoding.bajp.reel.core.data.repository.MovieRepository
 import me.dicoding.bajp.reel.ui.movie.detail.MovieDetailViewModel
-import me.dicoding.bajp.reel.core.utils.JsonHelper
-import me.dicoding.bajp.reel.core.utils.TestUtils
+import me.dicoding.bajp.reel.core.utils.TestFixtureHelper
+import me.dicoding.bajp.reel.core.utils.TestFixtureHelper.parseStringFromJsonResource
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -115,8 +116,8 @@ class MovieDetailViewModelTest : TestCase() {
   }
 
   private fun provideDummyData(): MovieEntity {
-    return JsonHelper.loadMovieData(
-      TestUtils.parseStringFromJsonResource("/latest_movie.json")
+    return TestFixtureHelper.loadMovieData(
+      parseStringFromJsonResource("/latest_movie.json")
     ).asEntity()
   }
 }

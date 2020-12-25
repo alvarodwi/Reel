@@ -1,4 +1,4 @@
-package me.dicoding.bajp.reel.core.data.repository
+package me.dicoding.bajp.reel.core.repository
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import io.mockk.MockKAnnotations
@@ -17,10 +17,11 @@ import me.dicoding.bajp.reel.core.data.model.json.MovieJson
 import me.dicoding.bajp.reel.core.data.model.json.MovieListJson
 import me.dicoding.bajp.reel.core.data.network.ApiService
 import me.dicoding.bajp.reel.core.data.network.NetworkResult
+import me.dicoding.bajp.reel.core.data.repository.MovieRepository
 import me.dicoding.bajp.reel.core.utils.API_KEY
 import me.dicoding.bajp.reel.core.utils.DatabaseConstants.FavoriteTable.Types
-import me.dicoding.bajp.reel.core.utils.JsonHelper
-import me.dicoding.bajp.reel.core.utils.TestUtils
+import me.dicoding.bajp.reel.core.utils.TestFixtureHelper
+import me.dicoding.bajp.reel.core.utils.TestFixtureHelper.parseStringFromJsonResource
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -109,14 +110,14 @@ class MovieRepositoryTest : TestCase() {
     }
 
     private fun providePopularMovie(): MovieListJson {
-        return JsonHelper.loadPopularMovieData(
-            TestUtils.parseStringFromJsonResource("/popular_movies.json")
+        return TestFixtureHelper.loadPopularMovieData(
+            parseStringFromJsonResource("/popular_movies.json")
         )
     }
 
     private fun provideSingleMovie(): MovieJson {
-        return JsonHelper.loadMovieData(
-            TestUtils.parseStringFromJsonResource("/latest_movie.json")
+        return TestFixtureHelper.loadMovieData(
+            parseStringFromJsonResource("/latest_movie.json")
         )
     }
 }
