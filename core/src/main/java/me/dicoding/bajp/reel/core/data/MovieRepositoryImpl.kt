@@ -5,24 +5,24 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.withContext
 import me.dicoding.bajp.reel.core.data.db.AppDatabase
 import me.dicoding.bajp.reel.core.data.network.ApiService
 import me.dicoding.bajp.reel.core.data.network.NetworkResult
 import me.dicoding.bajp.reel.core.data.network.json.MovieJson
 import me.dicoding.bajp.reel.core.domain.model.Movie
+import me.dicoding.bajp.reel.core.domain.repository.MovieRepository
 import me.dicoding.bajp.reel.core.utils.API_KEY
 import me.dicoding.bajp.reel.core.utils.DatabaseConstants.FavoriteTable.Types
 import me.dicoding.bajp.reel.core.utils.EspressoIdlingResource
 import me.dicoding.bajp.reel.core.utils.asDomain
 import me.dicoding.bajp.reel.core.utils.asFavoriteEntity
 
-class MovieRepository(
+class MovieRepositoryImpl(
   private val api: ApiService,
   private val db: AppDatabase,
   private val dispatcher: CoroutineDispatcher = Dispatchers.IO
-) {
-  fun getPopularMovie(): Flow<NetworkResult<List<Movie>>> = flow {
+) : MovieRepository {
+  override fun getPopularMovie(): Flow<NetworkResult<List<Movie>>> = flow {
     EspressoIdlingResource.increment()
     try {
       val response = api.getPopularMovie(API_KEY)
@@ -40,7 +40,7 @@ class MovieRepository(
     }
   }.flowOn(dispatcher)
 
-  fun getMovieDetailData(id: Long): Flow<NetworkResult<Movie>> = flow {
+  override fun getMovieDetailData(id: Long): Flow<NetworkResult<Movie>> = flow {
     EspressoIdlingResource.increment()
     try {
       val response = api.getMovieDetail(id, API_KEY)
@@ -57,18 +57,12 @@ class MovieRepository(
     }
   }.flowOn(dispatcher)
 
-  suspend fun addMovieToFavorites(data: Movie) {
-    withContext(Dispatchers.IO) {
-      db.favoriteDao.insertItem(data.asFavoriteEntity())
-    }
-  }
+  override suspend fun addMovieToFavorites(data: Movie) =
+    db.favoriteDao.insertItem(data.asFavoriteEntity())
 
-  suspend fun removeMovieFromFavorites(data: Movie) {
-    withContext(Dispatchers.IO) {
-      db.favoriteDao.deleteItem(data.id, Types.TYPE_MOVIE)
-    }
-  }
+  override suspend fun removeMovieFromFavorites(data: Movie) =
+    db.favoriteDao.deleteItem(data.id, Types.TYPE_MOVIE)
 
-  fun isMovieInFavorites(id: Long) =
+  override fun isMovieInFavorites(id: Long): Flow<Int> =
     db.favoriteDao.isItemWithIdExists(id, Types.TYPE_MOVIE)
 }

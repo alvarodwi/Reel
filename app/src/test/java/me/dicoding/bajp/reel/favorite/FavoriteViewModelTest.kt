@@ -10,10 +10,10 @@ import io.mockk.impl.annotations.MockK
 import io.mockk.verify
 import junit.framework.TestCase
 import kotlinx.coroutines.flow.flow
-import me.dicoding.bajp.reel.core.data.network.json.FavoriteJson
 import me.dicoding.bajp.reel.core.data.db.FavoriteQuery
-import me.dicoding.bajp.reel.core.data.FavoriteRepository
+import me.dicoding.bajp.reel.core.data.network.json.FavoriteJson
 import me.dicoding.bajp.reel.core.domain.model.Favorite
+import me.dicoding.bajp.reel.core.domain.repository.FavoriteRepository
 import me.dicoding.bajp.reel.core.utils.DatabaseConstants.FavoriteTable.Sorts
 import me.dicoding.bajp.reel.core.utils.DatabaseConstants.FavoriteTable.Types
 import me.dicoding.bajp.reel.core.utils.TestFixtureHelper

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item
-        android:id="@+id/action_open_link"
-        android:icon="@drawable/ic_link"
-        android:title="@string/text_open_link"
-        app:showAsAction="ifRoom" />
-    <item
-        android:id="@+id/action_share"
-        android:icon="@drawable/ic_share"
-        android:title="@string/text_share"
-        app:showAsAction="ifRoom" />
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+  <item
+    android:id="@+id/action_open_link"
+    android:icon="@drawable/ic_link"
+    android:title="@string/text_open_link"
+    app:showAsAction="ifRoom" />
+  <item
+    android:id="@+id/action_share"
+    android:icon="@drawable/ic_share"
+    android:title="@string/text_share"
+    app:showAsAction="ifRoom" />
 </menu>

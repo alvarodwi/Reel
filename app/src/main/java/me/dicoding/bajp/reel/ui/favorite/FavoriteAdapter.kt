@@ -9,10 +9,10 @@ import coil.ImageLoader
 import coil.request.ImageRequest
 import me.dicoding.bajp.reel.R
 import me.dicoding.bajp.reel.core.domain.model.Favorite
-import me.dicoding.bajp.reel.databinding.ItemFavoriteBinding
-import me.dicoding.bajp.reel.ui.favorite.FavoriteAdapter.FavoriteViewHolder
 import me.dicoding.bajp.reel.core.utils.DatabaseConstants.FavoriteTable.Types
+import me.dicoding.bajp.reel.databinding.ItemFavoriteBinding
 import me.dicoding.bajp.reel.ext.viewBinding
+import me.dicoding.bajp.reel.ui.favorite.FavoriteAdapter.FavoriteViewHolder
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 

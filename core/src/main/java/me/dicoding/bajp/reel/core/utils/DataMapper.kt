@@ -12,13 +12,13 @@ import java.time.LocalDateTime
 
 //map db entity as domain
 fun FavoriteEntity.asDomain(): Favorite = Favorite(
-    uid = this.uid,
-    tmdbId = this.tmdbId,
-    itemTitle = this.itemTitle,
-    itemDate = this.itemDate,
-    itemPosterUrl = this.itemPosterUrl,
-    dateAdded = this.dateAdded,
-    type = this.type
+  uid = this.uid,
+  tmdbId = this.tmdbId,
+  itemTitle = this.itemTitle,
+  itemDate = this.itemDate,
+  itemPosterUrl = this.itemPosterUrl,
+  dateAdded = this.dateAdded,
+  type = this.type
 )
 
 //map response to domain

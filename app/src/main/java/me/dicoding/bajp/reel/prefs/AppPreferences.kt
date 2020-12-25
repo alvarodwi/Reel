@@ -3,8 +3,8 @@ package me.dicoding.bajp.reel.prefs
 import android.content.SharedPreferences
 import androidx.core.content.edit
 import me.dicoding.bajp.reel.App
-import me.dicoding.bajp.reel.prefs.PreferencesKey as Keys
 import org.koin.android.ext.android.inject
+import me.dicoding.bajp.reel.prefs.PreferencesKey as Keys
 
 object AppPreferences {
   private val prefs: SharedPreferences by App.app.inject()

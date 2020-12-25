@@ -12,13 +12,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.runBlocking
+import me.dicoding.bajp.reel.core.data.TvShowRepositoryImpl
 import me.dicoding.bajp.reel.core.data.db.AppDatabase
 import me.dicoding.bajp.reel.core.data.network.ApiService
 import me.dicoding.bajp.reel.core.data.network.NetworkResult
-import me.dicoding.bajp.reel.core.utils.API_KEY
 import me.dicoding.bajp.reel.core.data.network.json.TvShowJson
 import me.dicoding.bajp.reel.core.data.network.json.TvShowListJson
-import me.dicoding.bajp.reel.core.data.TvShowRepository
+import me.dicoding.bajp.reel.core.domain.repository.TvShowRepository
+import me.dicoding.bajp.reel.core.utils.API_KEY
 import me.dicoding.bajp.reel.core.utils.DatabaseConstants.FavoriteTable.Types
 import me.dicoding.bajp.reel.core.utils.TestFixtureHelper
 import me.dicoding.bajp.reel.core.utils.TestFixtureHelper.parseStringFromJsonResource
@@ -46,7 +47,7 @@ class TvShowRepositoryTest : TestCase() {
   @Before
   fun setup() {
     MockKAnnotations.init(this)
-    repository = TvShowRepository(api, db, dispatcher)
+    repository = TvShowRepositoryImpl(api, db, dispatcher)
   }
 
   @Test

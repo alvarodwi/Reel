@@ -1,52 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="Theme.Reel.DayNight" parent="Theme.Reel" />
+  <style name="Theme.Reel.DayNight" parent="Theme.Reel" />
 
-    <style name="Theme.Reel" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Brand color. -->
-        <item name="colorPrimary">@color/dark_blue_800</item>
-        <item name="colorPrimaryVariant">@color/dark_blue_900</item>
-        <item name="colorOnPrimary">@color/white</item>
-        <item name="colorSecondary">@color/light_blue_300</item>
-        <item name="colorSecondaryVariant">@color/light_blue_400</item>
-        <item name="colorOnSecondary">@color/white</item>
-        <!-- Additional color. -->
-        <item name="android:colorBackground">@color/white</item>
-        <item name="colorOnBackground">@color/black</item>
-        <item name="colorSurface">@color/light_blue_50</item>
-        <item name="colorOnSurface">@color/black</item>
-        <item name="colorError">@color/red_600</item>
-        <item name="colorOnError">@color/white</item>
-        <item name="scrimBackground">@color/white_alpha_060</item>
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+  <style name="Theme.Reel" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <!-- Brand color. -->
+    <item name="colorPrimary">@color/dark_blue_800</item>
+    <item name="colorPrimaryVariant">@color/dark_blue_900</item>
+    <item name="colorOnPrimary">@color/white</item>
+    <item name="colorSecondary">@color/light_blue_300</item>
+    <item name="colorSecondaryVariant">@color/light_blue_400</item>
+    <item name="colorOnSecondary">@color/white</item>
+    <!-- Additional color. -->
+    <item name="android:colorBackground">@color/white</item>
+    <item name="colorOnBackground">@color/black</item>
+    <item name="colorSurface">@color/light_blue_50</item>
+    <item name="colorOnSurface">@color/black</item>
+    <item name="colorError">@color/red_600</item>
+    <item name="colorOnError">@color/white</item>
+    <item name="scrimBackground">@color/white_alpha_060</item>
+    <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
 
-        <!--Typography-->
-        <item name="fontFamily">@font/fira_sans</item>
-        <item name="textAppearanceHeadline2">@style/TextAppearance.Reel.Headline2</item>
-        <item name="textAppearanceHeadline3">@style/TextAppearance.Reel.Headline3</item>
-        <item name="textAppearanceHeadline4">@style/TextAppearance.Reel.Headline4</item>
-        <item name="textAppearanceHeadline5">@style/TextAppearance.Reel.Headline5</item>
-        <item name="textAppearanceHeadline6">@style/TextAppearance.Reel.Headline6</item>
-        <item name="textAppearanceSubtitle1">@style/TextAppearance.Reel.Subtitle1</item>
-        <item name="textAppearanceSubtitle2">@style/TextAppearance.Reel.Subtitle2</item>
-        <item name="textAppearanceBody1">@style/TextAppearance.Reel.Body1</item>
-        <item name="textAppearanceBody2">@style/TextAppearance.Reel.Body2</item>
-        <item name="textAppearanceButton">@style/TextAppearance.Reel.Button</item>
-        <item name="textAppearanceCaption">@style/TextAppearance.Reel.Caption</item>
-        <item name="textAppearanceOverline">@style/TextAppearance.Reel.Overline</item>
+    <!--Typography-->
+    <item name="fontFamily">@font/fira_sans</item>
+    <item name="textAppearanceHeadline2">@style/TextAppearance.Reel.Headline2</item>
+    <item name="textAppearanceHeadline3">@style/TextAppearance.Reel.Headline3</item>
+    <item name="textAppearanceHeadline4">@style/TextAppearance.Reel.Headline4</item>
+    <item name="textAppearanceHeadline5">@style/TextAppearance.Reel.Headline5</item>
+    <item name="textAppearanceHeadline6">@style/TextAppearance.Reel.Headline6</item>
+    <item name="textAppearanceSubtitle1">@style/TextAppearance.Reel.Subtitle1</item>
+    <item name="textAppearanceSubtitle2">@style/TextAppearance.Reel.Subtitle2</item>
+    <item name="textAppearanceBody1">@style/TextAppearance.Reel.Body1</item>
+    <item name="textAppearanceBody2">@style/TextAppearance.Reel.Body2</item>
+    <item name="textAppearanceButton">@style/TextAppearance.Reel.Button</item>
+    <item name="textAppearanceCaption">@style/TextAppearance.Reel.Caption</item>
+    <item name="textAppearanceOverline">@style/TextAppearance.Reel.Overline</item>
 
-        <item name="emphasisHighAlpha">0.87</item>
-        <item name="emphasisMediumAlpha">0.60</item>
-        <item name="emphasisDisabledAlpha">0.38</item>
+    <item name="emphasisHighAlpha">0.87</item>
+    <item name="emphasisMediumAlpha">0.60</item>
+    <item name="emphasisDisabledAlpha">0.38</item>
 
-        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.App.SmallComponent</item>
-        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.App.MediumComponent
-        </item>
-        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.App.LargeComponent</item>
-    </style>
+    <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.App.SmallComponent</item>
+    <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.App.MediumComponent
+    </item>
+    <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.App.LargeComponent</item>
+  </style>
 
-    <style name="Theme.Reel.DayNight.Splash">
-        <item name="android:windowBackground">@drawable/bg_splash</item>
-    </style>
+  <style name="Theme.Reel.DayNight.Splash">
+    <item name="android:windowBackground">@drawable/bg_splash</item>
+  </style>
 </resources>

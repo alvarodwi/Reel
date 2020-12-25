@@ -16,7 +16,8 @@ interface FavoriteDao {
   fun getItemsRaw(query: SupportSQLiteQuery): DataSource.Factory<Int, FavoriteEntity>
 
   //https://medium.com/androiddevelopers/room-flow-273acffe5b57
-  @Query("SELECT EXISTS(SELECT * FROM favorites WHERE tmdb_id = :id AND type = :type)") fun isItemWithIdExists(
+  @Query("SELECT EXISTS(SELECT * FROM favorites WHERE tmdb_id = :id AND type = :type)")
+  fun isItemWithIdExists(
     id: Long,
     type: Int
   ): Flow<Int>

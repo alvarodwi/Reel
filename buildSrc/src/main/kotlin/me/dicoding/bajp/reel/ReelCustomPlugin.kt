@@ -1,5 +1,6 @@
 package me.dicoding.bajp.reel
 
+import Libs
 import com.android.build.gradle.AppExtension
 import com.android.build.gradle.BaseExtension
 import com.android.build.gradle.LibraryExtension
@@ -30,6 +31,7 @@ class ReelCustomPlugin : Plugin<Project> {
       add("implementation", Libs.AndroidX.core)
       add("implementation", Libs.AndroidX.appCompat)
       add("implementation", Libs.AndroidX.constraintLayout)
+      add("implementation", Libs.AndroidX.coordinatorLayout)
       add("implementation", Libs.Google.material)
       add("implementation", Libs.timber)
       add("testImplementation", Libs.Testing.junit)

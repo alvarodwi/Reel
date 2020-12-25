@@ -9,10 +9,10 @@ import androidx.paging.map
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import me.dicoding.bajp.reel.core.data.FavoriteRepository
 import me.dicoding.bajp.reel.core.data.db.FavoriteQuery
 import me.dicoding.bajp.reel.core.data.db.entity.FavoriteEntity
 import me.dicoding.bajp.reel.core.domain.model.Favorite
+import me.dicoding.bajp.reel.core.domain.repository.FavoriteRepository
 import me.dicoding.bajp.reel.core.utils.DatabaseConstants.FavoriteTable.Sorts
 import me.dicoding.bajp.reel.core.utils.DatabaseConstants.FavoriteTable.Types
 import me.dicoding.bajp.reel.core.utils.asDomain

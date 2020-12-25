@@ -1,63 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main_nav.xml"
-    app:startDestination="@id/homeFragment">
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/main_nav.xml"
+  app:startDestination="@id/homeFragment">
 
-    <fragment
-        android:id="@+id/homeFragment"
-        android:name="me.dicoding.bajp.reel.ui.home.HomeFragment"
-        android:label="HomeFragment"
-        tools:layout="@layout/fragment_home">
-        <action
-            android:id="@+id/action_home_to_movieDetail"
-            app:destination="@id/movieDetailFragment" />
-        <action
-            android:id="@+id/action_home_to_tvShowDetail"
-            app:destination="@id/tvShowDetailFragment" />
-        <action
-            android:id="@+id/action_home_to_settings"
-            app:destination="@id/settingsFragment" />
-        <action
-            android:id="@+id/action_home_to_favorite"
-            app:destination="@id/favoriteFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/movieDetailFragment"
-        android:name="me.dicoding.bajp.reel.ui.movie.detail.MovieDetailFragment"
-        android:label="MovieDetailFragment"
-        tools:layout="@layout/fragment_movie_detail">
-        <argument
-            android:name="movieId"
-            android:defaultValue="-1L"
-            app:argType="long" />
-    </fragment>
-    <fragment
-        android:id="@+id/tvShowDetailFragment"
-        android:name="me.dicoding.bajp.reel.ui.tvshow.detail.TvShowDetailFragment"
-        android:label="TvShowDetailFragment"
-        tools:layout="@layout/fragment_tv_show_detail">
-        <argument
-            android:name="tvShowId"
-            android:defaultValue="-1L"
-            app:argType="long" />
-    </fragment>
-    <fragment
-        android:id="@+id/settingsFragment"
-        android:name="me.dicoding.bajp.reel.ui.settings.SettingsFragment"
-        android:label="SettingsFragment"
-        tools:layout="@layout/fragment_settings" />
-    <fragment
-        android:id="@+id/favoriteFragment"
-        android:name="me.dicoding.bajp.reel.ui.favorite.FavoriteFragment"
-        android:label="FavoriteFragment"
-        tools:layout="@layout/fragment_favorite">
-        <action
-            android:id="@+id/action_favorite_to_movieDetail"
-            app:destination="@id/movieDetailFragment" />
-        <action
-            android:id="@+id/action_favorite_to_tvShowDetail"
-            app:destination="@id/tvShowDetailFragment" />
-    </fragment>
+  <fragment
+    android:id="@+id/homeFragment"
+    android:name="me.dicoding.bajp.reel.ui.home.HomeFragment"
+    android:label="HomeFragment"
+    tools:layout="@layout/fragment_home">
+    <action
+      android:id="@+id/action_home_to_movieDetail"
+      app:destination="@id/movieDetailFragment" />
+    <action
+      android:id="@+id/action_home_to_tvShowDetail"
+      app:destination="@id/tvShowDetailFragment" />
+    <action
+      android:id="@+id/action_home_to_settings"
+      app:destination="@id/settingsFragment" />
+    <action
+      android:id="@+id/action_home_to_favorite"
+      app:destination="@id/favoriteFragment" />
+  </fragment>
+  <fragment
+    android:id="@+id/movieDetailFragment"
+    android:name="me.dicoding.bajp.reel.ui.movie.detail.MovieDetailFragment"
+    android:label="MovieDetailFragment"
+    tools:layout="@layout/fragment_movie_detail">
+    <argument
+      android:name="movieId"
+      android:defaultValue="-1L"
+      app:argType="long" />
+  </fragment>
+  <fragment
+    android:id="@+id/tvShowDetailFragment"
+    android:name="me.dicoding.bajp.reel.ui.tvshow.detail.TvShowDetailFragment"
+    android:label="TvShowDetailFragment"
+    tools:layout="@layout/fragment_tv_show_detail">
+    <argument
+      android:name="tvShowId"
+      android:defaultValue="-1L"
+      app:argType="long" />
+  </fragment>
+  <fragment
+    android:id="@+id/settingsFragment"
+    android:name="me.dicoding.bajp.reel.ui.settings.SettingsFragment"
+    android:label="SettingsFragment"
+    tools:layout="@layout/fragment_settings" />
+  <fragment
+    android:id="@+id/favoriteFragment"
+    android:name="me.dicoding.bajp.reel.ui.favorite.FavoriteFragment"
+    android:label="FavoriteFragment"
+    tools:layout="@layout/fragment_favorite">
+    <action
+      android:id="@+id/action_favorite_to_movieDetail"
+      app:destination="@id/movieDetailFragment" />
+    <action
+      android:id="@+id/action_favorite_to_tvShowDetail"
+      app:destination="@id/tvShowDetailFragment" />
+  </fragment>
 </navigation>

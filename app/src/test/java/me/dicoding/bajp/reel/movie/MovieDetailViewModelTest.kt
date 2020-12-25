@@ -9,13 +9,13 @@ import io.mockk.unmockkAll
 import io.mockk.verify
 import junit.framework.TestCase
 import kotlinx.coroutines.flow.flow
-import me.dicoding.bajp.reel.core.domain.model.Movie
 import me.dicoding.bajp.reel.core.data.network.NetworkResult
-import me.dicoding.bajp.reel.core.data.MovieRepository
-import me.dicoding.bajp.reel.ui.movie.detail.MovieDetailViewModel
+import me.dicoding.bajp.reel.core.domain.model.Movie
+import me.dicoding.bajp.reel.core.domain.repository.MovieRepository
 import me.dicoding.bajp.reel.core.utils.TestFixtureHelper
 import me.dicoding.bajp.reel.core.utils.TestFixtureHelper.parseStringFromJsonResource
 import me.dicoding.bajp.reel.core.utils.asDomain
+import me.dicoding.bajp.reel.ui.movie.detail.MovieDetailViewModel
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule

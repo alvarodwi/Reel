@@ -8,9 +8,9 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import me.dicoding.bajp.reel.core.domain.model.Movie
 import me.dicoding.bajp.reel.core.data.network.NetworkResult
-import me.dicoding.bajp.reel.core.data.MovieRepository
+import me.dicoding.bajp.reel.core.domain.model.Movie
+import me.dicoding.bajp.reel.core.domain.repository.MovieRepository
 
 class MovieDetailViewModel(
   private val movieId: Long,

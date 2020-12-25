@@ -18,8 +18,8 @@ import com.afollestad.materialdialogs.list.listItemsSingleChoice
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import me.dicoding.bajp.reel.R
-import me.dicoding.bajp.reel.databinding.FragmentFavoriteBinding
 import me.dicoding.bajp.reel.core.utils.DatabaseConstants.FavoriteTable.Types
+import me.dicoding.bajp.reel.databinding.FragmentFavoriteBinding
 import me.dicoding.bajp.reel.ext.setOnQueryTextChangeListener
 import me.dicoding.bajp.reel.ext.viewBinding
 import org.koin.android.ext.android.inject

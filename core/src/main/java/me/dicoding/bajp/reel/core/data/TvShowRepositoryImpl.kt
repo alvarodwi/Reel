@@ -10,18 +10,19 @@ import me.dicoding.bajp.reel.core.data.network.ApiService
 import me.dicoding.bajp.reel.core.data.network.NetworkResult
 import me.dicoding.bajp.reel.core.data.network.json.TvShowJson
 import me.dicoding.bajp.reel.core.domain.model.TvShow
+import me.dicoding.bajp.reel.core.domain.repository.TvShowRepository
 import me.dicoding.bajp.reel.core.utils.API_KEY
 import me.dicoding.bajp.reel.core.utils.DatabaseConstants.FavoriteTable.Types
 import me.dicoding.bajp.reel.core.utils.EspressoIdlingResource
 import me.dicoding.bajp.reel.core.utils.asDomain
 import me.dicoding.bajp.reel.core.utils.asFavoriteEntity
 
-class TvShowRepository(
+class TvShowRepositoryImpl(
   private val api: ApiService,
   private val db: AppDatabase,
   private val dispatcher: CoroutineDispatcher = Dispatchers.IO
-) {
-  fun getPopularTvShow(): Flow<NetworkResult<List<TvShow>>> = flow {
+) : TvShowRepository {
+  override fun getPopularTvShow(): Flow<NetworkResult<List<TvShow>>> = flow {
     EspressoIdlingResource.increment()
     try {
       val response = api.getPopularTvShow(API_KEY)
@@ -39,7 +40,7 @@ class TvShowRepository(
     }
   }.flowOn(dispatcher)
 
-  fun getTvShowDetailData(id: Long): Flow<NetworkResult<TvShow>> = flow {
+  override fun getTvShowDetailData(id: Long): Flow<NetworkResult<TvShow>> = flow {
     EspressoIdlingResource.increment()
     try {
       val response = api.getTvShowDetail(id, API_KEY)
@@ -56,12 +57,12 @@ class TvShowRepository(
     }
   }.flowOn(dispatcher)
 
-  suspend fun addTvShowToFavorites(data: TvShow) =
+  override suspend fun addTvShowToFavorites(data: TvShow): Long =
     db.favoriteDao.insertItem(data.asFavoriteEntity())
 
-  suspend fun removeTvShowFromFavorites(data: TvShow) =
+  override suspend fun removeTvShowFromFavorites(data: TvShow): Int =
     db.favoriteDao.deleteItem(data.id, Types.TYPE_TV_SHOW)
 
-  fun isTvShowInFavorites(id: Long) =
+  override fun isTvShowInFavorites(id: Long) =
     db.favoriteDao.isItemWithIdExists(id, Types.TYPE_TV_SHOW)
 }

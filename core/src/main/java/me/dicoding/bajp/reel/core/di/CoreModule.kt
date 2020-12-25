@@ -11,11 +11,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.asExecutor
 import kotlinx.serialization.json.Json
 import me.dicoding.bajp.reel.core.BuildConfig
+import me.dicoding.bajp.reel.core.data.FavoriteRepositoryImpl
+import me.dicoding.bajp.reel.core.data.MovieRepositoryImpl
+import me.dicoding.bajp.reel.core.data.TvShowRepositoryImpl
 import me.dicoding.bajp.reel.core.data.db.AppDatabase
 import me.dicoding.bajp.reel.core.data.network.ApiService
-import me.dicoding.bajp.reel.core.data.FavoriteRepository
-import me.dicoding.bajp.reel.core.data.MovieRepository
-import me.dicoding.bajp.reel.core.data.TvShowRepository
 import me.dicoding.bajp.reel.core.utils.BASE_URL
 import okhttp3.Cache
 import okhttp3.MediaType.Companion.toMediaType
@@ -89,9 +89,9 @@ val networkModule = module {
 }
 
 val repositoryModule = module {
-  single { MovieRepository(get(), get()) }
-  single { TvShowRepository(get(), get()) }
-  single { FavoriteRepository(get()) }
+  single { MovieRepositoryImpl(get(), get()) }
+  single { TvShowRepositoryImpl(get(), get()) }
+  single { FavoriteRepositoryImpl(get()) }
 }
 
 val libModule = module {
