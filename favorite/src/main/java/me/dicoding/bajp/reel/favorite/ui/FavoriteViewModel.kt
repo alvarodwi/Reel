@@ -1,17 +1,15 @@
-package me.dicoding.bajp.reel.ui.favorite
+package me.dicoding.bajp.reel.favorite.ui
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
-import androidx.paging.map
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import me.dicoding.bajp.reel.core.data.db.FavoriteQuery
 import me.dicoding.bajp.reel.core.domain.model.Favorite
-import me.dicoding.bajp.reel.core.domain.repository.FavoriteRepository
 import me.dicoding.bajp.reel.core.domain.usecase.FavoriteListUseCase
 import me.dicoding.bajp.reel.core.utils.DatabaseConstants.FavoriteTable.Sorts
 import me.dicoding.bajp.reel.core.utils.DatabaseConstants.FavoriteTable.Types

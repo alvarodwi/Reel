@@ -10,7 +10,6 @@ import me.dicoding.bajp.reel.core.domain.usecase.MovieDetailUseCase
 import me.dicoding.bajp.reel.core.domain.usecase.MovieListUseCase
 import me.dicoding.bajp.reel.core.domain.usecase.TvShowDetailUseCase
 import me.dicoding.bajp.reel.core.domain.usecase.TvShowListUseCase
-import me.dicoding.bajp.reel.ui.favorite.FavoriteViewModel
 import me.dicoding.bajp.reel.ui.movie.detail.MovieDetailViewModel
 import me.dicoding.bajp.reel.ui.movie.list.MovieListViewModel
 import me.dicoding.bajp.reel.ui.tvshow.detail.TvShowDetailViewModel
@@ -32,6 +31,4 @@ val viewModelModule = module {
 
   viewModel { TvShowListViewModel(get()) }
   viewModel { (id: Long) -> TvShowDetailViewModel(id, get()) }
-
-  viewModel { FavoriteViewModel(get()) }
 }

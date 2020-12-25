@@ -11,10 +11,10 @@ android {
   buildFeatures {
     viewBinding = true
   }
+  dynamicFeatures = mutableSetOf(":favorite")
 }
 
 dependencies {
-  //core
   implementation(project(":core"))
   implementation(kotlin("stdlib", version = Libs.kotlin_version))
 
@@ -30,6 +30,7 @@ dependencies {
   //navigation
   api(Libs.AndroidX.Navigation.navFragment)
   api(Libs.AndroidX.Navigation.navUI)
+  api(Libs.AndroidX.Navigation.dynamicFeatureFragment)
 
   //ui
   api(Libs.AndroidX.viewPager2)

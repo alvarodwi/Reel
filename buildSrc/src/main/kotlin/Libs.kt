@@ -41,6 +41,7 @@ object Libs {
     object Navigation {
       const val navFragment = "androidx.navigation:navigation-fragment-ktx:$nav_version"
       const val navUI = "androidx.navigation:navigation-ui-ktx:$nav_version"
+      const val dynamicFeatureFragment = "androidx.navigation:navigation-dynamic-features-fragment:$nav_version"
       const val safeArgsGradlePlugin =
         "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
     }

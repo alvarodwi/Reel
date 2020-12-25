@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="title_favorite">Favorite</string>
+  <string name="text_search_items">Search titles…</string>
+  <string name="sort_items">Sort items by</string>
+
+</resources>

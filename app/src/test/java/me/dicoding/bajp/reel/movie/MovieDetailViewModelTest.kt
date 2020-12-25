@@ -11,7 +11,7 @@ import junit.framework.TestCase
 import kotlinx.coroutines.flow.flow
 import me.dicoding.bajp.reel.core.data.network.NetworkResult
 import me.dicoding.bajp.reel.core.domain.model.Movie
-import me.dicoding.bajp.reel.core.domain.repository.MovieRepository
+import me.dicoding.bajp.reel.core.domain.usecase.MovieDetailUseCase
 import me.dicoding.bajp.reel.core.utils.TestFixtureHelper
 import me.dicoding.bajp.reel.core.utils.TestFixtureHelper.parseStringFromJsonResource
 import me.dicoding.bajp.reel.core.utils.asDomain
@@ -31,26 +31,26 @@ class MovieDetailViewModelTest : TestCase() {
   var instantExecutorRule = InstantTaskExecutorRule()
 
   @MockK
-  lateinit var repository: MovieRepository
+  lateinit var useCase: MovieDetailUseCase
   private lateinit var viewModel: MovieDetailViewModel
 
   @Before
   fun setup() {
     MockKAnnotations.init(this)
-    viewModel = MovieDetailViewModel(expectedMovieId, repository)
+    viewModel = MovieDetailViewModel(expectedMovieId, useCase)
   }
 
   @Test
   fun `test successful fetch of movie detail`() {
-    every { repository.getMovieDetailData(expectedMovieId) } returns flow {
+    every { useCase.getMovieDetailData(expectedMovieId) } returns flow {
       NetworkResult.Success(
         provideDummyData()
       )
     }
     viewModel.fetchMovieDetail()
 
-    verify(atLeast = 1) { repository.getMovieDetailData(expectedMovieId) }
-    confirmVerified(repository)
+    verify(atLeast = 1) { useCase.getMovieDetailData(expectedMovieId) }
+    confirmVerified(useCase)
 
     viewModel.movie.observeForever { value ->
       assertNotNull(value)
@@ -62,15 +62,15 @@ class MovieDetailViewModelTest : TestCase() {
 
   @Test
   fun `test failed fetch of movie detail`() {
-    every { repository.getMovieDetailData(expectedMovieId) } returns flow {
+    every { useCase.getMovieDetailData(expectedMovieId) } returns flow {
       NetworkResult.Error(
         Exception("foo")
       )
     }
     viewModel.fetchMovieDetail()
 
-    verify(atLeast = 1) { repository.getMovieDetailData(expectedMovieId) }
-    confirmVerified(repository)
+    verify(atLeast = 1) { useCase.getMovieDetailData(expectedMovieId) }
+    confirmVerified(useCase)
 
     viewModel.movie.observeForever { value ->
       assertNull(value)
@@ -80,13 +80,13 @@ class MovieDetailViewModelTest : TestCase() {
 
   @Test
   fun `test check data assumed already in db`() {
-    every { repository.isMovieInFavorites(expectedMovieId) } returns flow {
+    every { useCase.isMovieInFavorites(expectedMovieId) } returns flow {
       emit(1) // room query returns 1 when data exists in db
     }
     viewModel.checkMovieInDb()
 
-    verify(atLeast = 1) { repository.isMovieInFavorites(expectedMovieId) }
-    confirmVerified(repository)
+    verify(atLeast = 1) { useCase.isMovieInFavorites(expectedMovieId) }
+    confirmVerified(useCase)
 
     viewModel.isFavorite.observeForever { value ->
       assertNotNull(value)
@@ -96,13 +96,13 @@ class MovieDetailViewModelTest : TestCase() {
 
   @Test
   fun `test check data assumed not already in db`() {
-    every { repository.isMovieInFavorites(expectedMovieId) } returns flow {
+    every { useCase.isMovieInFavorites(expectedMovieId) } returns flow {
       emit(0) // room query returns 0 when data didn't exists in db
     }
     viewModel.checkMovieInDb()
 
-    verify(atLeast = 1) { repository.isMovieInFavorites(expectedMovieId) }
-    confirmVerified(repository)
+    verify(atLeast = 1) { useCase.isMovieInFavorites(expectedMovieId) }
+    confirmVerified(useCase)
 
     viewModel.isFavorite.observeForever { value ->
       assertNotNull(value)

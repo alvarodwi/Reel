@@ -13,13 +13,12 @@ import kotlinx.coroutines.flow.flow
 import me.dicoding.bajp.reel.core.data.db.FavoriteQuery
 import me.dicoding.bajp.reel.core.data.network.json.FavoriteJson
 import me.dicoding.bajp.reel.core.domain.model.Favorite
-import me.dicoding.bajp.reel.core.domain.repository.FavoriteRepository
+import me.dicoding.bajp.reel.core.domain.usecase.FavoriteListUseCase
 import me.dicoding.bajp.reel.core.utils.DatabaseConstants.FavoriteTable.Sorts
 import me.dicoding.bajp.reel.core.utils.DatabaseConstants.FavoriteTable.Types
 import me.dicoding.bajp.reel.core.utils.TestFixtureHelper
 import me.dicoding.bajp.reel.core.utils.TestFixtureHelper.parseStringFromJsonResource
 import me.dicoding.bajp.reel.core.utils.asDomain
-import me.dicoding.bajp.reel.ui.favorite.FavoriteViewModel
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -38,24 +37,24 @@ class FavoriteViewModelTest : TestCase() {
   var instantExecutorRule = InstantTaskExecutorRule()
 
   @MockK
-  lateinit var repository: FavoriteRepository
-  private lateinit var viewModel: FavoriteViewModel
+  lateinit var useCase : FavoriteListUseCase
+  private lateinit var viewModel: me.dicoding.bajp.reel.favorite.ui.FavoriteViewModel
 
   @Before
   fun setup() {
     MockKAnnotations.init(this)
-    viewModel = FavoriteViewModel(repository)
+    viewModel = me.dicoding.bajp.reel.favorite.ui.FavoriteViewModel(useCase)
   }
 
   @Test
   fun `test fetch favorite items`() {
-    every { repository.getFavoriteItems(query, viewModel.viewModelScope) } returns flow {
+    every { useCase.getFavoriteItems(query, viewModel.viewModelScope) } returns flow {
       PagingData.from(provideDummyData())
     }
     viewModel.fetchFavoriteItems()
 
-    verify(atLeast = 1) { repository.getFavoriteItems(query, viewModel.viewModelScope) }
-    confirmVerified(repository)
+    verify(atLeast = 1) { useCase.getFavoriteItems(query, viewModel.viewModelScope) }
+    confirmVerified(useCase)
 
     viewModel.items.observeForever { result ->
       assertNotNull(result)

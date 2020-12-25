@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.flow
 import me.dicoding.bajp.reel.core.data.network.NetworkResult
 import me.dicoding.bajp.reel.core.data.network.json.MovieJson
 import me.dicoding.bajp.reel.core.domain.model.Movie
-import me.dicoding.bajp.reel.core.domain.repository.MovieRepository
+import me.dicoding.bajp.reel.core.domain.usecase.MovieListUseCase
 import me.dicoding.bajp.reel.core.utils.TestFixtureHelper
 import me.dicoding.bajp.reel.core.utils.TestFixtureHelper.parseStringFromJsonResource
 import me.dicoding.bajp.reel.core.utils.asDomain
@@ -30,26 +30,26 @@ class MovieListViewModelTest : TestCase() {
   var instantExecutorRule = InstantTaskExecutorRule()
 
   @MockK
-  lateinit var repository: MovieRepository
+  lateinit var useCase: MovieListUseCase
   private lateinit var viewModel: MovieListViewModel
 
   @Before
   fun setup() {
     MockKAnnotations.init(this)
-    viewModel = MovieListViewModel(repository)
+    viewModel = MovieListViewModel(useCase)
   }
 
   @Test
   fun `test successful fetch of list movie`() {
-    every { repository.getPopularMovie() } returns flow {
+    every { useCase.getPopularMovie() } returns flow {
       NetworkResult.Success(
         provideDummyData()
       )
     }
     viewModel.fetchPopularMovie()
 
-    verify(atLeast = 1) { repository.getPopularMovie() }
-    confirmVerified(repository)
+    verify(atLeast = 1) { useCase.getPopularMovie() }
+    confirmVerified(useCase)
 
     viewModel.movies.observeForever { value ->
       assertNotNull(value)
@@ -60,11 +60,11 @@ class MovieListViewModelTest : TestCase() {
 
   @Test
   fun `test failed fetch of list movie`() {
-    every { repository.getPopularMovie() } returns flow { NetworkResult.Error(Exception("foo")) }
+    every { useCase.getPopularMovie() } returns flow { NetworkResult.Error(Exception("foo")) }
     viewModel.fetchPopularMovie()
 
-    verify(atLeast = 1) { repository.getPopularMovie() }
-    confirmVerified(repository)
+    verify(atLeast = 1) { useCase.getPopularMovie() }
+    confirmVerified(useCase)
 
     viewModel.movies.observeForever { value ->
       assert(value.isEmpty())

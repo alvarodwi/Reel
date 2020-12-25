@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.flow
 import me.dicoding.bajp.reel.core.data.network.NetworkResult
 import me.dicoding.bajp.reel.core.data.network.json.TvShowJson
 import me.dicoding.bajp.reel.core.domain.model.TvShow
-import me.dicoding.bajp.reel.core.domain.repository.TvShowRepository
+import me.dicoding.bajp.reel.core.domain.usecase.TvShowListUseCase
 import me.dicoding.bajp.reel.core.utils.TestFixtureHelper
 import me.dicoding.bajp.reel.core.utils.TestFixtureHelper.parseStringFromJsonResource
 import me.dicoding.bajp.reel.core.utils.asDomain
@@ -30,26 +30,26 @@ class TvShowListViewModelTest : TestCase() {
   var instantExecutorRule = InstantTaskExecutorRule()
 
   @MockK
-  lateinit var repository: TvShowRepository
+  lateinit var useCase: TvShowListUseCase
   private lateinit var viewModel: TvShowListViewModel
 
   @Before
   fun setup() {
     MockKAnnotations.init(this)
-    viewModel = TvShowListViewModel(repository)
+    viewModel = TvShowListViewModel(useCase)
   }
 
   @Test
   fun `test successful fetch of list tvShow`() {
-    every { repository.getPopularTvShow() } returns flow {
+    every { useCase.getPopularTvShow() } returns flow {
       NetworkResult.Success(
         provideDummyData()
       )
     }
     viewModel.fetchPopularTvShow()
 
-    verify(atLeast = 1) { repository.getPopularTvShow() }
-    confirmVerified(repository)
+    verify(atLeast = 1) { useCase.getPopularTvShow() }
+    confirmVerified(useCase)
 
     viewModel.tvShows.observeForever { value ->
       assertNotNull(value)
@@ -60,11 +60,11 @@ class TvShowListViewModelTest : TestCase() {
 
   @Test
   fun `test failed fetch of list tvShow`() {
-    every { repository.getPopularTvShow() } returns flow { NetworkResult.Error(Exception("foo")) }
+    every { useCase.getPopularTvShow() } returns flow { NetworkResult.Error(Exception("foo")) }
     viewModel.fetchPopularTvShow()
 
-    verify(atLeast = 1) { repository.getPopularTvShow() }
-    confirmVerified(repository)
+    verify(atLeast = 1) { useCase.getPopularTvShow() }
+    confirmVerified(useCase)
 
     viewModel.tvShows.observeForever { value ->
       assertNotNull(value)

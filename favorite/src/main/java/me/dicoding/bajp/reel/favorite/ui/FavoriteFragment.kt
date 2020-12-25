@@ -1,4 +1,4 @@
-package me.dicoding.bajp.reel.ui.favorite
+package me.dicoding.bajp.reel.favorite.ui
 
 import android.os.Bundle
 import android.view.MenuItem
@@ -17,13 +17,15 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.list.listItemsSingleChoice
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import me.dicoding.bajp.reel.R
 import me.dicoding.bajp.reel.core.utils.DatabaseConstants.FavoriteTable.Types
-import me.dicoding.bajp.reel.databinding.FragmentFavoriteBinding
 import me.dicoding.bajp.reel.ext.setOnQueryTextChangeListener
 import me.dicoding.bajp.reel.ext.viewBinding
+import me.dicoding.bajp.reel.favorite.R
+import me.dicoding.bajp.reel.favorite.databinding.FragmentFavoriteBinding
+import me.dicoding.bajp.reel.favorite.di.favoriteModule
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.context.loadKoinModules
 
 class FavoriteFragment : Fragment(R.layout.fragment_favorite) {
   private val binding by viewBinding { FragmentFavoriteBinding.bind(requireView()) }
@@ -32,12 +34,20 @@ class FavoriteFragment : Fragment(R.layout.fragment_favorite) {
   private val coilLoader by inject<ImageLoader>()
 
   private val toolbar get() = binding.toolbar
-  private val recyclerView get() = binding.listLayout.list.rvList
-  private val swipeRefresh get() = binding.listLayout.list.srlList
-  private val cardError get() = binding.listLayout.info.cardContainer
+  private val recyclerView get() = binding.rvList
+  private val swipeRefresh get() = binding.srlList
+  private val cardError get() = binding.cardContainer
   private val filterButton get() = binding.btnFilterToggle
 
   private lateinit var rvAdapter: FavoriteAdapter
+
+  //load koin module, forcefully -_-
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    requireActivity().also {
+      loadKoinModules(favoriteModule)
+    }
+  }
 
   override fun onViewCreated(
     view: View,
@@ -48,7 +58,7 @@ class FavoriteFragment : Fragment(R.layout.fragment_favorite) {
     setupList()
     setupFilter()
     with(toolbar) {
-      title = getString(R.string.text_favorite)
+      title = getString(R.string.title_favorite)
       navigationIcon = ContextCompat.getDrawable(context, R.drawable.ic_arrow_back)
       setNavigationOnClickListener { activity?.onBackPressed() }
       inflateMenu(R.menu.favorite)

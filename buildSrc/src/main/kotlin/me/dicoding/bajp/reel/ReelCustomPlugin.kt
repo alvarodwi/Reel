@@ -22,7 +22,9 @@ class ReelCustomPlugin : Plugin<Project> {
     val androidExtension = project.extensions.getByName("android")
     if (androidExtension is BaseExtension) {
       androidExtension.applyAndroidSettings()
-      androidExtension.applyProguardSettings()
+      if(!project.plugins.hasPlugin("com.android.dynamic-feature")) {
+        androidExtension.applyProguardSettings()
+      }
       androidExtension.enableJava8(project)
     }
 
@@ -44,13 +46,12 @@ class ReelCustomPlugin : Plugin<Project> {
 
   private fun BaseExtension.applyAndroidSettings() {
     compileSdkVersion(30)
-    buildToolsVersion = "30.0.2"
+    buildToolsVersion = "30.0.3"
     defaultConfig {
       minSdkVersion(23)
       targetSdkVersion(30)
       versionCode = 1
       versionName = "0.0.1"
-      multiDexEnabled = true
 
       testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -68,7 +69,6 @@ class ReelCustomPlugin : Plugin<Project> {
       is AppExtension -> buildTypes {
         getByName("release") {
           isMinifyEnabled = true
-          isShrinkResources = true
           proguardFiles(
             getDefaultProguardFile("proguard-android-optimize.txt"),
             proguardFilename

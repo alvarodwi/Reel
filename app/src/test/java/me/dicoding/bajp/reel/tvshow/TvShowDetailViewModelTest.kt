@@ -11,7 +11,7 @@ import junit.framework.TestCase
 import kotlinx.coroutines.flow.flow
 import me.dicoding.bajp.reel.core.data.network.NetworkResult
 import me.dicoding.bajp.reel.core.domain.model.TvShow
-import me.dicoding.bajp.reel.core.domain.repository.TvShowRepository
+import me.dicoding.bajp.reel.core.domain.usecase.TvShowDetailUseCase
 import me.dicoding.bajp.reel.core.utils.TestFixtureHelper
 import me.dicoding.bajp.reel.core.utils.TestFixtureHelper.parseStringFromJsonResource
 import me.dicoding.bajp.reel.core.utils.asDomain
@@ -31,26 +31,26 @@ class TvShowDetailViewModelTest : TestCase() {
   var instantExecutorRule = InstantTaskExecutorRule()
 
   @MockK
-  lateinit var repository: TvShowRepository
+  lateinit var useCase: TvShowDetailUseCase
   private lateinit var viewModel: TvShowDetailViewModel
 
   @Before
   fun setup() {
     MockKAnnotations.init(this)
-    viewModel = TvShowDetailViewModel(expectedTvShowId, repository)
+    viewModel = TvShowDetailViewModel(expectedTvShowId, useCase)
   }
 
   @Test
   fun `test successful fetch of tvShow detail`() {
-    every { repository.getTvShowDetailData(expectedTvShowId) } returns flow {
+    every { useCase.getTvShowDetailData(expectedTvShowId) } returns flow {
       NetworkResult.Success(
         provideDummyData()
       )
     }
     viewModel.fetchTvShowDetail()
 
-    verify(atLeast = 1) { repository.getTvShowDetailData(expectedTvShowId) }
-    confirmVerified(repository)
+    verify(atLeast = 1) { useCase.getTvShowDetailData(expectedTvShowId) }
+    confirmVerified(useCase)
 
     viewModel.tvShow.observeForever { value ->
       assertNotNull(value)
@@ -62,15 +62,15 @@ class TvShowDetailViewModelTest : TestCase() {
 
   @Test
   fun `test failed fetch of tvShow detail`() {
-    every { repository.getTvShowDetailData(expectedTvShowId) } returns flow {
+    every { useCase.getTvShowDetailData(expectedTvShowId) } returns flow {
       NetworkResult.Error(
         Exception("foo")
       )
     }
     viewModel.fetchTvShowDetail()
 
-    verify(atLeast = 1) { repository.getTvShowDetailData(expectedTvShowId) }
-    confirmVerified(repository)
+    verify(atLeast = 1) { useCase.getTvShowDetailData(expectedTvShowId) }
+    confirmVerified(useCase)
 
     viewModel.tvShow.observeForever { value ->
       assertNull(value)
@@ -80,13 +80,13 @@ class TvShowDetailViewModelTest : TestCase() {
 
   @Test
   fun `test check data assumed already in db`() {
-    every { repository.isTvShowInFavorites(expectedTvShowId) } returns flow {
+    every { useCase.isTvShowInFavorites(expectedTvShowId) } returns flow {
       emit(1) // room query returns 1 when data exists in db
     }
     viewModel.checkTvShowInDb()
 
-    verify(atLeast = 1) { repository.isTvShowInFavorites(expectedTvShowId) }
-    confirmVerified(repository)
+    verify(atLeast = 1) { useCase.isTvShowInFavorites(expectedTvShowId) }
+    confirmVerified(useCase)
 
     viewModel.isFavorite.observeForever { value ->
       assertNotNull(value)
@@ -96,13 +96,13 @@ class TvShowDetailViewModelTest : TestCase() {
 
   @Test
   fun `test check data assumed not already in db`() {
-    every { repository.isTvShowInFavorites(expectedTvShowId) } returns flow {
+    every { useCase.isTvShowInFavorites(expectedTvShowId) } returns flow {
       emit(0) // room query returns 0 when data didn't exists in db
     }
     viewModel.checkTvShowInDb()
 
-    verify(atLeast = 1) { repository.isTvShowInFavorites(expectedTvShowId) }
-    confirmVerified(repository)
+    verify(atLeast = 1) { useCase.isTvShowInFavorites(expectedTvShowId) }
+    confirmVerified(useCase)
 
     viewModel.isFavorite.observeForever { value ->
       assertNotNull(value)
