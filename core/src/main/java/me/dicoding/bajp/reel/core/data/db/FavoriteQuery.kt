@@ -1,4 +1,4 @@
-package me.dicoding.bajp.reel.core.data.model.query
+package me.dicoding.bajp.reel.core.data.db
 
 import androidx.sqlite.db.SimpleSQLiteQuery
 import me.dicoding.bajp.reel.core.utils.DatabaseConstants.FavoriteTable.Sorts

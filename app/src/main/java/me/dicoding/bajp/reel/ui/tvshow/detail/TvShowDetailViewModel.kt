@@ -9,15 +9,15 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import me.dicoding.bajp.reel.core.data.model.entity.TvShowEntity
+import me.dicoding.bajp.reel.core.domain.model.TvShow
 import me.dicoding.bajp.reel.core.data.network.NetworkResult
-import me.dicoding.bajp.reel.core.data.repository.TvShowRepository
+import me.dicoding.bajp.reel.core.data.TvShowRepository
 
 class TvShowDetailViewModel(
   private val tvShowId: Long,
   private val repository: TvShowRepository
 ) : ViewModel() {
-  private val _tvShow = MutableLiveData<TvShowEntity>()
+  private val _tvShow = MutableLiveData<TvShow>()
   val tvShow get() = _tvShow
 
   private val _errorMessage = MutableLiveData<String>()
@@ -48,7 +48,7 @@ class TvShowDetailViewModel(
     }
   }
 
-  fun onFabClicked(data: TvShowEntity) {
+  fun onFabClicked(data: TvShow) {
     viewModelScope.launch(Dispatchers.IO) {
       if (isFavorite.value == true) repository.removeTvShowFromFavorites(data)
       else repository.addTvShowToFavorites(data)

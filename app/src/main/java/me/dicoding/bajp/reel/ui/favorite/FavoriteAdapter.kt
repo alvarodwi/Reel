@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.ImageLoader
 import coil.request.ImageRequest
 import me.dicoding.bajp.reel.R
-import me.dicoding.bajp.reel.core.data.model.entity.FavoriteEntity
+import me.dicoding.bajp.reel.core.domain.model.Favorite
 import me.dicoding.bajp.reel.databinding.ItemFavoriteBinding
 import me.dicoding.bajp.reel.ui.favorite.FavoriteAdapter.FavoriteViewHolder
 import me.dicoding.bajp.reel.core.utils.DatabaseConstants.FavoriteTable.Types
@@ -19,19 +19,19 @@ import java.time.format.DateTimeFormatter
 class FavoriteAdapter(
   private val coilLoader: ImageLoader,
   private val clickCallback: (Long, Int) -> Unit,
-) : PagingDataAdapter<FavoriteEntity, FavoriteViewHolder>(FAVORITE_DIFF) {
+) : PagingDataAdapter<Favorite, FavoriteViewHolder>(FAVORITE_DIFF) {
   companion object {
-    private val FAVORITE_DIFF = object : DiffUtil.ItemCallback<FavoriteEntity>() {
+    private val FAVORITE_DIFF = object : DiffUtil.ItemCallback<Favorite>() {
       override fun areItemsTheSame(
-        oldItem: FavoriteEntity,
-        newItem: FavoriteEntity
+        oldItem: Favorite,
+        newItem: Favorite
       ): Boolean {
         return oldItem.uid == newItem.uid
       }
 
       override fun areContentsTheSame(
-        oldItem: FavoriteEntity,
-        newItem: FavoriteEntity
+        oldItem: Favorite,
+        newItem: Favorite
       ): Boolean {
         return oldItem == newItem
       }
@@ -44,7 +44,7 @@ class FavoriteAdapter(
       parent.viewBinding(ItemFavoriteBinding::inflate)
     )
 
-    fun bind(data: FavoriteEntity?) {
+    fun bind(data: Favorite?) {
       if (data == null) return
 
       with(binding) {

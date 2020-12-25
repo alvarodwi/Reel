@@ -13,9 +13,9 @@ import kotlinx.serialization.json.Json
 import me.dicoding.bajp.reel.core.BuildConfig
 import me.dicoding.bajp.reel.core.data.db.AppDatabase
 import me.dicoding.bajp.reel.core.data.network.ApiService
-import me.dicoding.bajp.reel.core.data.repository.FavoriteRepository
-import me.dicoding.bajp.reel.core.data.repository.MovieRepository
-import me.dicoding.bajp.reel.core.data.repository.TvShowRepository
+import me.dicoding.bajp.reel.core.data.FavoriteRepository
+import me.dicoding.bajp.reel.core.data.MovieRepository
+import me.dicoding.bajp.reel.core.data.TvShowRepository
 import me.dicoding.bajp.reel.core.utils.BASE_URL
 import okhttp3.Cache
 import okhttp3.MediaType.Companion.toMediaType

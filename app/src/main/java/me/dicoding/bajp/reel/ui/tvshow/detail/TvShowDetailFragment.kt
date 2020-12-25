@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import coil.ImageLoader
 import coil.request.ImageRequest
 import me.dicoding.bajp.reel.R
-import me.dicoding.bajp.reel.core.data.model.entity.TvShowEntity
+import me.dicoding.bajp.reel.core.domain.model.TvShow
 import me.dicoding.bajp.reel.databinding.FragmentTvShowDetailBinding
 import me.dicoding.bajp.reel.core.ext.toSafeUrl
 import me.dicoding.bajp.reel.ext.viewBinding
@@ -63,7 +63,7 @@ class TvShowDetailFragment : Fragment(R.layout.fragment_tv_show_detail) {
     }
   }
 
-  private fun setupView(data: TvShowEntity) {
+  private fun setupView(data: TvShow) {
     binding.toolbar.title = String.format("#%d", data.id)
     binding.toolbar.setOnMenuItemClickListener { menu ->
       when (menu.itemId) {

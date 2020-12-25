@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import coil.ImageLoader
 import coil.request.ImageRequest
 import me.dicoding.bajp.reel.R
-import me.dicoding.bajp.reel.core.data.model.entity.MovieEntity
+import me.dicoding.bajp.reel.core.domain.model.Movie
 import me.dicoding.bajp.reel.databinding.FragmentMovieDetailBinding
 import me.dicoding.bajp.reel.core.ext.toSafeUrl
 import me.dicoding.bajp.reel.ext.viewBinding
@@ -63,7 +63,7 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
     }
   }
 
-  private fun setupView(data: MovieEntity) {
+  private fun setupView(data: Movie) {
     binding.toolbar.title = String.format("#%d", data.id)
     binding.toolbar.setOnMenuItemClickListener { menu ->
       when (menu.itemId) {

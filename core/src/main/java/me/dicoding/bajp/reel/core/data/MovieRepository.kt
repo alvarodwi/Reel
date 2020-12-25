@@ -1,4 +1,4 @@
-package me.dicoding.bajp.reel.core.data.repository
+package me.dicoding.bajp.reel.core.data
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -7,27 +7,27 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.withContext
 import me.dicoding.bajp.reel.core.data.db.AppDatabase
-import me.dicoding.bajp.reel.core.data.model.entity.MovieEntity
-import me.dicoding.bajp.reel.core.data.model.entity.asFavoriteEntity
-import me.dicoding.bajp.reel.core.data.model.json.MovieJson
-import me.dicoding.bajp.reel.core.data.model.json.asEntity
 import me.dicoding.bajp.reel.core.data.network.ApiService
 import me.dicoding.bajp.reel.core.data.network.NetworkResult
+import me.dicoding.bajp.reel.core.data.network.json.MovieJson
+import me.dicoding.bajp.reel.core.domain.model.Movie
 import me.dicoding.bajp.reel.core.utils.API_KEY
 import me.dicoding.bajp.reel.core.utils.DatabaseConstants.FavoriteTable.Types
 import me.dicoding.bajp.reel.core.utils.EspressoIdlingResource
+import me.dicoding.bajp.reel.core.utils.asDomain
+import me.dicoding.bajp.reel.core.utils.asFavoriteEntity
 
 class MovieRepository(
   private val api: ApiService,
   private val db: AppDatabase,
   private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
-  fun getPopularMovie(): Flow<NetworkResult<List<MovieEntity>>> = flow {
+  fun getPopularMovie(): Flow<NetworkResult<List<Movie>>> = flow {
     EspressoIdlingResource.increment()
     try {
       val response = api.getPopularMovie(API_KEY)
       if (response.isSuccessful) {
-        val data = response.body()?.results?.map(MovieJson::asEntity)
+        val data = response.body()?.results?.map(MovieJson::asDomain)
           ?: throw(Exception("List is empty"))
         emit(NetworkResult.Success(data))
         EspressoIdlingResource.decrement()
@@ -40,12 +40,12 @@ class MovieRepository(
     }
   }.flowOn(dispatcher)
 
-  fun getMovieDetailData(id: Long): Flow<NetworkResult<MovieEntity>> = flow {
+  fun getMovieDetailData(id: Long): Flow<NetworkResult<Movie>> = flow {
     EspressoIdlingResource.increment()
     try {
       val response = api.getMovieDetail(id, API_KEY)
       if (response.isSuccessful) {
-        val data = response.body()?.asEntity() ?: throw(Exception("Response body is empty"))
+        val data = response.body()?.asDomain() ?: throw(Exception("Response body is empty"))
         emit(NetworkResult.Success(data))
         EspressoIdlingResource.decrement()
       } else {
@@ -57,13 +57,13 @@ class MovieRepository(
     }
   }.flowOn(dispatcher)
 
-  suspend fun addMovieToFavorites(data: MovieEntity) {
+  suspend fun addMovieToFavorites(data: Movie) {
     withContext(Dispatchers.IO) {
       db.favoriteDao.insertItem(data.asFavoriteEntity())
     }
   }
 
-  suspend fun removeMovieFromFavorites(data: MovieEntity) {
+  suspend fun removeMovieFromFavorites(data: Movie) {
     withContext(Dispatchers.IO) {
       db.favoriteDao.deleteItem(data.id, Types.TYPE_MOVIE)
     }

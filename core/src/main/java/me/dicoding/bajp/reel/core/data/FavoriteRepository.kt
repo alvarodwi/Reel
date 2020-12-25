@@ -1,4 +1,4 @@
-package me.dicoding.bajp.reel.core.data.repository
+package me.dicoding.bajp.reel.core.data
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
@@ -7,7 +7,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import me.dicoding.bajp.reel.core.data.db.AppDatabase
-import me.dicoding.bajp.reel.core.data.model.query.FavoriteQuery
+import me.dicoding.bajp.reel.core.data.db.FavoriteQuery
 
 class FavoriteRepository(
   private val db: AppDatabase,

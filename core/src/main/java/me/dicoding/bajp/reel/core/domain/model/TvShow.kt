@@ -1,6 +1,6 @@
-package me.dicoding.bajp.reel.core.data.model.entity
+package me.dicoding.bajp.reel.core.domain.model
 
-data class TvShowEntity(
+data class TvShow(
   val id: Long,
   val poster: String?,
   val backdrop: String?,

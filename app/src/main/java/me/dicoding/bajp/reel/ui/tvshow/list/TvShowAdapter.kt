@@ -7,26 +7,26 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.ImageLoader
 import coil.request.ImageRequest
 import me.dicoding.bajp.reel.R
-import me.dicoding.bajp.reel.core.data.model.entity.TvShowEntity
+import me.dicoding.bajp.reel.core.domain.model.TvShow
 import me.dicoding.bajp.reel.databinding.ItemTvShowBinding
 import me.dicoding.bajp.reel.ext.viewBinding
 
 class TvShowAdapter(
   private val coilLoader: ImageLoader,
   private val clickCallback: (Long) -> Unit,
-) : ListAdapter<TvShowEntity, TvShowAdapter.TvShowViewHolder>(MOVIE_DIFF) {
+) : ListAdapter<TvShow, TvShowAdapter.TvShowViewHolder>(MOVIE_DIFF) {
   companion object {
-    private val MOVIE_DIFF = object : DiffUtil.ItemCallback<TvShowEntity>() {
+    private val MOVIE_DIFF = object : DiffUtil.ItemCallback<TvShow>() {
       override fun areItemsTheSame(
-        oldItem: TvShowEntity,
-        newItem: TvShowEntity
+        oldItem: TvShow,
+        newItem: TvShow
       ): Boolean {
         return oldItem.id == newItem.id
       }
 
       override fun areContentsTheSame(
-        oldItem: TvShowEntity,
-        newItem: TvShowEntity
+        oldItem: TvShow,
+        newItem: TvShow
       ): Boolean {
         return oldItem == newItem
       }
@@ -39,7 +39,7 @@ class TvShowAdapter(
       parent.viewBinding(ItemTvShowBinding::inflate)
     )
 
-    fun bind(data: TvShowEntity?) {
+    fun bind(data: TvShow?) {
       if (data == null) return
 
       with(binding) {

@@ -10,15 +10,15 @@ import io.mockk.impl.annotations.MockK
 import io.mockk.verify
 import junit.framework.TestCase
 import kotlinx.coroutines.flow.flow
-import me.dicoding.bajp.reel.core.data.model.entity.FavoriteEntity
-import me.dicoding.bajp.reel.core.data.model.json.FavoriteJson
-import me.dicoding.bajp.reel.core.data.model.json.asEntity
-import me.dicoding.bajp.reel.core.data.model.query.FavoriteQuery
-import me.dicoding.bajp.reel.core.data.repository.FavoriteRepository
+import me.dicoding.bajp.reel.core.data.network.json.FavoriteJson
+import me.dicoding.bajp.reel.core.data.db.FavoriteQuery
+import me.dicoding.bajp.reel.core.data.FavoriteRepository
+import me.dicoding.bajp.reel.core.domain.model.Favorite
 import me.dicoding.bajp.reel.core.utils.DatabaseConstants.FavoriteTable.Sorts
 import me.dicoding.bajp.reel.core.utils.DatabaseConstants.FavoriteTable.Types
 import me.dicoding.bajp.reel.core.utils.TestFixtureHelper
 import me.dicoding.bajp.reel.core.utils.TestFixtureHelper.parseStringFromJsonResource
+import me.dicoding.bajp.reel.core.utils.asDomain
 import me.dicoding.bajp.reel.ui.favorite.FavoriteViewModel
 import org.junit.Before
 import org.junit.Rule
@@ -62,7 +62,7 @@ class FavoriteViewModelTest : TestCase() {
     }
   }
 
-  private fun provideDummyData(): List<FavoriteEntity> =
+  private fun provideDummyData(): List<Favorite> =
     TestFixtureHelper.loadFavoritesData(parseStringFromJsonResource("/favorites.json"))
-      .map(FavoriteJson::asEntity)
+      .map(FavoriteJson::asDomain)
 }

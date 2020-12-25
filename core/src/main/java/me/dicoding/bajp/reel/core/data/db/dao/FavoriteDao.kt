@@ -8,7 +8,7 @@ import androidx.room.Query
 import androidx.room.RawQuery
 import androidx.sqlite.db.SupportSQLiteQuery
 import kotlinx.coroutines.flow.Flow
-import me.dicoding.bajp.reel.core.data.model.entity.FavoriteEntity
+import me.dicoding.bajp.reel.core.data.db.entity.FavoriteEntity
 
 @Dao
 interface FavoriteDao {

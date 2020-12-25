@@ -2,15 +2,16 @@ package me.dicoding.bajp.reel.core.utils
 
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
-import me.dicoding.bajp.reel.core.data.model.json.FavoriteJson
-import me.dicoding.bajp.reel.core.data.model.json.MovieJson
-import me.dicoding.bajp.reel.core.data.model.json.MovieListJson
-import me.dicoding.bajp.reel.core.data.model.json.TvShowJson
-import me.dicoding.bajp.reel.core.data.model.json.TvShowListJson
+import me.dicoding.bajp.reel.core.data.network.json.FavoriteJson
+import me.dicoding.bajp.reel.core.data.network.json.MovieJson
+import me.dicoding.bajp.reel.core.data.network.json.MovieListJson
+import me.dicoding.bajp.reel.core.data.network.json.TvShowJson
+import me.dicoding.bajp.reel.core.data.network.json.TvShowListJson
 import okio.buffer
 import okio.source
 import java.nio.charset.StandardCharsets
 
+//used for test purpose
 object TestFixtureHelper {
   val jsonBuilder = Json {
     ignoreUnknownKeys = true

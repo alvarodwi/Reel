@@ -13,11 +13,11 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.runBlocking
 import me.dicoding.bajp.reel.core.data.db.AppDatabase
-import me.dicoding.bajp.reel.core.data.model.json.MovieJson
-import me.dicoding.bajp.reel.core.data.model.json.MovieListJson
+import me.dicoding.bajp.reel.core.data.network.json.MovieJson
+import me.dicoding.bajp.reel.core.data.network.json.MovieListJson
 import me.dicoding.bajp.reel.core.data.network.ApiService
 import me.dicoding.bajp.reel.core.data.network.NetworkResult
-import me.dicoding.bajp.reel.core.data.repository.MovieRepository
+import me.dicoding.bajp.reel.core.data.MovieRepository
 import me.dicoding.bajp.reel.core.utils.API_KEY
 import me.dicoding.bajp.reel.core.utils.DatabaseConstants.FavoriteTable.Types
 import me.dicoding.bajp.reel.core.utils.TestFixtureHelper

@@ -16,9 +16,9 @@ import me.dicoding.bajp.reel.core.data.db.AppDatabase
 import me.dicoding.bajp.reel.core.data.network.ApiService
 import me.dicoding.bajp.reel.core.data.network.NetworkResult
 import me.dicoding.bajp.reel.core.utils.API_KEY
-import me.dicoding.bajp.reel.core.data.model.json.TvShowJson
-import me.dicoding.bajp.reel.core.data.model.json.TvShowListJson
-import me.dicoding.bajp.reel.core.data.repository.TvShowRepository
+import me.dicoding.bajp.reel.core.data.network.json.TvShowJson
+import me.dicoding.bajp.reel.core.data.network.json.TvShowListJson
+import me.dicoding.bajp.reel.core.data.TvShowRepository
 import me.dicoding.bajp.reel.core.utils.DatabaseConstants.FavoriteTable.Types
 import me.dicoding.bajp.reel.core.utils.TestFixtureHelper
 import me.dicoding.bajp.reel.core.utils.TestFixtureHelper.parseStringFromJsonResource

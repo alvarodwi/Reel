@@ -33,7 +33,7 @@ object ViewCounter {
     }
   }
 
-  fun last(matcher: Matcher<View>): Matcher<View?>? {
+  fun last(matcher: Matcher<View>): Matcher<View?> {
     return getElementFromMatchAtPosition(matcher, getCount(matcher) - 1)
   }
 

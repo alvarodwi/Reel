@@ -1,9 +1,9 @@
-package me.dicoding.bajp.reel.core.data.model.json
+package me.dicoding.bajp.reel.core.data.network.json
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import me.dicoding.bajp.reel.core.data.model.entity.FavoriteEntity
 
+//used for test purpose
 @Serializable
 data class FavoriteJson(
   @SerialName("id") val uid: Long = 0L,
@@ -13,14 +13,4 @@ data class FavoriteJson(
   @SerialName("item_date") val itemDate: String = "",
   @SerialName("date_added") val dateAdded: String = "",
   @SerialName("type") val type: Int
-)
-
-fun FavoriteJson.asEntity(): FavoriteEntity = FavoriteEntity(
-  uid = this.uid,
-  tmdbId = this.tmdbId,
-  itemTitle = this.itemTitle,
-  itemDate = this.itemDate,
-  itemPosterUrl = this.itemPosterUrl,
-  dateAdded = this.dateAdded,
-  type = this.type
 )

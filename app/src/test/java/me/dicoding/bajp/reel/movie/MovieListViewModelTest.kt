@@ -9,14 +9,14 @@ import io.mockk.unmockkAll
 import io.mockk.verify
 import junit.framework.TestCase
 import kotlinx.coroutines.flow.flow
-import me.dicoding.bajp.reel.core.data.model.entity.MovieEntity
-import me.dicoding.bajp.reel.core.data.model.json.MovieJson
-import me.dicoding.bajp.reel.core.data.model.json.asEntity
+import me.dicoding.bajp.reel.core.domain.model.Movie
+import me.dicoding.bajp.reel.core.data.network.json.MovieJson
 import me.dicoding.bajp.reel.core.data.network.NetworkResult
-import me.dicoding.bajp.reel.core.data.repository.MovieRepository
+import me.dicoding.bajp.reel.core.data.MovieRepository
 import me.dicoding.bajp.reel.ui.movie.list.MovieListViewModel
 import me.dicoding.bajp.reel.core.utils.TestFixtureHelper
 import me.dicoding.bajp.reel.core.utils.TestFixtureHelper.parseStringFromJsonResource
+import me.dicoding.bajp.reel.core.utils.asDomain
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -77,9 +77,9 @@ class MovieListViewModelTest : TestCase() {
     unmockkAll()
   }
 
-  private fun provideDummyData(): List<MovieEntity> {
+  private fun provideDummyData(): List<Movie> {
     return TestFixtureHelper.loadPopularMovieData(
       parseStringFromJsonResource("/popular_movies.json")
-    ).results.map(MovieJson::asEntity)
+    ).results.map(MovieJson::asDomain)
   }
 }

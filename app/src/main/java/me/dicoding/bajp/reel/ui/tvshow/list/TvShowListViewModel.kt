@@ -8,9 +8,9 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import me.dicoding.bajp.reel.core.data.model.entity.TvShowEntity
+import me.dicoding.bajp.reel.core.domain.model.TvShow
 import me.dicoding.bajp.reel.core.data.network.NetworkResult
-import me.dicoding.bajp.reel.core.data.repository.TvShowRepository
+import me.dicoding.bajp.reel.core.data.TvShowRepository
 
 class TvShowListViewModel(
   private val repository: TvShowRepository
@@ -18,8 +18,8 @@ class TvShowListViewModel(
   private val _loading = MutableLiveData<Boolean>()
   val loading: LiveData<Boolean> get() = _loading
 
-  private val _tvShows = MutableLiveData<List<TvShowEntity>>()
-  val tvShows: LiveData<List<TvShowEntity>> get() = _tvShows
+  private val _tvShows = MutableLiveData<List<TvShow>>()
+  val tvShows: LiveData<List<TvShow>> get() = _tvShows
 
   private val _errorMessage = MutableLiveData<String>()
   val errorMessage: LiveData<String> get() = _errorMessage

@@ -1,4 +1,4 @@
-package me.dicoding.bajp.reel.core.data.model.json
+package me.dicoding.bajp.reel.core.data.network.json
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

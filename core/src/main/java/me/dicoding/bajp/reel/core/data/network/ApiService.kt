@@ -1,9 +1,9 @@
 package me.dicoding.bajp.reel.core.data.network
 
-import me.dicoding.bajp.reel.core.data.model.json.MovieJson
-import me.dicoding.bajp.reel.core.data.model.json.MovieListJson
-import me.dicoding.bajp.reel.core.data.model.json.TvShowJson
-import me.dicoding.bajp.reel.core.data.model.json.TvShowListJson
+import me.dicoding.bajp.reel.core.data.network.json.MovieJson
+import me.dicoding.bajp.reel.core.data.network.json.MovieListJson
+import me.dicoding.bajp.reel.core.data.network.json.TvShowJson
+import me.dicoding.bajp.reel.core.data.network.json.TvShowListJson
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path

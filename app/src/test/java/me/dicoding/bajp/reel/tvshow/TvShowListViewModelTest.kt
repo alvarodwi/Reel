@@ -9,14 +9,14 @@ import io.mockk.unmockkAll
 import io.mockk.verify
 import junit.framework.TestCase
 import kotlinx.coroutines.flow.flow
-import me.dicoding.bajp.reel.core.data.model.entity.TvShowEntity
-import me.dicoding.bajp.reel.core.data.model.json.TvShowJson
-import me.dicoding.bajp.reel.core.data.model.json.asEntity
+import me.dicoding.bajp.reel.core.data.TvShowRepository
 import me.dicoding.bajp.reel.core.data.network.NetworkResult
-import me.dicoding.bajp.reel.core.data.repository.TvShowRepository
-import me.dicoding.bajp.reel.ui.tvshow.list.TvShowListViewModel
+import me.dicoding.bajp.reel.core.data.network.json.TvShowJson
+import me.dicoding.bajp.reel.core.domain.model.TvShow
 import me.dicoding.bajp.reel.core.utils.TestFixtureHelper
 import me.dicoding.bajp.reel.core.utils.TestFixtureHelper.parseStringFromJsonResource
+import me.dicoding.bajp.reel.core.utils.asDomain
+import me.dicoding.bajp.reel.ui.tvshow.list.TvShowListViewModel
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -78,9 +78,9 @@ class TvShowListViewModelTest : TestCase() {
     unmockkAll()
   }
 
-  private fun provideDummyData(): List<TvShowEntity> {
+  private fun provideDummyData(): List<TvShow> {
     return TestFixtureHelper.loadPopularTvShowData(
       parseStringFromJsonResource("/popular_tv_shows.json")
-    ).results.map(TvShowJson::asEntity)
+    ).results.map(TvShowJson::asDomain)
   }
 }
