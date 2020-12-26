@@ -37,7 +37,7 @@ class FavoriteViewModelTest : TestCase() {
   var instantExecutorRule = InstantTaskExecutorRule()
 
   @MockK
-  lateinit var useCase : FavoriteListUseCase
+  lateinit var useCase: FavoriteListUseCase
   private lateinit var viewModel: me.dicoding.bajp.reel.favorite.ui.FavoriteViewModel
 
   @Before

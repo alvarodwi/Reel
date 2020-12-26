@@ -4,7 +4,7 @@ import kotlinx.coroutines.flow.Flow
 import me.dicoding.bajp.reel.core.data.network.NetworkResult
 import me.dicoding.bajp.reel.core.domain.model.Movie
 
-interface MovieDetailUseCase{
+interface MovieDetailUseCase {
   fun getMovieDetailData(id: Long): Flow<NetworkResult<Movie>>
 
   suspend fun addMovieToFavorites(data: Movie): Long

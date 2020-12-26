@@ -27,9 +27,8 @@ local.properties
 # IDEA/Android Studio project files, because
 # the project can be imported from settings.gradle.kts
 *.iml
-.idea/*
-!.idea/copyright
-!.idea/codeStyles/codeStyleConfig.xml
+.idea
+!.idea/codeStyles
 
 # Gradle cache
 .gradle

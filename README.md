@@ -1,6 +1,7 @@
 <!--
  Using https://github.com/othneildrew/Best-README-Template for this README~
 -->
+
 [![LinkedIn][linkedin-shield]][linkedin-url] [![GitHub version](https://badge.fury.io/gh/alvarodwi%2Freel.svg)](https://badge.fury.io/gh/alvarodwi%2Freel)
 
 <p align="center">
@@ -12,7 +13,7 @@
 
 ## Panduan Memulai
 
-Projek ini menggunakan gradle. Untuk membuka proyek ini, gunakan
+Proyek ini menggunakan gradle. Untuk membuka proyek ini, gunakan
 `gradlew build` command atau gunakan "Import Project" di Android Studio.
 
 Data yang ada didalam aplikasi ini diambil dari internet, tepatnya di TMDB
@@ -28,6 +29,48 @@ tmdb.api.key="<API_KEY>"
 <!-- MARKDOWN LINKS & IMAGES -->
 
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+
+## Gambaran Umum
+
+"Reel" merupakan aplikasi sederhana untuk melihat film ataupun acara tv yang sedang populer di dunia. Daftar ini biasanya diperbarui setiap harinya (dari TMDB-nya) sehingga ditambahkan fitur *favorite* untuk menandai film atau acara tv yang datanya tidak bergantung ke TMDB.
+
+<img src="screenshots/reel_home.png" width="25%" />
+<img src="screenshots/reel_detail.png" width="25%" />
+<img src="screenshots/reel_favorite.png" width="25%" />
+
+## Teknologi yang Digunakan
+
+- Min. SDK 23 (Marshmallow)
+- [Kotlin Coroutines](https://github.com/Kotlin/kotlinx.coroutines) + [Flow](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/) untuk **Reactive Programming**
+- [Koin](https://github.com/InsertKoinIO/koin) untuk **Dependency Injection**
+- JetPack library (lihat MAD Score)
+  - [Material-Components](https://github.com/material-components/material-components-android)
+  
+  - [Lifecycle](https://developer.android.com/jetpack/androidx/releases/lifecycle)
+  
+  - [Navigation](https://developer.android.com/jetpack/androidx/releases/navigation)
+  
+  - [Room](https://developer.android.com/jetpack/androidx/releases/room)
+  
+  - [Paging](https://developer.android.com/jetpack/androidx/releases/paging)
+- Architecture pattern :
+  - MVVM - (Model - View via viewBinding - ViewModel)
+  
+  - Repository + UseCase pattern
+- [Kotlin Serialization](https://github.com/Kotlin/kotlinx.serialization) untuk JSON parsing
+- [Retrofit 2](https://github.com/square/retrofit) untuk mendapatkan data dari REST API
+- [Coil](https://github.com/coil-kt/coil) untuk memuat gambar
+- [Material Dialogs](https://github.com/afollestad/material-dialogs), dialog builder yang mudah digunakan
+- [Timber](https://github.com/JakeWharton/timber), untuk logging
+- **Modularization** 2 + 1 configuration ( [:core](core/), [:favorite](favorite/) + [:app](app/) )
+- Kotlin DSL (.kts) + Gradle [buildSrc](buildSrc/) untuk Build Script
+- Gradle Plugin untuk Multi-Module Management
+
+## MAD Score
+
+<img src="screenshots/mad_score_summary.png" width="50%" />
+
+<img src="screenshots/mad_score_kotlin.png" width="50%" />
 
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/alvarodwi

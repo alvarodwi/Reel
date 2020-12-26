@@ -49,10 +49,10 @@
     android:label="SettingsFragment"
     tools:layout="@layout/fragment_settings" />
   <fragment
-    app:moduleName="favorite"
     android:id="@+id/favoriteFragment"
     android:name="me.dicoding.bajp.reel.favorite.ui.FavoriteFragment"
     android:label="FavoriteFragment"
+    app:moduleName="favorite"
     tools:layout="@layout/fragment_favorite">
     <action
       android:id="@+id/action_favorite_to_movieDetail"
