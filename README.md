@@ -70,9 +70,9 @@ tmdb.api.key="<API_KEY>"
 
 ## MAD Score
 
-<img src="screenshots/mad_score_summary.png" width="50%" />
+<img src="screenshots/mad_score_summary.png" />
 
-<img src="screenshots/mad_score_kotlin.png" width="50%" />
+<img src="screenshots/mad_score_kotlin.png" />
 
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/alvarodwi

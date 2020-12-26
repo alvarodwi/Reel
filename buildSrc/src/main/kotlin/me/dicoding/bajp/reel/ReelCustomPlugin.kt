@@ -50,8 +50,8 @@ class ReelCustomPlugin : Plugin<Project> {
     defaultConfig {
       minSdkVersion(23)
       targetSdkVersion(30)
-      versionCode = 1
-      versionName = "0.0.1"
+      versionCode = 2
+      versionName = "1.1.0"
 
       testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
