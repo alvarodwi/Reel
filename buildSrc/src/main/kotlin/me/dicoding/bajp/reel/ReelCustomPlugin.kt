@@ -22,7 +22,7 @@ class ReelCustomPlugin : Plugin<Project> {
     val androidExtension = project.extensions.getByName("android")
     if (androidExtension is BaseExtension) {
       androidExtension.applyAndroidSettings()
-      if(!project.plugins.hasPlugin("com.android.dynamic-feature")) {
+      if (!project.plugins.hasPlugin("com.android.dynamic-feature")) {
         androidExtension.applyProguardSettings()
       }
       androidExtension.enableJava8(project)

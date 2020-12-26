@@ -32,18 +32,20 @@ tmdb.api.key="<API_KEY>"
 
 ## Gambaran Umum
 
-"Reel" merupakan aplikasi sederhana untuk melihat film ataupun acara tv yang sedang populer di dunia. Daftar ini biasanya diperbarui setiap harinya (dari TMDB-nya) sehingga ditambahkan fitur *favorite* untuk menandai film atau acara tv yang datanya tidak bergantung ke TMDB.
+"Reel" merupakan aplikasi sederhana untuk melihat film ataupun acara tv yang sedang populer di dunia. Daftar ini biasanya diperbarui setiap harinya (dari TMDB-nya) sehingga ditambahkan fitur favorite untuk menandai film atau acara tv yang datanya tidak bergantung ke TMDB.
 
+<div align="center">
 <img src="screenshots/reel_home.png" width="25%" />
 <img src="screenshots/reel_detail.png" width="25%" />
 <img src="screenshots/reel_favorite.png" width="25%" />
+</div>
 
 ## Teknologi yang Digunakan
 
 - Min. SDK 23 (Marshmallow)
 - [Kotlin Coroutines](https://github.com/Kotlin/kotlinx.coroutines) + [Flow](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/) untuk **Reactive Programming**
 - [Koin](https://github.com/InsertKoinIO/koin) untuk **Dependency Injection**
-- JetPack library (lihat MAD Score)
+- JetPack library :
   - [Material-Components](https://github.com/material-components/material-components-android)
   
   - [Lifecycle](https://developer.android.com/jetpack/androidx/releases/lifecycle)
@@ -64,7 +66,7 @@ tmdb.api.key="<API_KEY>"
 - [Timber](https://github.com/JakeWharton/timber), untuk logging
 - **Modularization** 2 + 1 configuration ( [:core](core/), [:favorite](favorite/) + [:app](app/) )
 - Kotlin DSL (.kts) + Gradle [buildSrc](buildSrc/) untuk Build Script
-- Gradle Plugin untuk Multi-Module Management
+- [Gradle Plugin](buildSrc/src/main/kotlin/me/dicoding/bajp/reel/ReelCustomPlugin.kt) untuk Multi-Module Management
 
 ## MAD Score
 

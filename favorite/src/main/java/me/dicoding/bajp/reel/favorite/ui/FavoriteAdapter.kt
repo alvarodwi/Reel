@@ -52,8 +52,8 @@ class FavoriteAdapter(
         title.text = data.itemTitle
         releaseDate.text = String.format("Aired at %s", data.itemDate)
         when (data.type) {
-          Types.TYPE_MOVIE -> type.text = "Movie"
-          Types.TYPE_TV_SHOW -> type.text = "Tv Show"
+          Types.TYPE_MOVIE -> type.text = String.format("Movie")
+          Types.TYPE_TV_SHOW -> type.text = String.format("Tv Show")
           else -> type.isVisible = false
         }
         val addedDateTime =
