@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.MaterialToolbar
+      android:id="@+id/toolbar"
+      style="@style/Widget.MaterialComponents.ActionBar.Surface"
+      android:layout_width="match_parent"
+      android:layout_height="?attr/actionBarSize"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:title="@string/app_name" />
+
+    <FrameLayout
+      android:id="@+id/list_layout"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      app:layout_constraintBottom_toTopOf="@id/filter_layout"
+      app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+      <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/srl_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+          android:id="@+id/rv_list"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          tools:listitem="@layout/item_favorite" />
+      </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+      <androidx.cardview.widget.CardView
+        android:id="@+id/card_container"
+        style="@style/Widget.Reel.Card"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:background="?attr/colorSurface"
+          android:padding="@dimen/spacing_large">
+
+          <TextView
+            android:id="@+id/txt_reaction"
+            style="?textAppearanceHeadline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_emoticon_sad"
+            android:textColor="?attr/colorSecondary"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+          <TextView
+            android:id="@+id/txt_description"
+            style="?textAppearanceSubtitle1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/error_message_global"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txt_reaction" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+      </androidx.cardview.widget.CardView>
+    </FrameLayout>
+
+    <LinearLayout
+      android:id="@+id/filter_layout"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/spacing_medium"
+      android:elevation="@dimen/elevation_large"
+      android:orientation="horizontal"
+      app:layout_constraintBottom_toBottomOf="parent">
+
+      <com.google.android.material.button.MaterialButtonToggleGroup
+        android:id="@+id/btn_filter_toggle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:checkedButton="@id/btn_toggle_all"
+        app:selectionRequired="true"
+        app:singleSelection="true">
+
+        <Button
+          android:id="@+id/btn_toggle_movie"
+          style="@style/Widget.Reel.Button.Outlined"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/filter_movies_only" />
+
+        <Button
+          android:id="@+id/btn_toggle_all"
+          style="@style/Widget.Reel.Button.Outlined"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/filter_all_items" />
+
+        <Button
+          android:id="@+id/btn_toggle_tv_show"
+          style="@style/Widget.Reel.Button.Outlined"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/filter_tv_shows_only" />
+      </com.google.android.material.button.MaterialButtonToggleGroup>
+    </LinearLayout>
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

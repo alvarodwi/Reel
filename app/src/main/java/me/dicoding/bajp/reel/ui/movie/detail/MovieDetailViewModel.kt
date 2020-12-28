@@ -8,15 +8,15 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import me.dicoding.bajp.reel.data.model.entity.MovieEntity
-import me.dicoding.bajp.reel.data.network.NetworkResult
-import me.dicoding.bajp.reel.data.repository.MovieRepository
+import me.dicoding.bajp.reel.core.data.network.NetworkResult
+import me.dicoding.bajp.reel.core.domain.model.Movie
+import me.dicoding.bajp.reel.core.domain.usecase.MovieDetailUseCase
 
 class MovieDetailViewModel(
   private val movieId: Long,
-  private val repository: MovieRepository,
+  private val useCase: MovieDetailUseCase,
 ) : ViewModel() {
-  private val _movie = MutableLiveData<MovieEntity>()
+  private val _movie = MutableLiveData<Movie>()
   val movie get() = _movie
 
   private val _errorMessage = MutableLiveData<String>()
@@ -28,7 +28,7 @@ class MovieDetailViewModel(
   fun fetchMovieDetail() {
     viewModelScope.launch {
       _errorMessage.postValue("")
-      repository.getMovieDetailData(movieId)
+      useCase.getMovieDetailData(movieId)
         .catch { _errorMessage.postValue(it.message) }
         .collect { result ->
           when (result) {
@@ -41,16 +41,16 @@ class MovieDetailViewModel(
 
   fun checkMovieInDb() {
     viewModelScope.launch {
-      repository.isMovieInFavorites(movieId).collect { result ->
+      useCase.isMovieInFavorites(movieId).collect { result ->
         _isFavorite.value = result == 1
       }
     }
   }
 
-  fun onFabClicked(data: MovieEntity) {
+  fun onFabClicked(data: Movie) {
     viewModelScope.launch {
-      if (isFavorite.value == true) repository.removeMovieFromFavorites(data)
-      else repository.addMovieToFavorites(data)
+      if (isFavorite.value == true) useCase.removeMovieFromFavorites(data)
+      else useCase.addMovieToFavorites(data)
     }
   }
 

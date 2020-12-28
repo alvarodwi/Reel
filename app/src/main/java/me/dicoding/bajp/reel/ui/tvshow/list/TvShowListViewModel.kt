@@ -8,18 +8,18 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import me.dicoding.bajp.reel.data.model.entity.TvShowEntity
-import me.dicoding.bajp.reel.data.network.NetworkResult
-import me.dicoding.bajp.reel.data.repository.TvShowRepository
+import me.dicoding.bajp.reel.core.data.network.NetworkResult
+import me.dicoding.bajp.reel.core.domain.model.TvShow
+import me.dicoding.bajp.reel.core.domain.usecase.TvShowListUseCase
 
 class TvShowListViewModel(
-  private val repository: TvShowRepository
+  private val usecase: TvShowListUseCase
 ) : ViewModel() {
   private val _loading = MutableLiveData<Boolean>()
   val loading: LiveData<Boolean> get() = _loading
 
-  private val _tvShows = MutableLiveData<List<TvShowEntity>>()
-  val tvShows: LiveData<List<TvShowEntity>> get() = _tvShows
+  private val _tvShows = MutableLiveData<List<TvShow>>()
+  val tvShows: LiveData<List<TvShow>> get() = _tvShows
 
   private val _errorMessage = MutableLiveData<String>()
   val errorMessage: LiveData<String> get() = _errorMessage
@@ -28,7 +28,7 @@ class TvShowListViewModel(
     viewModelScope.launch {
       _loading.postValue(true)
       _errorMessage.postValue("")
-      repository.getPopularTvShow()
+      usecase.getPopularTvShow()
         .catch { _errorMessage.postValue(it.message) }
         .collect { result ->
           when (result) {

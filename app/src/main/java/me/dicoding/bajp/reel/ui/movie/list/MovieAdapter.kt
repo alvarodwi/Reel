@@ -7,26 +7,26 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.ImageLoader
 import coil.request.ImageRequest
 import me.dicoding.bajp.reel.R
-import me.dicoding.bajp.reel.data.model.entity.MovieEntity
+import me.dicoding.bajp.reel.core.domain.model.Movie
 import me.dicoding.bajp.reel.databinding.ItemMovieBinding
-import me.dicoding.bajp.reel.utils.ext.viewBinding
+import me.dicoding.bajp.reel.ext.viewBinding
 
 class MovieAdapter(
   private val coilLoader: ImageLoader,
   private val clickCallback: (Long) -> Unit,
-) : ListAdapter<MovieEntity, MovieAdapter.MovieViewHolder>(MOVIE_DIFF) {
+) : ListAdapter<Movie, MovieAdapter.MovieViewHolder>(MOVIE_DIFF) {
   companion object {
-    private val MOVIE_DIFF = object : DiffUtil.ItemCallback<MovieEntity>() {
+    private val MOVIE_DIFF = object : DiffUtil.ItemCallback<Movie>() {
       override fun areItemsTheSame(
-        oldItem: MovieEntity,
-        newItem: MovieEntity
+        oldItem: Movie,
+        newItem: Movie
       ): Boolean {
         return oldItem.id == newItem.id
       }
 
       override fun areContentsTheSame(
-        oldItem: MovieEntity,
-        newItem: MovieEntity
+        oldItem: Movie,
+        newItem: Movie
       ): Boolean {
         return oldItem == newItem
       }
@@ -39,7 +39,7 @@ class MovieAdapter(
       parent.viewBinding(ItemMovieBinding::inflate)
     )
 
-    fun bind(data: MovieEntity?) {
+    fun bind(data: Movie?) {
       if (data == null) return
 
       with(binding) {

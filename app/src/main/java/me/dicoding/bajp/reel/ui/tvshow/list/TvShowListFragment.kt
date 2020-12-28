@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import coil.ImageLoader
 import me.dicoding.bajp.reel.R
 import me.dicoding.bajp.reel.databinding.FragmentSimpleListBinding
+import me.dicoding.bajp.reel.ext.viewBinding
 import me.dicoding.bajp.reel.ui.home.HomeFragmentDirections
-import me.dicoding.bajp.reel.utils.ext.viewBinding
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 

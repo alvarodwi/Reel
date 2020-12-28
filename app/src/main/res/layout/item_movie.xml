@@ -1,55 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    style="@style/Widget.Reel.Card"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  style="@style/Widget.Reel.Card"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content">
+
+  <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <ImageView
+      android:id="@+id/poster"
+      android:layout_width="75dp"
+      android:layout_height="100dp"
+      android:contentDescription="@string/desc_detail_poster"
+      android:scaleType="centerCrop"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      tools:src="@color/black" />
 
-        <ImageView
-            android:id="@+id/poster"
-            android:layout_width="75dp"
-            android:layout_height="100dp"
-            android:contentDescription="@string/desc_detail_poster"
-            android:scaleType="centerCrop"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@color/black" />
+    <TextView
+      android:id="@+id/title"
+      style="?attr/textAppearanceHeadline2"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="@dimen/spacing_normal"
+      android:layout_marginTop="@dimen/spacing_small"
+      android:ellipsize="end"
+      android:maxWidth="300dp"
+      android:maxLines="2"
+      android:textSize="16sp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toEndOf="@+id/poster"
+      app:layout_constraintTop_toTopOf="parent"
+      tools:text="Title" />
 
-        <TextView
-            android:id="@+id/title"
-            style="?attr/textAppearanceHeadline2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_normal"
-            android:layout_marginTop="@dimen/spacing_small"
-            android:ellipsize="end"
-            android:maxWidth="300dp"
-            android:maxLines="2"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/poster"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Title" />
-
-        <TextView
-            android:id="@+id/release_date"
-            style="?attr/textAppearanceSubtitle2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_normal"
-            android:ellipsize="end"
-            android:maxWidth="300dp"
-            android:maxLines="1"
-            android:textColor="@color/color_on_surface_emphasis_medium"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/poster"
-            app:layout_constraintTop_toBottomOf="@id/title"
-            tools:text="Released at yyyy-MM-dd" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+      android:id="@+id/release_date"
+      style="?attr/textAppearanceSubtitle2"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="@dimen/spacing_normal"
+      android:ellipsize="end"
+      android:maxWidth="300dp"
+      android:maxLines="1"
+      android:textColor="@color/color_on_surface_emphasis_medium"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toEndOf="@+id/poster"
+      app:layout_constraintTop_toBottomOf="@id/title"
+      tools:text="Released at yyyy-MM-dd" />
+  </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

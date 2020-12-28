@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="Theme.Reel.DayNight" parent="Theme.Reel.Dark" />
+  <style name="Theme.Reel.DayNight" parent="Theme.Reel.Dark" />
 
-    <style name="Theme.Reel.Dark" parent="Theme.Reel">
-        <!-- Brand color. -->
-        <item name="colorPrimary">@color/dark_blue_400</item>
-        <item name="colorPrimaryVariant">@color/dark_blue_700</item>
-        <item name="colorOnPrimary">@color/black</item>
-        <item name="colorSecondary">@color/light_blue_300</item>
-        <item name="colorSecondaryVariant">@color/light_blue_200</item>
-        <item name="colorOnSecondary">@color/black</item>
-        <!-- Additional color. -->
-        <item name="android:colorBackground">@color/dark_gray_900</item>
-        <item name="colorOnBackground">@color/white</item>
-        <item name="colorSurface">@color/dark_gray_700</item>
-        <item name="colorOnSurface">@color/white</item>
-        <item name="colorError">@color/red_700</item>
-        <item name="colorOnError">@color/white</item>
-        <item name="scrimBackground">@color/dark_gray_700_alpha_060</item>
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-    </style>
+  <style name="Theme.Reel.Dark" parent="Theme.Reel">
+    <!-- Brand color. -->
+    <item name="colorPrimary">@color/dark_blue_400</item>
+    <item name="colorPrimaryVariant">@color/dark_blue_700</item>
+    <item name="colorOnPrimary">@color/black</item>
+    <item name="colorSecondary">@color/light_blue_300</item>
+    <item name="colorSecondaryVariant">@color/light_blue_200</item>
+    <item name="colorOnSecondary">@color/black</item>
+    <!-- Additional color. -->
+    <item name="android:colorBackground">@color/dark_gray_900</item>
+    <item name="colorOnBackground">@color/white</item>
+    <item name="colorSurface">@color/dark_gray_700</item>
+    <item name="colorOnSurface">@color/white</item>
+    <item name="colorError">@color/red_700</item>
+    <item name="colorOnError">@color/white</item>
+    <item name="scrimBackground">@color/dark_gray_700_alpha_060</item>
+    <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+  </style>
 </resources>

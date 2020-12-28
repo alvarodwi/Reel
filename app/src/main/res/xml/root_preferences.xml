@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
-    <PreferenceCategory app:title="@string/text_general">
-        <SwitchPreferenceCompat
-            app:key="night_mode"
-            app:summaryOff="@string/text_off"
-            app:summaryOn="@string/text_on"
-            app:title="@string/text_toggle_night_mode" />
-    </PreferenceCategory>
+  <PreferenceCategory app:title="@string/text_general">
+    <SwitchPreferenceCompat
+      app:key="night_mode"
+      app:summaryOff="@string/text_off"
+      app:summaryOn="@string/text_on"
+      app:title="@string/text_toggle_night_mode" />
+  </PreferenceCategory>
 </PreferenceScreen>

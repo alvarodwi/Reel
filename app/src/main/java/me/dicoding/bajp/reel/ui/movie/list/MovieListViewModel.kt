@@ -8,18 +8,18 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import me.dicoding.bajp.reel.data.model.entity.MovieEntity
-import me.dicoding.bajp.reel.data.network.NetworkResult
-import me.dicoding.bajp.reel.data.repository.MovieRepository
+import me.dicoding.bajp.reel.core.data.network.NetworkResult
+import me.dicoding.bajp.reel.core.domain.model.Movie
+import me.dicoding.bajp.reel.core.domain.usecase.MovieListUseCase
 
 class MovieListViewModel(
-  private val repository: MovieRepository
+  private val useCase: MovieListUseCase
 ) : ViewModel() {
   private val _loading = MutableLiveData<Boolean>()
   val loading: LiveData<Boolean> get() = _loading
 
-  private val _movies = MutableLiveData<List<MovieEntity>>()
-  val movies: LiveData<List<MovieEntity>> get() = _movies
+  private val _movies = MutableLiveData<List<Movie>>()
+  val movies: LiveData<List<Movie>> get() = _movies
 
   private val _errorMessage = MutableLiveData<String>()
   val errorMessage: LiveData<String> get() = _errorMessage
@@ -28,7 +28,7 @@ class MovieListViewModel(
     viewModelScope.launch {
       _loading.postValue(true)
       _errorMessage.postValue("")
-      repository.getPopularMovie()
+      useCase.getPopularMovie()
         .catch { _errorMessage.postValue(it.message) }
         .collect { result ->
           when (result) {
