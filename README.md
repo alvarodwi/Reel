@@ -2,7 +2,10 @@
  Using https://github.com/othneildrew/Best-README-Template for this README~
 -->
 
-[![LinkedIn][linkedin-shield]][linkedin-url] ![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/alvarodwi/reel?color=40BA12&label=version)
+[![LinkedIn][linkedin-shield]][linkedin-url] 
+![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/alvarodwi/reel?color=40BA12&label=version)
+[![CircleCI](https://circleci.com/gh/circleci/circleci-docs.svg?style=shield)](https://circleci.com/gh/circleci/circleci-docs)
+[![CodeFactor](https://www.codefactor.io/repository/github/alvarodwi/reel/badge)](https://www.codefactor.io/repository/github/alvarodwi/reel)
 
 <p align="center">
     <img src="app/src/main/ic_launcher-playstore.png" alt="Logo" width="128" height="128">
