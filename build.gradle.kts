@@ -1,8 +1,8 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {
-    id("com.github.ben-manes.versions").version(Libs.benmanes_version)
-    id("io.gitlab.arturbosch.detekt").version(Libs.detekt_version)
-    id("org.jlleitschuh.gradle.ktlint").version(Libs.ktlint_gradle_version)
+    id("com.github.ben-manes.versions").version(LibsVersion.versions)
+    id("io.gitlab.arturbosch.detekt").version(LibsVersion.detekt)
+    id("org.jlleitschuh.gradle.ktlint").version(LibsVersion.ktlint_gradle)
 }
 
 buildscript {
@@ -12,7 +12,7 @@ buildscript {
     }
     dependencies {
         classpath(Libs.androidGradlePlugin)
-        classpath(kotlin("gradle-plugin", version = Libs.kotlin_version))
+        classpath(kotlin("gradle-plugin", version = LibsVersion.kotlin))
         classpath(Libs.AndroidX.Navigation.safeArgsGradlePlugin)
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files

@@ -43,6 +43,7 @@ val databaseModule = module {
     single { provideAppDatabase(androidContext()) }
 }
 
+@Suppress("MagicNumber")
 @OptIn(ExperimentalSerializationApi::class)
 val networkModule = module {
     fun provideNetworkCache(application: Application): Cache {
@@ -57,8 +58,8 @@ val networkModule = module {
             .writeTimeout(10, TimeUnit.SECONDS)
 
         if (BuildConfig.DEBUG) {
-            val logger = HttpLoggingInterceptor { messsage ->
-                Timber.d("API: $messsage")
+            val logger = HttpLoggingInterceptor { message ->
+                Timber.d("API: $message")
             }.apply {
                 level = HttpLoggingInterceptor.Level.BASIC
             }
@@ -105,7 +106,6 @@ val libModule = module {
         app: Application,
         client: OkHttpClient
     ) = ImageLoader.Builder(app)
-        .availableMemoryPercentage(0.25)
         .okHttpClient(client)
         .crossfade(true)
         .build()

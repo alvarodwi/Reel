@@ -4,7 +4,7 @@ plugins {
     id("com.android.library")
     id("reel-custom-plugin")
     kotlin("kapt")
-    kotlin("plugin.serialization") version Libs.kotlin_version
+    kotlin("plugin.serialization") version LibsVersion.kotlin
 }
 
 val localProperties = Properties()
@@ -17,7 +17,7 @@ android {
 }
 
 dependencies {
-    implementation(kotlin("stdlib", version = Libs.kotlin_version))
+    implementation(kotlin("stdlib", version = LibsVersion.kotlin))
 
     // coroutines
     api(Libs.Kotlin.Coroutines.core)

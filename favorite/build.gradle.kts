@@ -13,7 +13,7 @@ android {
 dependencies {
     implementation(project(":core"))
     implementation(project(":app"))
-    implementation(kotlin("stdlib", version = Libs.kotlin_version))
+    implementation(kotlin("stdlib", version = LibsVersion.kotlin))
 
     // instrumentation testing
     androidTestImplementation(Libs.Testing.rules)

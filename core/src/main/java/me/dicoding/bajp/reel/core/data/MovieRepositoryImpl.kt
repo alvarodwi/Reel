@@ -1,5 +1,6 @@
 package me.dicoding.bajp.reel.core.data
 
+import java.io.IOException
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flow
@@ -15,7 +16,6 @@ import me.dicoding.bajp.reel.core.utils.DatabaseConstants.FavoriteTable.Types
 import me.dicoding.bajp.reel.core.utils.EspressoIdlingResource
 import me.dicoding.bajp.reel.core.utils.asDomain
 import me.dicoding.bajp.reel.core.utils.asFavoriteEntity
-import java.io.IOException
 
 class MovieRepositoryImpl(
     private val api: ApiService,
@@ -28,13 +28,16 @@ class MovieRepositoryImpl(
             val response = api.getPopularMovie(API_KEY)
             if (response.isSuccessful) {
                 val data = response.body()?.results?.map(MovieJson::asDomain)
-                    ?: throw Exception("List is empty")
+                    ?: throw IllegalStateException("List is empty")
                 emit(NetworkResult.Success(data))
                 EspressoIdlingResource.decrement()
             } else {
-                throw Exception("code : ${response.code()}")
+                throw IOException("code : ${response.code()}")
             }
         } catch (e: IOException) {
+            emit(NetworkResult.Error(e))
+            EspressoIdlingResource.decrement()
+        } catch (e: IllegalStateException) {
             emit(NetworkResult.Error(e))
             EspressoIdlingResource.decrement()
         }
@@ -45,13 +48,17 @@ class MovieRepositoryImpl(
         try {
             val response = api.getMovieDetail(id, API_KEY)
             if (response.isSuccessful) {
-                val data = response.body()?.asDomain() ?: throw Exception("Response body is empty")
+                val data = response.body()?.asDomain()
+                    ?: throw IllegalStateException("Response body is empty")
                 emit(NetworkResult.Success(data))
                 EspressoIdlingResource.decrement()
             } else {
-                throw Exception("code : ${response.code()}")
+                throw IOException("code : ${response.code()}")
             }
         } catch (e: IOException) {
+            emit(NetworkResult.Error(e))
+            EspressoIdlingResource.decrement()
+        } catch (e: IllegalStateException) {
             emit(NetworkResult.Error(e))
             EspressoIdlingResource.decrement()
         }

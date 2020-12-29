@@ -16,7 +16,7 @@ android {
 
 dependencies {
     implementation(project(":core"))
-    implementation(kotlin("stdlib", version = Libs.kotlin_version))
+    implementation(kotlin("stdlib", version = LibsVersion.kotlin))
 
     // ktx
     api(Libs.AndroidX.KTX.activity)
@@ -35,7 +35,7 @@ dependencies {
     // ui
     api(Libs.AndroidX.viewPager2)
     api(Libs.AndroidX.swipeRefresh)
-    api(Libs.MaterialDialogs.core)
+    api(Libs.materialDialogs)
 
     // instrumentation testing
     androidTestImplementation(Libs.Testing.rules)

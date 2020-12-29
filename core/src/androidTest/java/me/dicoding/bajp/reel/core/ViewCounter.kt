@@ -34,9 +34,8 @@ object ViewCounter {
         }
     }
 
-    fun last(matcher: Matcher<View>): Matcher<View?> {
-        return getElementFromMatchAtPosition(matcher, getCount(matcher) - 1)
-    }
+    fun last(matcher: Matcher<View>): Matcher<View?> =
+        getElementFromMatchAtPosition(matcher, getCount(matcher) - 1)
 
     private fun getElementFromMatchAtPosition(
         matcher: Matcher<View>,
@@ -68,7 +67,7 @@ object ViewCounter {
             }
             actualViewsCount++
         } while (actualViewsCount < countLimit)
-        throw Exception("Counting $viewMatcher was failed. Count limit exceeded")
+        throw IllegalStateException("Counting $viewMatcher was failed. Count limit exceeded")
     }
 
     private fun withViewCount(
@@ -95,7 +94,6 @@ object ViewCounter {
         }
     }
 
-    private fun withMatcherPredicate(matcher: Matcher<View>): Predicate<View?> {
-        return Predicate<View?> { view -> matcher.matches(view) }
-    }
+    private fun withMatcherPredicate(matcher: Matcher<View>): Predicate<View?> =
+        Predicate<View?> { view -> matcher.matches(view) }
 }
