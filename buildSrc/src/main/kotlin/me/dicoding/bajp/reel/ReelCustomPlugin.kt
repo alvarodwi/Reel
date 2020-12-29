@@ -16,7 +16,7 @@ class ReelCustomPlugin : Plugin<Project> {
   override fun apply(project: Project) {
     //adding plugins
     project.plugins.apply("kotlin-android")
-    project.plugins.apply(("kotlin-kapt"))
+    project.plugins.apply("kotlin-kapt")
 
     //configuring android gradle extension
     val androidExtension = project.extensions.getByName("android")

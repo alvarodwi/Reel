@@ -5,8 +5,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class MovieListJson(
-  @SerialName("page") val page: Int,
-  @SerialName("results") val results: List<MovieJson>,
-  @SerialName("total_pages") val totalPages: Int,
-  @SerialName("total_results") val totalResults: Int,
+    @SerialName("page") val page: Int,
+    @SerialName("results") val results: List<MovieJson>,
+    @SerialName("total_pages") val totalPages: Int,
+    @SerialName("total_results") val totalResults: Int,
 )

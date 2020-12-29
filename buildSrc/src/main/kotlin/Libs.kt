@@ -1,6 +1,8 @@
 object Libs {
   const val kotlin_version = "1.4.21"
   const val benmanes_version = "0.36.0"
+  const val detekt_version = "1.15.0"
+  const val ktlint_gradle_version = "9.4.1"
   private const val nav_version = "2.3.2"
   private const val lifecycle_version = "2.2.0"
   private const val room_version = "2.2.6"

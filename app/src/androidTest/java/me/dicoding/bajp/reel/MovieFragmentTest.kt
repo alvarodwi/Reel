@@ -20,31 +20,31 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class MovieFragmentTest {
-  @get:Rule
-  var activityRule = ActivityScenarioRule(MainActivity::class.java)
+    @get:Rule
+    var activityRule = ActivityScenarioRule(MainActivity::class.java)
 
-  @Before
-  fun setup() {
-    IdlingRegistry.getInstance().register(EspressoIdlingResource.idleResource)
-  }
+    @Before
+    fun setup() {
+        IdlingRegistry.getInstance().register(EspressoIdlingResource.idleResource)
+    }
 
-  @After
-  fun after() {
-    IdlingRegistry.getInstance().unregister(EspressoIdlingResource.idleResource)
-  }
+    @After
+    fun after() {
+        IdlingRegistry.getInstance().unregister(EspressoIdlingResource.idleResource)
+    }
 
-  @Test
-  fun loadMovies() {
-    onView(withId(R.id.rv_list)).perform(
-      RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(19)
-    )
-  }
+    @Test
+    fun loadMovies() {
+        onView(withId(R.id.rv_list)).perform(
+            RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(19)
+        )
+    }
 
-  @Test
-  fun loadDetails() {
-    onView(withId(R.id.rv_list)).perform(
-      RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click())
-    )
-    onView(withId(R.id.backdrop)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
-  }
+    @Test
+    fun loadDetails() {
+        onView(withId(R.id.rv_list)).perform(
+            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click())
+        )
+        onView(withId(R.id.backdrop)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+    }
 }

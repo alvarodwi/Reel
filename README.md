@@ -4,7 +4,7 @@
 
 [![LinkedIn][linkedin-shield]][linkedin-url] 
 ![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/alvarodwi/reel?color=40BA12&label=version)
-[![CircleCI](https://circleci.com/gh/circleci/circleci-docs.svg?style=shield)](https://circleci.com/gh/circleci/circleci-docs)
+[![CircleCI](https://circleci.com/gh/circleci/circleci-docs.svg?style=shield)](https://circleci.com/gh/alvarodwi/Reel)
 [![CodeFactor](https://www.codefactor.io/repository/github/alvarodwi/reel/badge)](https://www.codefactor.io/repository/github/alvarodwi/reel)
 
 <p align="center">

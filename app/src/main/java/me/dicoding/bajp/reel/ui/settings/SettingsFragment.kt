@@ -9,20 +9,20 @@ import me.dicoding.bajp.reel.databinding.FragmentSettingsBinding
 import me.dicoding.bajp.reel.ext.viewBinding
 
 class SettingsFragment : Fragment(R.layout.fragment_settings) {
-  private val binding by viewBinding { FragmentSettingsBinding.bind(requireView()) }
+    private val binding by viewBinding { FragmentSettingsBinding.bind(requireView()) }
 
-  private val toolbar get() = binding.toolbar
+    private val toolbar get() = binding.toolbar
 
-  override fun onViewCreated(
-    view: View,
-    savedInstanceState: Bundle?
-  ) {
-    super.onViewCreated(view, savedInstanceState)
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?
+    ) {
+        super.onViewCreated(view, savedInstanceState)
 
-    with(toolbar) {
-      title = getString(R.string.text_settings)
-      navigationIcon = ContextCompat.getDrawable(context, R.drawable.ic_arrow_back)
-      setNavigationOnClickListener { activity?.onBackPressed() }
+        with(toolbar) {
+            title = getString(R.string.text_settings)
+            navigationIcon = ContextCompat.getDrawable(context, R.drawable.ic_arrow_back)
+            setNavigationOnClickListener { activity?.onBackPressed() }
+        }
     }
-  }
 }

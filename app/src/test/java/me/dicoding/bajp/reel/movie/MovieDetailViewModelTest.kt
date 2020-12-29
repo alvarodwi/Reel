@@ -25,99 +25,99 @@ import org.junit.runners.JUnit4
 
 @RunWith(JUnit4::class)
 class MovieDetailViewModelTest : TestCase() {
-  private val expectedMovieId = 1L
+    private val expectedMovieId = 1L
 
-  @get:Rule
-  var instantExecutorRule = InstantTaskExecutorRule()
+    @get:Rule
+    var instantExecutorRule = InstantTaskExecutorRule()
 
-  @MockK
-  lateinit var useCase: MovieDetailUseCase
-  private lateinit var viewModel: MovieDetailViewModel
+    @MockK
+    lateinit var useCase: MovieDetailUseCase
+    private lateinit var viewModel: MovieDetailViewModel
 
-  @Before
-  fun setup() {
-    MockKAnnotations.init(this)
-    viewModel = MovieDetailViewModel(expectedMovieId, useCase)
-  }
-
-  @Test
-  fun `test successful fetch of movie detail`() {
-    every { useCase.getMovieDetailData(expectedMovieId) } returns flow {
-      NetworkResult.Success(
-        provideDummyData()
-      )
+    @Before
+    fun setup() {
+        MockKAnnotations.init(this)
+        viewModel = MovieDetailViewModel(expectedMovieId, useCase)
     }
-    viewModel.fetchMovieDetail()
 
-    verify(atLeast = 1) { useCase.getMovieDetailData(expectedMovieId) }
-    confirmVerified(useCase)
+    @Test
+    fun `test successful fetch of movie detail`() {
+        every { useCase.getMovieDetailData(expectedMovieId) } returns flow {
+            NetworkResult.Success(
+                provideDummyData()
+            )
+        }
+        viewModel.fetchMovieDetail()
 
-    viewModel.movie.observeForever { value ->
-      assertNotNull(value)
-      assertEquals(value.id, 528085L)
-      assertEquals(value.title, "2067")
-      assertEquals(viewModel.errorMessage.value, "")
+        verify(atLeast = 1) { useCase.getMovieDetailData(expectedMovieId) }
+        confirmVerified(useCase)
+
+        viewModel.movie.observeForever { value ->
+            assertNotNull(value)
+            assertEquals(value.id, 528085L)
+            assertEquals(value.title, "2067")
+            assertEquals(viewModel.errorMessage.value, "")
+        }
     }
-  }
 
-  @Test
-  fun `test failed fetch of movie detail`() {
-    every { useCase.getMovieDetailData(expectedMovieId) } returns flow {
-      NetworkResult.Error(
-        Exception("foo")
-      )
+    @Test
+    fun `test failed fetch of movie detail`() {
+        every { useCase.getMovieDetailData(expectedMovieId) } returns flow {
+            NetworkResult.Error(
+                Exception("foo")
+            )
+        }
+        viewModel.fetchMovieDetail()
+
+        verify(atLeast = 1) { useCase.getMovieDetailData(expectedMovieId) }
+        confirmVerified(useCase)
+
+        viewModel.movie.observeForever { value ->
+            assertNull(value)
+            assertEquals(viewModel.errorMessage.value, "foo")
+        }
     }
-    viewModel.fetchMovieDetail()
 
-    verify(atLeast = 1) { useCase.getMovieDetailData(expectedMovieId) }
-    confirmVerified(useCase)
+    @Test
+    fun `test check data assumed already in db`() {
+        every { useCase.isMovieInFavorites(expectedMovieId) } returns flow {
+            emit(1) // room query returns 1 when data exists in db
+        }
+        viewModel.checkMovieInDb()
 
-    viewModel.movie.observeForever { value ->
-      assertNull(value)
-      assertEquals(viewModel.errorMessage.value, "foo")
+        verify(atLeast = 1) { useCase.isMovieInFavorites(expectedMovieId) }
+        confirmVerified(useCase)
+
+        viewModel.isFavorite.observeForever { value ->
+            assertNotNull(value)
+            assertEquals(value, true)
+        }
     }
-  }
 
-  @Test
-  fun `test check data assumed already in db`() {
-    every { useCase.isMovieInFavorites(expectedMovieId) } returns flow {
-      emit(1) // room query returns 1 when data exists in db
+    @Test
+    fun `test check data assumed not already in db`() {
+        every { useCase.isMovieInFavorites(expectedMovieId) } returns flow {
+            emit(0) // room query returns 0 when data didn't exists in db
+        }
+        viewModel.checkMovieInDb()
+
+        verify(atLeast = 1) { useCase.isMovieInFavorites(expectedMovieId) }
+        confirmVerified(useCase)
+
+        viewModel.isFavorite.observeForever { value ->
+            assertNotNull(value)
+            assertEquals(value, false)
+        }
     }
-    viewModel.checkMovieInDb()
 
-    verify(atLeast = 1) { useCase.isMovieInFavorites(expectedMovieId) }
-    confirmVerified(useCase)
-
-    viewModel.isFavorite.observeForever { value ->
-      assertNotNull(value)
-      assertEquals(value, true)
+    @After
+    fun tearUp() {
+        unmockkAll()
     }
-  }
 
-  @Test
-  fun `test check data assumed not already in db`() {
-    every { useCase.isMovieInFavorites(expectedMovieId) } returns flow {
-      emit(0) // room query returns 0 when data didn't exists in db
+    private fun provideDummyData(): Movie {
+        return TestFixtureHelper.loadMovieData(
+            parseStringFromJsonResource("/latest_movie.json")
+        ).asDomain()
     }
-    viewModel.checkMovieInDb()
-
-    verify(atLeast = 1) { useCase.isMovieInFavorites(expectedMovieId) }
-    confirmVerified(useCase)
-
-    viewModel.isFavorite.observeForever { value ->
-      assertNotNull(value)
-      assertEquals(value, false)
-    }
-  }
-
-  @After
-  fun tearUp() {
-    unmockkAll()
-  }
-
-  private fun provideDummyData(): Movie {
-    return TestFixtureHelper.loadMovieData(
-      parseStringFromJsonResource("/latest_movie.json")
-    ).asDomain()
-  }
 }

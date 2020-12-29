@@ -18,18 +18,18 @@ import me.dicoding.bajp.reel.core.domain.repository.FavoriteRepository
 import me.dicoding.bajp.reel.core.utils.asDomain
 
 class FavoriteRepositoryImpl(
-  private val db: AppDatabase,
-  private val dispatcher: CoroutineDispatcher = Dispatchers.IO
+    private val db: AppDatabase,
+    private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : FavoriteRepository {
 
-  override fun getFavoriteItems(
-    query: FavoriteQuery,
-    scope: CoroutineScope
-  ): Flow<PagingData<Favorite>> = Pager(
-    PagingConfig(pageSize = 10)
-  ) {
-    db.favoriteDao.getItemsRaw(query.generateQuery()).asPagingSourceFactory(dispatcher).invoke()
-  }.flow
-    .map { it.map(FavoriteEntity::asDomain) }
-    .cachedIn(scope)
+    override fun getFavoriteItems(
+        query: FavoriteQuery,
+        scope: CoroutineScope
+    ): Flow<PagingData<Favorite>> = Pager(
+        PagingConfig(pageSize = 10)
+    ) {
+        db.favoriteDao.getItemsRaw(query.generateQuery()).asPagingSourceFactory(dispatcher).invoke()
+    }.flow
+        .map { it.map(FavoriteEntity::asDomain) }
+        .cachedIn(scope)
 }

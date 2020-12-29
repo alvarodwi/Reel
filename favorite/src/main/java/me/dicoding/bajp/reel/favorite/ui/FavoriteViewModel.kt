@@ -15,51 +15,51 @@ import me.dicoding.bajp.reel.core.utils.DatabaseConstants.FavoriteTable.Sorts
 import me.dicoding.bajp.reel.core.utils.DatabaseConstants.FavoriteTable.Types
 
 class FavoriteViewModel(
-  private val useCase: FavoriteListUseCase
+    private val useCase: FavoriteListUseCase
 ) : ViewModel() {
-  private val query: FavoriteQuery = FavoriteQuery(
-    type = Types.TYPE_ALL,
-    sort = Sorts.TITLE_ASC,
-    searchQuery = ""
-  )
+    private val query: FavoriteQuery = FavoriteQuery(
+        type = Types.TYPE_ALL,
+        sort = Sorts.TITLE_ASC,
+        searchQuery = ""
+    )
 
-  private val _items = MutableLiveData<PagingData<Favorite>>()
-  val items: LiveData<PagingData<Favorite>> get() = _items
+    private val _items = MutableLiveData<PagingData<Favorite>>()
+    val items: LiveData<PagingData<Favorite>> get() = _items
 
-  fun fetchFavoriteItems() {
-    viewModelScope.launch {
-      useCase.getFavoriteItems(query, viewModelScope).collect { result ->
-        _items.postValue(result)
-      }
+    fun fetchFavoriteItems() {
+        viewModelScope.launch {
+            useCase.getFavoriteItems(query, viewModelScope).collect { result ->
+                _items.postValue(result)
+            }
+        }
     }
-  }
 
-  fun updateFilter(type: Int) {
-    query.type = type
-    fetchFavoriteItems()
-  }
+    fun updateFilter(type: Int) {
+        query.type = type
+        fetchFavoriteItems()
+    }
 
-  fun searchItems(s: String) {
-    query.searchQuery = s
-    fetchFavoriteItems()
-  }
+    fun searchItems(s: String) {
+        query.searchQuery = s
+        fetchFavoriteItems()
+    }
 
-  fun resetSearch() {
-    query.searchQuery = ""
-    fetchFavoriteItems()
-  }
+    fun resetSearch() {
+        query.searchQuery = ""
+        fetchFavoriteItems()
+    }
 
-  fun getSortCode() = query.sort
+    fun getSortCode() = query.sort
 
-  fun reOrderItems(
-    sort: Int
-  ) {
-    query.sort = sort
-    fetchFavoriteItems()
-  }
+    fun reOrderItems(
+        sort: Int
+    ) {
+        query.sort = sort
+        fetchFavoriteItems()
+    }
 
-  override fun onCleared() {
-    super.onCleared()
-    viewModelScope.cancel()
-  }
+    override fun onCleared() {
+        super.onCleared()
+        viewModelScope.cancel()
+    }
 }

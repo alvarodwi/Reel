@@ -18,17 +18,17 @@ import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val useCaseModule = module {
-  factory<MovieListUseCase> { MovieListInteractor(get()) }
-  factory<MovieDetailUseCase> { MovieDetailInteractor(get()) }
-  factory<TvShowListUseCase> { TvShowListInteractor(get()) }
-  factory<TvShowDetailUseCase> { TvShowDetailInteractor(get()) }
-  factory<FavoriteListUseCase> { FavoriteListInteractor(get()) }
+    factory<MovieListUseCase> { MovieListInteractor(get()) }
+    factory<MovieDetailUseCase> { MovieDetailInteractor(get()) }
+    factory<TvShowListUseCase> { TvShowListInteractor(get()) }
+    factory<TvShowDetailUseCase> { TvShowDetailInteractor(get()) }
+    factory<FavoriteListUseCase> { FavoriteListInteractor(get()) }
 }
 
 val viewModelModule = module {
-  viewModel { MovieListViewModel(get()) }
-  viewModel { (id: Long) -> MovieDetailViewModel(id, get()) }
+    viewModel { MovieListViewModel(get()) }
+    viewModel { (id: Long) -> MovieDetailViewModel(id, get()) }
 
-  viewModel { TvShowListViewModel(get()) }
-  viewModel { (id: Long) -> TvShowDetailViewModel(id, get()) }
+    viewModel { TvShowListViewModel(get()) }
+    viewModel { (id: Long) -> TvShowDetailViewModel(id, get()) }
 }
