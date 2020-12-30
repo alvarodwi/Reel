@@ -4,12 +4,15 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import io.mockk.MockKAnnotations
+import io.mockk.coEvery
+import io.mockk.coVerify
 import io.mockk.confirmVerified
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
 import io.mockk.verify
 import junit.framework.TestCase
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOf
 import me.dicoding.bajp.reel.core.data.db.FavoriteQuery
 import me.dicoding.bajp.reel.core.data.network.json.FavoriteJson
 import me.dicoding.bajp.reel.core.domain.model.Favorite
@@ -48,11 +51,13 @@ class FavoriteViewModelTest : TestCase() {
 
     @Test
     fun `test fetch favorite items`() {
+        coEvery { useCase.checkFavoriteItems(query) } returns flowOf(true)
         every { useCase.getFavoriteItems(query, viewModel.viewModelScope) } returns flow {
             PagingData.from(provideDummyData())
         }
         viewModel.fetchFavoriteItems()
 
+        coVerify(atLeast = 1) { useCase.checkFavoriteItems(query) }
         verify(atLeast = 1) { useCase.getFavoriteItems(query, viewModel.viewModelScope) }
         confirmVerified(useCase)
 

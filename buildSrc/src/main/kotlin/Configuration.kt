@@ -97,14 +97,17 @@ object Libs {
         // const val gif = "io.coil-kt:coil-gif:${LibsVersion.coil"
     }
 
-    object Network {
+    object Square {
         const val retrofit = "com.squareup.retrofit2:retrofit:2.9.0"
+        const val okhttpLogging = "com.squareup.okhttp3:logging-interceptor:${LibsVersion.okhttp}"
+        const val okhttpMockWebServer = "com.squareup.okhttp3:mockwebserver:${LibsVersion.okhttp}"
+        const val leakCanary = "com.squareup.leakcanary:leakcanary-android:2.6"
+    }
+
+    object Network {
         const val retrofitKotlinxSerializationConverter =
             "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0"
         const val kotlinxSerialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1"
-
-        const val okhttpLogging = "com.squareup.okhttp3:logging-interceptor:${LibsVersion.okhttp}"
-        const val okhttpMockWebServer = "com.squareup.okhttp3:mockwebserver:${LibsVersion.okhttp}"
     }
 
     object Testing {

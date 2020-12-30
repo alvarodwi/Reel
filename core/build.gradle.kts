@@ -36,15 +36,15 @@ dependencies {
 
     // networking
     implementation(Libs.Network.kotlinxSerialization)
-    implementation(Libs.Network.retrofit)
+    implementation(Libs.Square.retrofit)
     implementation(Libs.Network.retrofitKotlinxSerializationConverter)
-    implementation(Libs.Network.okhttpLogging)
+    implementation(Libs.Square.okhttpLogging)
 
     // di
     api(Libs.Koin.core)
     api(Libs.Koin.viewModel)
 
     // unit testing + espresso idling resource
-    testImplementation(Libs.Network.okhttpMockWebServer)
+    testImplementation(Libs.Square.okhttpMockWebServer)
     api(Libs.Testing.Espresso.idlingResources)
 }

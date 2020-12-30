@@ -41,4 +41,6 @@ dependencies {
     // instrumentation testing
     androidTestImplementation(Libs.Testing.rules)
     androidTestImplementation(Libs.Testing.Espresso.contrib)
+
+    debugImplementation(Libs.Square.leakCanary)
 }
