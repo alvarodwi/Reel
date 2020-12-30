@@ -34,11 +34,21 @@ jobs:
       - store_artifacts:
           path: app/build/reports
           destination: reports
+      - store_artifacts:
+          path: core/build/reports
+          destination: reports
+      - store_artifacts:
+          path: favorite/build/reports
+          destination: reports
       - run:
           name: Run Tests
           command: ./gradlew lint test
       - store_test_results:
           path: app/build/test-results
+      - store_test_results:
+          path: core/build/test-results
+      - store_test_results:
+          path: favorite/build/test-results
       - store_artifacts:
           path: app/build/outputs/apk/debug/
           destination: artifact-file
