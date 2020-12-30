@@ -87,7 +87,6 @@ object Libs {
 
     object Koin {
         const val core = "org.koin:koin-android:${LibsVersion.koin}"
-
         // const val scope = "org.koin:koin-android-scope:$LibsVersion.koin"
         const val viewModel = "org.koin:koin-android-viewmodel:${LibsVersion.koin}"
         const val test = "org.koin:koin-test:${LibsVersion.koin}"
@@ -126,4 +125,5 @@ object Libs {
     // other library
     const val timber = "com.jakewharton.timber:timber:4.7.1"
     const val materialDialogs = "com.afollestad.material-dialogs:core:3.3.0"
+    const val lottie = "com.airbnb.android:lottie:3.6.0"
 }

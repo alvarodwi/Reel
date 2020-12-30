@@ -26,8 +26,15 @@ class FavoriteViewModel(
     private val _items = MutableLiveData<PagingData<Favorite>>()
     val items: LiveData<PagingData<Favorite>> get() = _items
 
+    private val _errorMessage = MutableLiveData<String>()
+    val errorMessage: LiveData<String> get() = _errorMessage
+
     fun fetchFavoriteItems() {
         viewModelScope.launch {
+            useCase.checkFavoriteItems(query).collect { flag ->
+                if (flag) _errorMessage.postValue("List is empty") else _errorMessage.postValue("")
+            }
+
             useCase.getFavoriteItems(query, viewModelScope).collect { result ->
                 _items.postValue(result)
             }

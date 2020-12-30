@@ -7,6 +7,10 @@ import me.dicoding.bajp.reel.core.data.db.FavoriteQuery
 import me.dicoding.bajp.reel.core.domain.model.Favorite
 
 interface FavoriteRepository {
+    suspend fun checkFavoriteItems(
+        query: FavoriteQuery
+    ): Flow<Boolean>
+
     fun getFavoriteItems(
         query: FavoriteQuery,
         scope: CoroutineScope

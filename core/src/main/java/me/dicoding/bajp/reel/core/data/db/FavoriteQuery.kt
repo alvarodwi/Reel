@@ -9,16 +9,23 @@ data class FavoriteQuery(
     var sort: Int = Sorts.TITLE_ASC,
     var searchQuery: String = ""
 ) {
-    fun generateQuery(): SimpleSQLiteQuery {
+    fun generateQuery(isValidating: Boolean = false): SimpleSQLiteQuery {
         val result = StringBuilder().apply {
-            append(defaultQuery)
+            generateFilterBaseQuery(isValidating)
             generateFilterTypeQuery()
             generateFilterSortQuery()
         }
         return SimpleSQLiteQuery(result.toString())
     }
 
-    private val defaultQuery = "SELECT * FROM favorites WHERE item_title LIKE '%$searchQuery%'"
+    private val defaultQuery = "SELECT * FROM favorites"
+    private val validatingQuery =
+        "SELECT COUNT(*) FROM favorites"
+
+    private fun StringBuilder.generateFilterBaseQuery(flag: Boolean) {
+        if (flag) append(validatingQuery) else append(defaultQuery)
+        append(" WHERE item_title LIKE '%$searchQuery%'")
+    }
 
     private fun StringBuilder.generateFilterTypeQuery() {
         if (type != Types.TYPE_ALL) append(" AND")

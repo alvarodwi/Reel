@@ -9,6 +9,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import me.dicoding.bajp.reel.core.data.db.AppDatabase
 import me.dicoding.bajp.reel.core.data.db.FavoriteQuery
@@ -21,6 +22,13 @@ class FavoriteRepositoryImpl(
     private val db: AppDatabase,
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : FavoriteRepository {
+
+    override suspend fun checkFavoriteItems(
+        query: FavoriteQuery
+    ): Flow<Boolean> = flow {
+        val result = db.favoriteDao.checkItemsRaw(query.generateQuery(true))
+        emit(result == 0)
+    }
 
     override fun getFavoriteItems(
         query: FavoriteQuery,

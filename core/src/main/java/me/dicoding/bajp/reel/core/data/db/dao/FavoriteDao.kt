@@ -13,6 +13,9 @@ import me.dicoding.bajp.reel.core.data.db.entity.FavoriteEntity
 @Dao
 interface FavoriteDao {
     @RawQuery(observedEntities = [FavoriteEntity::class])
+    suspend fun checkItemsRaw(query: SupportSQLiteQuery): Int
+
+    @RawQuery(observedEntities = [FavoriteEntity::class])
     fun getItemsRaw(query: SupportSQLiteQuery): DataSource.Factory<Int, FavoriteEntity>
 
     // https://medium.com/androiddevelopers/room-flow-273acffe5b57

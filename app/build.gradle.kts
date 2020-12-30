@@ -36,6 +36,7 @@ dependencies {
     api(Libs.AndroidX.viewPager2)
     api(Libs.AndroidX.swipeRefresh)
     api(Libs.materialDialogs)
+    api(Libs.lottie)
 
     // instrumentation testing
     androidTestImplementation(Libs.Testing.rules)

@@ -37,6 +37,7 @@ class FavoriteFragment : Fragment(R.layout.fragment_favorite) {
     private val recyclerView get() = binding.rvList
     private val swipeRefresh get() = binding.srlList
     private val cardError get() = binding.cardContainer
+    private val errorText get() = binding.txtDescription
     private val filterButton get() = binding.btnFilterToggle
 
     private lateinit var rvAdapter: FavoriteAdapter
@@ -106,12 +107,17 @@ class FavoriteFragment : Fragment(R.layout.fragment_favorite) {
             lifecycleScope.launch { rvAdapter.submitData(data) }
         }
 
+        viewModel.errorMessage.observe(viewLifecycleOwner) { message ->
+            cardError.isVisible = message.isNotBlank()
+            errorText.text = message
+            recyclerView.isVisible = message.isBlank()
+        }
+
         // https://developer.android.com/topic/libraries/architecture/paging/v3-paged-data#kotlin
         swipeRefresh.setOnRefreshListener { rvAdapter.refresh() }
         lifecycleScope.launch {
             rvAdapter.loadStateFlow.collectLatest { state ->
                 swipeRefresh.isRefreshing = state.refresh is LoadState.Loading
-                cardError.isVisible = state.refresh is LoadState.Error
             }
         }
 
