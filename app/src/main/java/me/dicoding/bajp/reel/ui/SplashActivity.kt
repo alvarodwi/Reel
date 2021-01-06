@@ -2,13 +2,14 @@ package me.dicoding.bajp.reel.ui
 
 import android.content.Intent
 import android.os.Bundle
-import com.jintin.bindingextension.BindingActivity
-import me.dicoding.bajp.reel.databinding.ActivitySplashBinding
+import androidx.appcompat.app.AppCompatActivity
+import me.dicoding.bajp.reel.R
 import timber.log.Timber
 
-class SplashActivity : BindingActivity<ActivitySplashBinding>() {
+class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_splash)
         goToMainActivity()
     }
 

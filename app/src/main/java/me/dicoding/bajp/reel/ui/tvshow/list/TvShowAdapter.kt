@@ -6,10 +6,10 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.ImageLoader
 import coil.request.ImageRequest
-import com.jintin.bindingextension.toBinding
 import me.dicoding.bajp.reel.R
 import me.dicoding.bajp.reel.core.domain.model.TvShow
 import me.dicoding.bajp.reel.databinding.ItemTvShowBinding
+import me.dicoding.bajp.reel.ext.viewBinding
 
 class TvShowAdapter(
     private val coilLoader: ImageLoader,
@@ -55,7 +55,7 @@ class TvShowAdapter(
         parent: ViewGroup,
         viewType: Int
     ): TvShowViewHolder =
-        TvShowViewHolder(parent.toBinding())
+        TvShowViewHolder(parent.viewBinding(ItemTvShowBinding::inflate))
 
     override fun onBindViewHolder(
         holder: TvShowViewHolder,

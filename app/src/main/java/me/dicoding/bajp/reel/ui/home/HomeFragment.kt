@@ -2,14 +2,17 @@ package me.dicoding.bajp.reel.ui.home
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import com.jintin.bindingextension.BindingFragment
 import me.dicoding.bajp.reel.R
 import me.dicoding.bajp.reel.databinding.FragmentHomeBinding
+import me.dicoding.bajp.reel.ext.viewBinding
 
-class HomeFragment : BindingFragment<FragmentHomeBinding>() {
+class HomeFragment : Fragment(R.layout.fragment_home) {
+    private val binding by viewBinding<FragmentHomeBinding>()
+
     private val toolbar get() = binding.toolbar
     private val tabLayout get() = binding.tabLayout
     private val viewPager get() = binding.viewPager

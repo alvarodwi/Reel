@@ -6,10 +6,10 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.ImageLoader
 import coil.request.ImageRequest
-import com.jintin.bindingextension.toBinding
 import me.dicoding.bajp.reel.R
 import me.dicoding.bajp.reel.core.domain.model.Movie
 import me.dicoding.bajp.reel.databinding.ItemMovieBinding
+import me.dicoding.bajp.reel.ext.viewBinding
 
 class MovieAdapter(
     private val coilLoader: ImageLoader,
@@ -31,6 +31,7 @@ class MovieAdapter(
 
     inner class MovieViewHolder(private val binding: ItemMovieBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
         fun bind(data: Movie?) {
             if (data == null) return
 
@@ -55,7 +56,7 @@ class MovieAdapter(
         parent: ViewGroup,
         viewType: Int
     ): MovieViewHolder =
-        MovieViewHolder(parent.toBinding())
+        MovieViewHolder(parent.viewBinding(ItemMovieBinding::inflate))
 
     override fun onBindViewHolder(
         holder: MovieViewHolder,

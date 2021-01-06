@@ -68,6 +68,15 @@ class ReelCustomPlugin : Plugin<Project> {
                 consumerProguardFiles("consumer-rules.pro")
             }
             is AppExtension -> buildTypes {
+                getByName("debug") {
+                    applicationIdSuffix = ".debug"
+                    // apply r8 minify
+                    isMinifyEnabled = true
+                    proguardFiles(
+                        getDefaultProguardFile("proguard-android-optimize.txt"),
+                        "proguard-rules.pro"
+                    )
+                }
                 getByName("release") {
                     isMinifyEnabled = true
                     proguardFiles(

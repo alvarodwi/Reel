@@ -6,18 +6,21 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import coil.ImageLoader
 import coil.request.ImageRequest
-import com.jintin.bindingextension.BindingFragment
 import me.dicoding.bajp.reel.R
 import me.dicoding.bajp.reel.core.domain.model.Movie
 import me.dicoding.bajp.reel.core.ext.toSafeUrl
 import me.dicoding.bajp.reel.databinding.FragmentMovieDetailBinding
+import me.dicoding.bajp.reel.ext.viewBinding
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-class MovieDetailFragment : BindingFragment<FragmentMovieDetailBinding>() {
+class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
+    private val binding by viewBinding<FragmentMovieDetailBinding>()
+
     private val toolbar get() = binding.toolbar
     private val cardError get() = binding.infoContainer
     private val errorText get() = binding.info.txtDescription
