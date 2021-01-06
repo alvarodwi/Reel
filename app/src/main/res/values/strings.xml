@@ -11,16 +11,7 @@
     <string name="text_share">Share</string>
     <string name="text_overview">Overview</string>
     <string name="text_open_link">Open link</string>
-    <string name="text_emoticon_sad">(Ｔ▽Ｔ)</string>
-    <string name="text_sort">Sort</string>
-    <string name="drag_handle">Drag handle</string>
-    <string name="text_group_items">Group items by</string>
-    <string name="filter_movies_only">Movies only</string>
-    <string name="filter_all_items">All items</string>
-    <string name="filter_tv_shows_only">Tv shows only</string>
     <string name="favorite_button">Favorite button</string>
-    <string name="retry">Retry</string>
     <string name="error_message_global">An error occurred…</string>
-    <string name="text_search">Search</string>
     <string name="text_favorite">Favorite</string>
 </resources>

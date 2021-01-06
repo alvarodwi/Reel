@@ -1,8 +1,3 @@
-<!--
- Using https://github.com/othneildrew/Best-README-Template for this README~
--->
-
-[![LinkedIn][linkedin-shield]][linkedin-url] 
 ![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/alvarodwi/reel?color=40BA12&label=version)
 [![CircleCI](https://circleci.com/gh/circleci/circleci-docs.svg?style=shield)](https://circleci.com/gh/alvarodwi/Reel)
 [![CodeFactor](https://www.codefactor.io/repository/github/alvarodwi/reel/badge)](https://www.codefactor.io/repository/github/alvarodwi/reel)
@@ -23,7 +18,7 @@ Data yang ada didalam aplikasi ini diambil dari internet, tepatnya dari TMDB. Un
 
 Selain itu, diperlukan juga sebuah passphrase untuk database supaya database terenkripsi oleh SQLCipher.
 
-Simpan keduanya di ```local.properties``` aplikasi ini.
+Simpan keduanya di `local.properties` aplikasi ini.
 
 ```kotlin
 tmdb.api.key="<API_KEY>"
@@ -88,5 +83,8 @@ db.passphrase="<DB_PASSPHRASE>"
 
 <img src="screenshots/mad_score_kotlin.png" />
 
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/alvarodwi
+### Catatan
+
+Semua aset gambar yang dijadikan *icon* dalam aplikasi ini berasal dari [Remix Icon](https://remixicon.com/) (`Apache License 2.0`)
+
+Animasi *lottie* yang digunakan adalah [Alert](https://lottiefiles.com/8750-alert) by Alex Martov (`Creative Commons License 4.0`)

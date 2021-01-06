@@ -3,5 +3,9 @@
     <string name="title_favorite">Favorite</string>
     <string name="text_search_items">Search titles…</string>
     <string name="sort_items">Sort items by</string>
-
+    <string name="text_search">Search</string>
+    <string name="text_sort">Sort</string>
+    <string name="filter_tv_shows_only">Tv shows only</string>
+    <string name="filter_movies_only">Movies only</string>
+    <string name="filter_all_items">All items</string>
 </resources>
