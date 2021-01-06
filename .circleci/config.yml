@@ -13,8 +13,12 @@ jobs:
       GRADLE_OPTS: "-Dorg.gradle.daemon=false -Dorg.gradle.workers.max=2"
     steps:
       - checkout
-      #Set TMDB API key with environment variables
-      - run: echo "tmdb.api.key=\"$TMDB_API_KEY\"" >> local.properties
+      - run:
+        name: Adding TMDB API to build environment
+        command: echo "tmdb.api.key=\"$TMDB_API_KEY\"" >> local.properties
+      - run:
+        name: Adding DB Encryption Key to build environment
+        command: echo "db.passphrase=\"$DB_PASSPHRASE\"" >> local.properties
       - restore_cache:
           key: android-orb-v1-
       - run:
@@ -33,13 +37,13 @@ jobs:
           command: ./gradlew build --stacktrace
       - store_artifacts:
           path: app/build/reports
-          destination: reports
+          destination: app/reports
       - store_artifacts:
           path: core/build/reports
-          destination: reports
+          destination: core/reports
       - store_artifacts:
           path: favorite/build/reports
-          destination: reports
+          destination: favorite/reports
       - run:
           name: Run Tests
           command: ./gradlew lint test

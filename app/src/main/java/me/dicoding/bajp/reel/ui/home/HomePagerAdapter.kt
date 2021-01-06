@@ -7,8 +7,8 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import me.dicoding.bajp.reel.ui.movie.list.MovieListFragment
 import me.dicoding.bajp.reel.ui.tvshow.list.TvShowListFragment
 
-class HomePagerAdapter(fragmentManager : FragmentManager, lifecycle: Lifecycle) :
-    FragmentStateAdapter(fragmentManager,lifecycle) {
+class HomePagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
+    FragmentStateAdapter(fragmentManager, lifecycle) {
     override fun getItemCount(): Int = 2
 
     override fun createFragment(position: Int): Fragment {

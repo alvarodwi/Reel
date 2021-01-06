@@ -22,7 +22,10 @@ import me.dicoding.bajp.reel.core.domain.repository.FavoriteRepository
 import me.dicoding.bajp.reel.core.domain.repository.MovieRepository
 import me.dicoding.bajp.reel.core.domain.repository.TvShowRepository
 import me.dicoding.bajp.reel.core.utils.BASE_URL
+import net.sqlcipher.database.SQLiteDatabase
+import net.sqlcipher.database.SupportFactory
 import okhttp3.Cache
+import okhttp3.CertificatePinner
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -33,11 +36,14 @@ import retrofit2.Retrofit
 import timber.log.Timber
 
 val databaseModule = module {
+    val passphrase: ByteArray = SQLiteDatabase.getBytes(BuildConfig.dbPassphrase.toCharArray())
+    val sqlCipherFactory = SupportFactory(passphrase)
     fun provideAppDatabase(context: Context): AppDatabase =
-        Room.databaseBuilder(context, AppDatabase::class.java, "db_reel")
+        Room.databaseBuilder(context, AppDatabase::class.java, "reel.db")
             .fallbackToDestructiveMigration()
             .setQueryExecutor(Dispatchers.IO.asExecutor())
             .setTransactionExecutor(Dispatchers.IO.asExecutor())
+            .openHelperFactory(sqlCipherFactory)
             .build()
 
     single { provideAppDatabase(androidContext()) }
@@ -52,10 +58,19 @@ val networkModule = module {
     }
 
     fun provideHttpClient(cache: Cache): OkHttpClient {
+        val hostUrl = "www.themoviedb.org"
+        val hostSSLPin = listOf(
+            "sha256/+vqZVAzTqUP8BGkfl88yU7SQ3C8J2uNEa55B7RZjEg0=",
+        )
+        val certificatePinner = CertificatePinner.Builder().also { builder ->
+            hostSSLPin.forEach { pin -> builder.add(hostUrl, pin) }
+        }.build()
+
         val builder = OkHttpClient.Builder()
             .connectTimeout(10, TimeUnit.SECONDS)
             .readTimeout(10, TimeUnit.SECONDS)
             .writeTimeout(10, TimeUnit.SECONDS)
+            .certificatePinner(certificatePinner)
 
         if (BuildConfig.DEBUG) {
             val logger = HttpLoggingInterceptor { message ->

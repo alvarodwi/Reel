@@ -63,17 +63,16 @@ class ReelCustomPlugin : Plugin<Project> {
     }
 
     private fun BaseExtension.applyProguardSettings() {
-        val proguardFilename = "proguard-rules.pro"
         when (this) {
             is LibraryExtension -> defaultConfig {
-                consumerProguardFiles(proguardFilename)
+                consumerProguardFiles("consumer-rules.pro")
             }
             is AppExtension -> buildTypes {
                 getByName("release") {
                     isMinifyEnabled = true
                     proguardFiles(
                         getDefaultProguardFile("proguard-android-optimize.txt"),
-                        proguardFilename
+                        "proguard-rules.pro"
                     )
                 }
             }

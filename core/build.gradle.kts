@@ -13,6 +13,7 @@ localProperties.load(project.rootProject.file("local.properties").inputStream())
 android {
     defaultConfig {
         buildConfigField("String", "tmdbApiKey", localProperties["tmdb.api.key"] as String)
+        buildConfigField("String", "dbPassphrase", localProperties["db.passphrase"] as String)
     }
 }
 
@@ -33,6 +34,7 @@ dependencies {
     implementation(Libs.AndroidX.KTX.room)
     kapt(Libs.AndroidX.Room.compiler)
     api(Libs.AndroidX.KTX.preferences)
+    implementation(Libs.sqlCipher)
 
     // networking
     implementation(Libs.Network.kotlinxSerialization)

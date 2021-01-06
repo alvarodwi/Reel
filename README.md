@@ -19,19 +19,16 @@
 Proyek ini menggunakan gradle. Untuk membuka proyek ini, gunakan
 `gradlew build` command atau gunakan "Import Project" di Android Studio.
 
-Data yang ada didalam aplikasi ini diambil dari internet, tepatnya di TMDB
+Data yang ada didalam aplikasi ini diambil dari internet, tepatnya dari TMDB. Untuk itu, dibutuhkan api-key, yang bisa didapatkan dengan membuat akun TMDB
 
-Untuk itu, dibutuhkan api-key, yang bisa didapatkan dengan mendaftar ke TMDB
+Selain itu, diperlukan juga sebuah passphrase untuk database supaya database terenkripsi oleh SQLCipher.
 
-Setelah api-key didapatkan, simpan api-key tersebut di local.properties, supaya api key dapat dibaca oleh proyek ini.
+Simpan keduanya di ```local.properties``` aplikasi ini.
 
 ```kotlin
 tmdb.api.key="<API_KEY>"
+db.passphrase="<DB_PASSPHRASE>"
 ```
-
-<!-- MARKDOWN LINKS & IMAGES -->
-
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
 ## Gambaran Umum
 

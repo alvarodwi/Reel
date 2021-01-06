@@ -8,13 +8,13 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.ImageLoader
 import coil.request.ImageRequest
 import com.jintin.bindingextension.toBinding
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import me.dicoding.bajp.reel.R
 import me.dicoding.bajp.reel.core.domain.model.Favorite
 import me.dicoding.bajp.reel.core.utils.DatabaseConstants.FavoriteTable.Types
 import me.dicoding.bajp.reel.favorite.databinding.ItemFavoriteBinding
 import me.dicoding.bajp.reel.favorite.ui.FavoriteAdapter.FavoriteViewHolder
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 
 class FavoriteAdapter(
     private val coilLoader: ImageLoader,

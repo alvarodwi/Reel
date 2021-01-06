@@ -114,7 +114,7 @@ object Libs {
         const val junit = "junit:junit:4.13.1"
         const val junitExt = "androidx.test.ext:junit:1.1.2"
         const val rules = "androidx.test:rules:1.3.0"
-        const val mockk = "io.mockk:mockk:1.10.3-jdk8"
+        const val mockk = "io.mockk:mockk:1.10.4"
         const val archCore = "androidx.arch.core:core-testing:2.1.0"
 
         object Espresso {
@@ -130,4 +130,5 @@ object Libs {
     const val materialDialogs = "com.afollestad.material-dialogs:core:3.3.0"
     const val lottie = "com.airbnb.android:lottie:3.6.0"
     const val bindingExtension = "com.github.jintin:BindingExtension:3.0.0"
+    const val sqlCipher = "net.zetetic:android-database-sqlcipher:4.4.2"
 }
