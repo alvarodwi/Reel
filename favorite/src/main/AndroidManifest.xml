@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:dist="http://schemas.android.com/apk/distribution"
-  package="me.dicoding.bajp.reel.favorite">
+    package="me.dicoding.bajp.reel.favorite">
 
-  <dist:module
-    dist:instant="false"
-    dist:title="@string/title_favorite">
-    <dist:delivery>
-      <dist:install-time />
-    </dist:delivery>
+    <dist:module
+        dist:instant="false"
+        dist:title="@string/title_favorite">
+        <dist:delivery>
+            <dist:install-time />
+        </dist:delivery>
 
-    <dist:fusing dist:include="true" />
-  </dist:module>
+        <dist:fusing dist:include="true" />
+    </dist:module>
 </manifest>

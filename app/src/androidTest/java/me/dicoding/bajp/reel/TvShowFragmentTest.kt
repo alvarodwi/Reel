@@ -24,36 +24,36 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class TvShowFragmentTest {
-  @get:Rule
-  var activityRule = ActivityScenarioRule(MainActivity::class.java)
+    @get:Rule
+    var activityRule = ActivityScenarioRule(MainActivity::class.java)
 
-  @Before
-  fun setup() {
-    IdlingRegistry.getInstance().register(EspressoIdlingResource.idleResource)
-  }
+    @Before
+    fun setup() {
+        IdlingRegistry.getInstance().register(EspressoIdlingResource.idleResource)
+    }
 
-  @After
-  fun after() {
-    IdlingRegistry.getInstance().unregister(EspressoIdlingResource.idleResource)
-  }
+    @After
+    fun after() {
+        IdlingRegistry.getInstance().unregister(EspressoIdlingResource.idleResource)
+    }
 
-  @Test
-  fun loadTvShows() {
-    onView(withId(id.view_pager)).perform(swipeLeft())
-    onView(ViewCounter.last(withId(id.rv_list))).perform(
-      RecyclerViewActions.scrollToPosition<ViewHolder>(19)
-    )
-  }
+    @Test
+    fun loadTvShows() {
+        onView(withId(id.view_pager)).perform(swipeLeft())
+        onView(ViewCounter.last(withId(id.rv_list))).perform(
+            RecyclerViewActions.scrollToPosition<ViewHolder>(19)
+        )
+    }
 
-  @Test
-  fun loadDetails() {
-    onView(withId(id.view_pager)).perform(swipeLeft())
-    //akomodasi waktu swipe
-    //ini biang error ketika testing =(
-    SystemClock.sleep(1000)
-    onView(ViewCounter.last(withId(id.rv_list))).perform(
-      RecyclerViewActions.actionOnItemAtPosition<ViewHolder>(0, click())
-    )
-    onView(withId(id.backdrop)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
-  }
+    @Test
+    fun loadDetails() {
+        onView(withId(id.view_pager)).perform(swipeLeft())
+        // akomodasi waktu swipe
+        // ini biang error ketika testing =(
+        SystemClock.sleep(1000)
+        onView(ViewCounter.last(withId(id.rv_list))).perform(
+            RecyclerViewActions.actionOnItemAtPosition<ViewHolder>(0, click())
+        )
+        onView(withId(id.backdrop)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+    }
 }

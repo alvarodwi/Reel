@@ -1,43 +1,29 @@
 package me.dicoding.bajp.reel.ext
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
+import androidx.annotation.MainThread
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.DefaultLifecycleObserver
-import androidx.lifecycle.LifecycleOwner
 import androidx.viewbinding.ViewBinding
-import kotlin.properties.ReadOnlyProperty
-import kotlin.reflect.KProperty
+import me.dicoding.bajp.reel.ui.utils.FragmentViewBindingDelegate
 
-// view binding helper
-fun <T> Fragment.viewBinding(initialise: () -> T): ReadOnlyProperty<Fragment, T> =
-  object : ReadOnlyProperty<Fragment, T>, DefaultLifecycleObserver {
-    private var binding: T? = null
+@MainThread
+fun <T : ViewBinding> Fragment.viewBinding(bind: (View) -> T): FragmentViewBindingDelegate<T> =
+    FragmentViewBindingDelegate.from(
+        fragment = this,
+        viewBindingBind = bind
+    )
 
-    override fun onDestroy(owner: LifecycleOwner) {
-      binding = null
-    }
+@MainThread
+inline fun <reified T : ViewBinding> Fragment.viewBinding(): FragmentViewBindingDelegate<T> =
+    FragmentViewBindingDelegate.from(
+        fragment = this,
+        viewBindingClazz = T::class.java
+    )
 
-    override fun getValue(
-      thisRef: Fragment,
-      property: KProperty<*>
-    ): T =
-      binding
-        ?: initialise().also {
-          binding = it
-          this@viewBinding.viewLifecycleOwner.lifecycle.addObserver(this)
-        }
-  }
-
-inline fun <T : ViewBinding> AppCompatActivity.viewBinding(
-  crossinline bindingInflater: (LayoutInflater) -> T
-) =
-  lazy(LazyThreadSafetyMode.NONE) {
-    bindingInflater.invoke(layoutInflater)
-  }
-
+@MainThread
 inline fun <T : ViewBinding> ViewGroup.viewBinding(
-  crossinline bindingInflater: (LayoutInflater, ViewGroup, Boolean) -> T,
-  attachToParent: Boolean = false
-) = bindingInflater.invoke(LayoutInflater.from(context), this, attachToParent)
+    viewBindingFactory: (LayoutInflater, ViewGroup, Boolean) -> T
+) =
+    viewBindingFactory.invoke(LayoutInflater.from(this.context), this, false)

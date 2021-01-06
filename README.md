@@ -1,8 +1,6 @@
-<!--
- Using https://github.com/othneildrew/Best-README-Template for this README~
--->
-
-[![LinkedIn][linkedin-shield]][linkedin-url] ![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/alvarodwi/reel?color=40BA12&label=version)
+![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/alvarodwi/reel?color=40BA12&label=version)
+[![CircleCI](https://circleci.com/gh/circleci/circleci-docs.svg?style=shield)](https://circleci.com/gh/alvarodwi/Reel)
+[![CodeFactor](https://www.codefactor.io/repository/github/alvarodwi/reel/badge)](https://www.codefactor.io/repository/github/alvarodwi/reel)
 
 <p align="center">
     <img src="app/src/main/ic_launcher-playstore.png" alt="Logo" width="128" height="128">
@@ -16,19 +14,16 @@
 Proyek ini menggunakan gradle. Untuk membuka proyek ini, gunakan
 `gradlew build` command atau gunakan "Import Project" di Android Studio.
 
-Data yang ada didalam aplikasi ini diambil dari internet, tepatnya di TMDB
+Data yang ada didalam aplikasi ini diambil dari internet, tepatnya dari TMDB. Untuk itu, dibutuhkan api-key, yang bisa didapatkan dengan membuat akun TMDB
 
-Untuk itu, dibutuhkan api-key, yang bisa didapatkan dengan mendaftar ke TMDB
+Selain itu, diperlukan juga sebuah passphrase untuk database supaya database terenkripsi oleh SQLCipher.
 
-Setelah api-key didapatkan, simpan api-key tersebut di local.properties, supaya api key dapat dibaca oleh proyek ini.
+Simpan keduanya di `local.properties` aplikasi ini.
 
 ```kotlin
 tmdb.api.key="<API_KEY>"
+db.passphrase="<DB_PASSPHRASE>"
 ```
-
-<!-- MARKDOWN LINKS & IMAGES -->
-
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
 ## Gambaran Umum
 
@@ -88,5 +83,8 @@ tmdb.api.key="<API_KEY>"
 
 <img src="screenshots/mad_score_kotlin.png" />
 
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/alvarodwi
+### Catatan
+
+Semua aset gambar yang dijadikan *icon* dalam aplikasi ini berasal dari [Remix Icon](https://remixicon.com/) (`Apache License 2.0`)
+
+Animasi *lottie* yang digunakan adalah [Alert](https://lottiefiles.com/8750-alert) by Alex Martov (`Creative Commons License 4.0`)

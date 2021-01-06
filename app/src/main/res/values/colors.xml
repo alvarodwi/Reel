@@ -1,26 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <color name="dark_gray_900">#FF222831</color>
-  <color name="dark_gray_800">#FF343c48</color>
-  <color name="dark_gray_700">#FF434e5d</color>
+    <color name="dark_gray_900">#FF222831</color>
+    <color name="dark_gray_700">#FF434e5d</color>
 
-  <color name="dark_blue_900">#FF17253e</color>
-  <color name="dark_blue_800">#FF1d3557</color>
-  <color name="dark_blue_700">#FF223f64</color>
-  <color name="dark_blue_400">#FF506787</color>
+    <color name="dark_blue_900">#FF17253e</color>
+    <color name="dark_blue_800">#FF1d3557</color>
+    <color name="dark_blue_700">#FF223f64</color>
+    <color name="dark_blue_400">#FF506787</color>
 
-  <color name="light_blue_400">#FF66b9d8</color>
-  <color name="light_blue_300">#FF77c5dd</color>
-  <color name="light_blue_200">#FF95d6e7</color>
-  <color name="light_blue_50">#FFe4f5f9</color>
+    <color name="light_blue_400">#FF66b9d8</color>
+    <color name="light_blue_300">#FF77c5dd</color>
+    <color name="light_blue_200">#FF95d6e7</color>
+    <color name="light_blue_50">#FFe4f5f9</color>
 
-  <color name="red_600">#FFda1a45</color>
-  <color name="red_700">#FFc51243</color>
+    <color name="red_600">#FFda1a45</color>
+    <color name="red_700">#FFc51243</color>
 
-  <color name="black">#FF000000</color>
-  <color name="white">#FFffffff</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFffffff</color>
 
-  <!-- alpha modified colors -->
-  <color name="white_alpha_060">#99ffffff</color>
-  <color name="dark_gray_700_alpha_060">#99434e5d</color>
+    <!-- alpha modified colors -->
+    <color name="white_alpha_060">#99ffffff</color>
+    <color name="dark_gray_700_alpha_060">#99434e5d</color>
 </resources>

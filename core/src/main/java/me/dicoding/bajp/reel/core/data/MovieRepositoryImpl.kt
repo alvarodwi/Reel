@@ -1,5 +1,6 @@
 package me.dicoding.bajp.reel.core.data
 
+import java.io.IOException
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flow
@@ -17,51 +18,58 @@ import me.dicoding.bajp.reel.core.utils.asDomain
 import me.dicoding.bajp.reel.core.utils.asFavoriteEntity
 
 class MovieRepositoryImpl(
-  private val api: ApiService,
-  private val db: AppDatabase,
-  private val dispatcher: CoroutineDispatcher = Dispatchers.IO
+    private val api: ApiService,
+    private val db: AppDatabase,
+    private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : MovieRepository {
-  override fun getPopularMovie() = flow {
-    EspressoIdlingResource.increment()
-    try {
-      val response = api.getPopularMovie(API_KEY)
-      if (response.isSuccessful) {
-        val data = response.body()?.results?.map(MovieJson::asDomain)
-          ?: throw(Exception("List is empty"))
-        emit(NetworkResult.Success(data))
-        EspressoIdlingResource.decrement()
-      } else {
-        throw(Exception("code : ${response.code()}"))
-      }
-    } catch (e: Exception) {
-      emit(NetworkResult.Error(e))
-      EspressoIdlingResource.decrement()
-    }
-  }.flowOn(dispatcher)
+    override fun getPopularMovie() = flow {
+        EspressoIdlingResource.increment()
+        try {
+            val response = api.getPopularMovie(API_KEY)
+            if (response.isSuccessful) {
+                val data = response.body()?.results?.map(MovieJson::asDomain)
+                    ?: throw IllegalStateException("List is empty")
+                emit(NetworkResult.Success(data))
+                EspressoIdlingResource.decrement()
+            } else {
+                throw IOException("code : ${response.code()}")
+            }
+        } catch (e: IOException) {
+            emit(NetworkResult.Error(e))
+            EspressoIdlingResource.decrement()
+        } catch (e: IllegalStateException) {
+            emit(NetworkResult.Error(e))
+            EspressoIdlingResource.decrement()
+        }
+    }.flowOn(dispatcher)
 
-  override fun getMovieDetailData(id: Long) = flow {
-    EspressoIdlingResource.increment()
-    try {
-      val response = api.getMovieDetail(id, API_KEY)
-      if (response.isSuccessful) {
-        val data = response.body()?.asDomain() ?: throw(Exception("Response body is empty"))
-        emit(NetworkResult.Success(data))
-        EspressoIdlingResource.decrement()
-      } else {
-        throw(Exception("code : ${response.code()}"))
-      }
-    } catch (e: Exception) {
-      emit(NetworkResult.Error(e))
-      EspressoIdlingResource.decrement()
-    }
-  }.flowOn(dispatcher)
+    override fun getMovieDetailData(id: Long) = flow {
+        EspressoIdlingResource.increment()
+        try {
+            val response = api.getMovieDetail(id, API_KEY)
+            if (response.isSuccessful) {
+                val data = response.body()?.asDomain()
+                    ?: throw IllegalStateException("Response body is empty")
+                emit(NetworkResult.Success(data))
+                EspressoIdlingResource.decrement()
+            } else {
+                throw IOException("code : ${response.code()}")
+            }
+        } catch (e: IOException) {
+            emit(NetworkResult.Error(e))
+            EspressoIdlingResource.decrement()
+        } catch (e: IllegalStateException) {
+            emit(NetworkResult.Error(e))
+            EspressoIdlingResource.decrement()
+        }
+    }.flowOn(dispatcher)
 
-  override suspend fun addMovieToFavorites(data: Movie) =
-    db.favoriteDao.insertItem(data.asFavoriteEntity())
+    override suspend fun addMovieToFavorites(data: Movie) =
+        db.favoriteDao.insertItem(data.asFavoriteEntity())
 
-  override suspend fun removeMovieFromFavorites(data: Movie) =
-    db.favoriteDao.deleteItem(data.id, Types.TYPE_MOVIE)
+    override suspend fun removeMovieFromFavorites(data: Movie) =
+        db.favoriteDao.deleteItem(data.id, Types.TYPE_MOVIE)
 
-  override fun isMovieInFavorites(id: Long) =
-    db.favoriteDao.isItemWithIdExists(id, Types.TYPE_MOVIE)
+    override fun isMovieInFavorites(id: Long) =
+        db.favoriteDao.isItemWithIdExists(id, Types.TYPE_MOVIE)
 }

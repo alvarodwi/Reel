@@ -28,136 +28,144 @@ import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
 
 class FavoriteFragment : Fragment(R.layout.fragment_favorite) {
-  private val binding by viewBinding { FragmentFavoriteBinding.bind(requireView()) }
+    private val binding by viewBinding<FragmentFavoriteBinding>()
 
-  private val viewModel by viewModel<FavoriteViewModel>()
-  private val coilLoader by inject<ImageLoader>()
+    private val viewModel by viewModel<FavoriteViewModel>()
+    private val coilLoader by inject<ImageLoader>()
 
-  private val toolbar get() = binding.toolbar
-  private val recyclerView get() = binding.rvList
-  private val swipeRefresh get() = binding.srlList
-  private val cardError get() = binding.cardContainer
-  private val filterButton get() = binding.btnFilterToggle
+    private val toolbar get() = binding.toolbar
+    private val recyclerView get() = binding.rvList
+    private val swipeRefresh get() = binding.srlList
+    private val cardError get() = binding.cardContainer
+    private val errorText get() = binding.txtDescription
+    private val filterButton get() = binding.btnFilterToggle
 
-  private lateinit var rvAdapter: FavoriteAdapter
+    private lateinit var rvAdapter: FavoriteAdapter
 
-  //load koin module, forcefully -_-
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    requireActivity().also {
-      loadKoinModules(favoriteModule)
+    // load koin module, forcefully -_-
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        requireActivity().also {
+            loadKoinModules(favoriteModule)
+        }
     }
-  }
 
-  override fun onViewCreated(
-    view: View,
-    savedInstanceState: Bundle?
-  ) {
-    super.onViewCreated(view, savedInstanceState)
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?
+    ) {
+        super.onViewCreated(view, savedInstanceState)
 
-    setupList()
-    setupFilter()
-    with(toolbar) {
-      title = getString(R.string.title_favorite)
-      navigationIcon = ContextCompat.getDrawable(context, R.drawable.ic_arrow_back)
-      setNavigationOnClickListener { activity?.onBackPressed() }
-      inflateMenu(R.menu.favorite)
+        setupList()
+        setupFilter()
+        with(toolbar) {
+            title = getString(R.string.title_favorite)
+            navigationIcon = ContextCompat.getDrawable(context, R.drawable.ic_arrow_back)
+            setNavigationOnClickListener { activity?.onBackPressed() }
+            inflateMenu(R.menu.favorite)
 
-      val searchItem = menu.findItem(R.id.action_search)
-      val searchView = searchItem.actionView as SearchView
-      searchView.queryHint = requireView().context.getString(R.string.text_search_items)
-      searchItem.setOnActionExpandListener(object : OnActionExpandListener {
-        override fun onMenuItemActionExpand(p0: MenuItem?): Boolean {
-          return true
-        }
+            val searchItem = menu.findItem(R.id.action_search)
+            val searchView = searchItem.actionView as SearchView
+            searchView.queryHint = requireView().context.getString(R.string.text_search_items)
+            searchItem.setOnActionExpandListener(
+                object : OnActionExpandListener {
+                    override fun onMenuItemActionExpand(p0: MenuItem?): Boolean {
+                        return true
+                    }
 
-        override fun onMenuItemActionCollapse(p0: MenuItem?): Boolean {
-          viewModel.resetSearch()
-          return true
-        }
-      })
-      setOnQueryTextChangeListener(searchView, false) {
-        if (it != null) viewModel.searchItems(it)
-        true
-      }
-
-      setOnMenuItemClickListener {
-        when (it.itemId) {
-          R.id.action_sort -> {
-            MaterialDialog(requireContext()).show {
-              title(R.string.sort_items)
-              listItemsSingleChoice(
-                R.array.favorite_sort,
-                initialSelection = viewModel.getSortCode()
-              ) { dialog, index, _ ->
-                viewModel.reOrderItems(index)
-                dialog.dismiss()
-              }
+                    override fun onMenuItemActionCollapse(p0: MenuItem?): Boolean {
+                        viewModel.resetSearch()
+                        return true
+                    }
+                }
+            )
+            setOnQueryTextChangeListener(searchView, false) {
+                if (it != null) viewModel.searchItems(it)
+                true
             }
-          }
+
+            setOnMenuItemClickListener {
+                when (it.itemId) {
+                    R.id.action_sort -> {
+                        MaterialDialog(requireContext()).show {
+                            title(R.string.sort_items)
+                            listItemsSingleChoice(
+                                R.array.favorite_sort,
+                                initialSelection = viewModel.getSortCode()
+                            ) { dialog, index, _ ->
+                                viewModel.reOrderItems(index)
+                                dialog.dismiss()
+                            }
+                        }
+                    }
+                }
+                true
+            }
         }
-        true
-      }
+
+        viewModel.items.observe(viewLifecycleOwner) { data ->
+            lifecycleScope.launch { rvAdapter.submitData(data) }
+        }
+
+        viewModel.errorMessage.observe(viewLifecycleOwner) { message ->
+            cardError.isVisible = message.isNotBlank()
+            errorText.text = message
+            recyclerView.isVisible = message.isBlank()
+        }
+
+        // https://developer.android.com/topic/libraries/architecture/paging/v3-paged-data#kotlin
+        swipeRefresh.setOnRefreshListener { rvAdapter.refresh() }
+        lifecycleScope.launch {
+            rvAdapter.loadStateFlow.collectLatest { state ->
+                swipeRefresh.isRefreshing = state.refresh is LoadState.Loading
+            }
+        }
+
+        viewModel.fetchFavoriteItems()
     }
 
-    viewModel.items.observe(viewLifecycleOwner) { data ->
-      lifecycleScope.launch { rvAdapter.submitData(data) }
+    private fun setupList() {
+        rvAdapter = FavoriteAdapter(
+            coilLoader
+        ) { id, type ->
+            navigateToDetail(id, type)
+        }
+
+        recyclerView.adapter = rvAdapter
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
     }
 
-    //https://developer.android.com/topic/libraries/architecture/paging/v3-paged-data#kotlin
-    swipeRefresh.setOnRefreshListener { rvAdapter.refresh() }
-    lifecycleScope.launch {
-      rvAdapter.loadStateFlow.collectLatest { state ->
-        swipeRefresh.isRefreshing = state.refresh is LoadState.Loading
-        cardError.isVisible = state.refresh is LoadState.Error
-      }
+    private fun setupFilter() {
+        filterButton.addOnButtonCheckedListener { _, checkedId, _ ->
+            val param = when (checkedId) {
+                R.id.btn_toggle_movie -> Types.TYPE_MOVIE
+                R.id.btn_toggle_tv_show -> Types.TYPE_TV_SHOW
+                else -> Types.TYPE_ALL
+            }
+            viewModel.updateFilter(param)
+        }
     }
 
-    viewModel.fetchFavoriteItems()
-  }
-
-  private fun setupList() {
-    rvAdapter = FavoriteAdapter(
-      coilLoader
-    ) { id, type ->
-      navigateToDetail(id, type)
+    private fun navigateToDetail(
+        id: Long,
+        type: Int
+    ) {
+        when (type) {
+            Types.TYPE_MOVIE -> navigateToMovieDetail(id)
+            Types.TYPE_TV_SHOW -> navigateToTvShowDetail(id)
+            else -> throw IllegalArgumentException("Unknown type")
+        }
     }
 
-    recyclerView.adapter = rvAdapter
-    recyclerView.layoutManager = LinearLayoutManager(requireContext())
-  }
-
-  private fun setupFilter() {
-    filterButton.addOnButtonCheckedListener { _, checkedId, _ ->
-      val param = when (checkedId) {
-        R.id.btn_toggle_movie -> Types.TYPE_MOVIE
-        R.id.btn_toggle_tv_show -> Types.TYPE_TV_SHOW
-        else -> Types.TYPE_ALL
-      }
-      viewModel.updateFilter(param)
+    private fun navigateToMovieDetail(id: Long) {
+        findNavController().navigate(
+            FavoriteFragmentDirections.actionFavoriteToMovieDetail(id)
+        )
     }
-  }
 
-  private fun navigateToDetail(
-    id: Long,
-    type: Int
-  ) {
-    when (type) {
-      Types.TYPE_MOVIE -> navigateToMovieDetail(id)
-      Types.TYPE_TV_SHOW -> navigateToTvShowDetail(id)
-      else -> throw IllegalArgumentException("Unknown type")
+    private fun navigateToTvShowDetail(id: Long) {
+        findNavController().navigate(
+            FavoriteFragmentDirections.actionFavoriteToTvShowDetail(id)
+        )
     }
-  }
-
-  private fun navigateToMovieDetail(id: Long) {
-    findNavController().navigate(
-      FavoriteFragmentDirections.actionFavoriteToMovieDetail(id)
-    )
-  }
-
-  private fun navigateToTvShowDetail(id: Long) {
-    findNavController().navigate(
-      FavoriteFragmentDirections.actionFavoriteToTvShowDetail(id)
-    )
-  }
 }

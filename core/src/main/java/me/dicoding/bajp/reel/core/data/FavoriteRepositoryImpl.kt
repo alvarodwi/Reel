@@ -9,6 +9,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import me.dicoding.bajp.reel.core.data.db.AppDatabase
 import me.dicoding.bajp.reel.core.data.db.FavoriteQuery
@@ -18,18 +19,25 @@ import me.dicoding.bajp.reel.core.domain.repository.FavoriteRepository
 import me.dicoding.bajp.reel.core.utils.asDomain
 
 class FavoriteRepositoryImpl(
-  private val db: AppDatabase,
-  private val dispatcher: CoroutineDispatcher = Dispatchers.IO
+    private val db: AppDatabase,
+    private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : FavoriteRepository {
 
-  override fun getFavoriteItems(
-    query: FavoriteQuery,
-    scope: CoroutineScope
-  ): Flow<PagingData<Favorite>> = Pager(
-    PagingConfig(pageSize = 10)
-  ) {
-    db.favoriteDao.getItemsRaw(query.generateQuery()).asPagingSourceFactory(dispatcher).invoke()
-  }.flow
-    .map { it.map(FavoriteEntity::asDomain) }
-    .cachedIn(scope)
+    override suspend fun checkFavoriteItems(
+        query: FavoriteQuery
+    ): Flow<Boolean> = flow {
+        val result = db.favoriteDao.checkItemsRaw(query.generateQuery(true))
+        emit(result == 0)
+    }
+
+    override fun getFavoriteItems(
+        query: FavoriteQuery,
+        scope: CoroutineScope
+    ): Flow<PagingData<Favorite>> = Pager(
+        PagingConfig(pageSize = 10)
+    ) {
+        db.favoriteDao.getItemsRaw(query.generateQuery()).asPagingSourceFactory(dispatcher).invoke()
+    }.flow
+        .map { it.map(FavoriteEntity::asDomain) }
+        .cachedIn(scope)
 }
