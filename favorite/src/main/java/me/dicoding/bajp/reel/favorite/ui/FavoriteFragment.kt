@@ -7,7 +7,6 @@ import android.view.View
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
@@ -15,11 +14,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import coil.ImageLoader
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.list.listItemsSingleChoice
+import com.jintin.bindingextension.BindingFragment
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import me.dicoding.bajp.reel.core.utils.DatabaseConstants.FavoriteTable.Types
 import me.dicoding.bajp.reel.ext.setOnQueryTextChangeListener
-import me.dicoding.bajp.reel.ext.viewBinding
 import me.dicoding.bajp.reel.favorite.R
 import me.dicoding.bajp.reel.favorite.databinding.FragmentFavoriteBinding
 import me.dicoding.bajp.reel.favorite.di.favoriteModule
@@ -27,9 +26,7 @@ import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
 
-class FavoriteFragment : Fragment(R.layout.fragment_favorite) {
-    private val binding by viewBinding { FragmentFavoriteBinding.bind(requireView()) }
-
+class FavoriteFragment : BindingFragment<FragmentFavoriteBinding>() {
     private val viewModel by viewModel<FavoriteViewModel>()
     private val coilLoader by inject<ImageLoader>()
 

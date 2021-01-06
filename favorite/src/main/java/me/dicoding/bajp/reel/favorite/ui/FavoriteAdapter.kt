@@ -7,14 +7,14 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.ImageLoader
 import coil.request.ImageRequest
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
+import com.jintin.bindingextension.toBinding
 import me.dicoding.bajp.reel.R
 import me.dicoding.bajp.reel.core.domain.model.Favorite
 import me.dicoding.bajp.reel.core.utils.DatabaseConstants.FavoriteTable.Types
-import me.dicoding.bajp.reel.ext.viewBinding
 import me.dicoding.bajp.reel.favorite.databinding.ItemFavoriteBinding
 import me.dicoding.bajp.reel.favorite.ui.FavoriteAdapter.FavoriteViewHolder
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class FavoriteAdapter(
     private val coilLoader: ImageLoader,
@@ -36,10 +36,6 @@ class FavoriteAdapter(
 
     inner class FavoriteViewHolder(private val binding: ItemFavoriteBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        constructor(parent: ViewGroup) : this(
-            parent.viewBinding(ItemFavoriteBinding::inflate)
-        )
-
         fun bind(data: Favorite?) {
             if (data == null) return
 
@@ -81,5 +77,5 @@ class FavoriteAdapter(
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): FavoriteViewHolder = FavoriteViewHolder(parent)
+    ): FavoriteViewHolder = FavoriteViewHolder(parent.toBinding())
 }

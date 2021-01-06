@@ -3,14 +3,11 @@ package me.dicoding.bajp.reel.ui.settings
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
+import com.jintin.bindingextension.BindingFragment
 import me.dicoding.bajp.reel.R
 import me.dicoding.bajp.reel.databinding.FragmentSettingsBinding
-import me.dicoding.bajp.reel.ext.viewBinding
 
-class SettingsFragment : Fragment(R.layout.fragment_settings) {
-    private val binding by viewBinding { FragmentSettingsBinding.bind(requireView()) }
-
+class SettingsFragment : BindingFragment<FragmentSettingsBinding>() {
     private val toolbar get() = binding.toolbar
 
     override fun onViewCreated(

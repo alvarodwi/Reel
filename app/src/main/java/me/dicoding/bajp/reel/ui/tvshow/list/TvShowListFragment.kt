@@ -3,20 +3,16 @@ package me.dicoding.bajp.reel.ui.tvshow.list
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import coil.ImageLoader
-import me.dicoding.bajp.reel.R
+import com.jintin.bindingextension.BindingFragment
 import me.dicoding.bajp.reel.databinding.FragmentSimpleListBinding
-import me.dicoding.bajp.reel.ext.viewBinding
 import me.dicoding.bajp.reel.ui.home.HomeFragmentDirections
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class TvShowListFragment : Fragment(R.layout.fragment_simple_list) {
-    private val binding by viewBinding { FragmentSimpleListBinding.bind(requireView()) }
-
+class TvShowListFragment : BindingFragment<FragmentSimpleListBinding>() {
     private val viewModel by viewModel<TvShowListViewModel>()
     private val coilLoader by inject<ImageLoader>()
 
@@ -25,7 +21,7 @@ class TvShowListFragment : Fragment(R.layout.fragment_simple_list) {
     private val cardError get() = binding.info.cardContainer
     private val errorText get() = binding.info.txtDescription
 
-    private lateinit var rvAdapter: TvShowAdapter
+    private var rvAdapter: TvShowAdapter? = null
 
     override fun onViewCreated(
         view: View,
@@ -36,7 +32,7 @@ class TvShowListFragment : Fragment(R.layout.fragment_simple_list) {
 
         setupList()
         viewModel.tvShows.observe(viewLifecycleOwner) { data ->
-            rvAdapter.submitList(data)
+            rvAdapter?.submitList(data)
         }
 
         viewModel.errorMessage.observe(viewLifecycleOwner) { message ->
@@ -63,5 +59,10 @@ class TvShowListFragment : Fragment(R.layout.fragment_simple_list) {
         findNavController().navigate(
             HomeFragmentDirections.actionHomeToTvShowDetail(movieId)
         )
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        rvAdapter = null
     }
 }

@@ -37,6 +37,7 @@ dependencies {
     api(Libs.AndroidX.swipeRefresh)
     api(Libs.materialDialogs)
     api(Libs.lottie)
+    api(Libs.bindingExtension)
 
     // instrumentation testing
     androidTestImplementation(Libs.Testing.rules)

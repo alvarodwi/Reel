@@ -129,4 +129,5 @@ object Libs {
     const val timber = "com.jakewharton.timber:timber:4.7.1"
     const val materialDialogs = "com.afollestad.material-dialogs:core:3.3.0"
     const val lottie = "com.airbnb.android:lottie:3.6.0"
+    const val bindingExtension = "com.github.jintin:BindingExtension:3.0.0"
 }

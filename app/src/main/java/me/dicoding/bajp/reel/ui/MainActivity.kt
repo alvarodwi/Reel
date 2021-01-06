@@ -1,12 +1,6 @@
 package me.dicoding.bajp.reel.ui
 
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import me.dicoding.bajp.reel.R
+import com.jintin.bindingextension.BindingActivity
+import me.dicoding.bajp.reel.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-    }
-}
+class MainActivity : BindingActivity<ActivityMainBinding>()
